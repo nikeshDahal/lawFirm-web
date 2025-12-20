@@ -6,20 +6,20 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#1a1c1e] text-gray-400">
+    <footer className="bg-primary text-white">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Brand & Bio */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="bg-[#c5a059] p-2 rounded">
-                <Scale size={24} className="text-[#1a1c1e]" />
+              <div className="bg-secondary p-2 rounded">
+                <Scale size={24} className="text-primary" />
               </div>
               <h2 className="text-xl font-serif font-bold tracking-tight text-white leading-none">
-                JUSTICE & <span className="text-[#c5a059]">CO.</span>
+                JUSTICE & <span className="text-secondary">CO.</span>
               </h2>
             </div>
-            <p className="text-sm leading-relaxed text-gray-500">
+            <p className="text-sm leading-relaxed text-white">
               Providing sophisticated legal solutions with a commitment to
               integrity and excellence for over two decades. Your trusted
               partner in navigating complex legal landscapes.
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
                 <a
                   key={idx}
                   href="#"
-                  className="w-10 h-10 rounded border border-white/10 flex items-center justify-center hover:bg-[#c5a059] hover:text-[#1a1c1e] hover:border-[#c5a059] transition-all duration-300"
+                  className="w-10 h-10 rounded border border-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1a1c1e] hover:border-secondary transition-all duration-300"
                 >
                   <Icon size={18} />
                 </a>
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-[#c5a059]">
+            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
               Quick Links
             </h4>
             <ul className="space-y-4 text-sm">
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 <li key={idx}>
                   <a
                     href={item.link}
-                    className="flex items-center gap-2 hover:text-[#c5a059] transition-colors group"
+                    className="flex items-center gap-2 hover:text-secondary transition-colors group"
                   >
                     <ArrowRight
                       size={12}
@@ -62,16 +62,16 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Practice Areas */}
           <div>
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-[#c5a059]">
+            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
               Expertise
             </h4>
             <ul className="space-y-4 text-sm">
-              {NAV_ITEMS[1].submenu &&
-                NAV_ITEMS[1]?.submenu.map((item, idx) => (
+              {NAV_ITEMS[2].submenu &&
+                NAV_ITEMS[2]?.submenu.map((item, idx) => (
                   <li key={idx}>
                     <Link
                       href={item.link}
-                      className="flex items-center gap-2 hover:text-[#c5a059] transition-colors group"
+                      className="flex items-center gap-2 hover:text-secondary transition-colors group"
                     >
                       <ArrowRight
                         size={12}
@@ -86,10 +86,10 @@ const Footer: React.FC = () => {
 
           {/* Column 4: Newsletter/Contact */}
           <div className="space-y-6">
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-[#c5a059]">
+            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
               Legal Insights
             </h4>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-white">
               Subscribe to our newsletter for the latest legal updates and firm
               news.
             </p>
@@ -97,9 +97,9 @@ const Footer: React.FC = () => {
               <input
                 type="email"
                 placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#c5a059] transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"
               />
-              <button className="absolute right-2 top-2 bg-[#c5a059] text-[#1a1c1e] p-1.5 rounded hover:bg-white transition-colors">
+              <button className="absolute right-2 top-2 bg-secondary text-[#1a1c1e] p-1.5 rounded hover:bg-white transition-colors">
                 <ArrowRight size={16} />
               </button>
             </form>
