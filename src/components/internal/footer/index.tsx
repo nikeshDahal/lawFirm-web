@@ -108,17 +108,27 @@ const Footer: React.FC = () => {
 
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
-          <p>© 2024 Justice & Co. All Rights Reserved.</p>
+          <p>© 2025 Justice & Co. All Rights Reserved.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link
+              href="/privacy-policy"
+              className="hover:text-white transition-colors"
+            >
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link
+              href="/terms-and-conditions"
+              className="hover:text-white transition-colors"
+            >
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link
+              href="/sitemap.xml"
+              target="_blank"
+              className="hover:text-white transition-colors"
+            >
               Sitemap
-            </a>
+            </Link>
           </div>
         </div>
       </div>

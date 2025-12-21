@@ -93,7 +93,7 @@ const About = () => {
           </div>
           {["/about-us"].includes(pathname) && (
             <div className="mt-10 space-y-3">
-              <p className="text-[18px]">
+              <p className="text-[18px] text-gray-600 leading-relaxed font-light text-lg">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
                 omnis sunt nobis. Laboriosam voluptatem dignissimos laudantium
                 error voluptate ducimus, veniam eos nemo quia? Inventore fuga
@@ -103,7 +103,7 @@ const About = () => {
                 repellendus ullam at ut tempora repudiandae, est conse
               </p>
 
-              <p className="text-[18px]">
+              <p className="text-[18px] text-gray-600 leading-relaxed font-light text-lg">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
                 omnis sunt nobis. Laboriosam voluptatem dignissimos laudantium
                 error voluptate ducimus, veniam eos nemo quia? Inventore fuga

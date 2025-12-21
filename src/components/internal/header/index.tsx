@@ -67,7 +67,7 @@ const Header: React.FC = () => {
           <ul className="hidden lg:flex items-center space-x-8">
             {NAV_ITEMS.map((item, idx) => (
               <li key={idx} className="relative group">
-                <a
+                <Link
                   href={item.link}
                   className="flex items-center gap-1 text-[#1a1c1e] font-medium hover:text-secondary transition-colors py-2"
                 >
@@ -78,20 +78,20 @@ const Header: React.FC = () => {
                       className="group-hover:rotate-180 transition-transform duration-300"
                     />
                   )}
-                </a>
+                </Link>
 
                 {/* Submenu */}
                 {item.submenu && (
                   <div className="absolute top-full left-0 w-56 bg-white shadow-xl rounded-b-lg border-t-2 border-secondary opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                     <div className="py-2">
                       {item.submenu.map((sub, sIdx) => (
-                        <a
+                        <Link
                           key={sIdx}
                           href={sub.link}
                           className="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary transition-colors"
                         >
                           {sub.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
