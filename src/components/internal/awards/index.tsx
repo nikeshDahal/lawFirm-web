@@ -3,7 +3,7 @@ import { IconName } from "@/interface";
 import React from "react";
 import * as LucideIcons from "lucide-react";
 
-const AwardsOverview = () => {
+const AwardsOverview: React.FC = () => {
   return (
     <>
       {/* Awards Section */}

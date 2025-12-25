@@ -25,14 +25,17 @@ const HeroBanner = () => {
           with over 25 years of proven excellence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href={"#firm-overview"}>
+          <Link
+            href={"https://maps.app.goo.gl/hTxqrAuioiz7FAvw5"}
+            target="_blank"
+          >
             <button className="bg-primary cursor-pointer text-white px-8 py-4 rounded font-bold hover:bg-secondary transition-colors uppercase tracking-wider text-sm">
-              Our Practice Areas
+              View our location
             </button>
           </Link>
-          <Link href={"/teams"}>
+          <Link href={"/contact-us"}>
             <button className="bg-white/10 cursor-pointer backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded font-bold hover:bg-white/20 transition-colors uppercase tracking-wider text-sm">
-              Meet Our Team
+              Book with us
             </button>
           </Link>
         </div>

@@ -1,8 +1,9 @@
 "use client";
 import { NAV_ITEMS } from "@/constant/menu";
-import { ArrowRight, Facebook, Linkedin, Scale, Twitter } from "lucide-react";
+import { ArrowRight, Scale } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import SocialHandler from "../socialhandler";
 
 const Footer: React.FC = () => {
   return (
@@ -25,15 +26,7 @@ const Footer: React.FC = () => {
               partner in navigating complex legal landscapes.
             </p>
             <div className="flex gap-4">
-              {[Facebook, Twitter, Linkedin].map((Icon, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className="w-10 h-10 rounded border border-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1a1c1e] hover:border-secondary transition-all duration-300"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
+              <SocialHandler />
             </div>
           </div>
 

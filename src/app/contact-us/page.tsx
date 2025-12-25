@@ -42,7 +42,7 @@ const ContactUs = () => {
   return (
     <>
       {/* Contact Section */}
-      <section id="contact-section" className="py-24 bg-white">
+      <section id="contact-section" className="py-24 bg-secondary/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Contact Info Column */}
@@ -206,6 +206,26 @@ const ContactUs = () => {
                     {errors.practiceArea && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.practiceArea.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
+                      Phone Number
+                    </label>
+                    <input
+                      {...register("phoneNumber")}
+                      type="phoneNumber"
+                      placeholder="+977 9806089009"
+                      className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
+                        errors.phoneNumber
+                          ? "border-red-500"
+                          : "border-gray-200 focus:border-secondary"
+                      }`}
+                    />
+                    {errors.phoneNumber && (
+                      <p className="text-red-500 text-[11px] flex items-center gap-1">
+                        <AlertCircle size={12} /> {errors.phoneNumber.message}
                       </p>
                     )}
                   </div>

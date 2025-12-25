@@ -1,10 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { ChevronDown, Scale, Phone, Mail, MapPin } from "lucide-react";
 import { NAV_ITEMS } from "@/constant/menu";
+import { cn } from "@/lib/utils";
+import { ChevronDown, Mail, MapPin, Phone, Scale } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import SocialHandler from "../socialhandler";
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -17,6 +21,26 @@ const Header: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isActive = (link: string) => {
+    if (link === "/") return pathname === "/";
+    return pathname.startsWith(link);
+  };
+
+  const isParentActive = (item: {
+    link: string;
+    submenu: [{ link: string }];
+  }) => {
+    if (isActive(item.link)) return true;
+
+    if (item.submenu) {
+      return item.submenu.some((sub: { link: string }) =>
+        pathname.startsWith(sub.link)
+      );
+    }
+
+    return false;
+  };
 
   return (
     <div className="bg-gray-50">
@@ -34,11 +58,11 @@ const Header: React.FC = () => {
           </div>
           <div className="flex items-center gap-2  font-light">
             <MapPin size={14} className="text-secondary" /> 123 Legal Plaza, New
-            KTM, NP
+            KTM, NP &nbsp;
+            <SocialHandler iconSize={14} size="sm" />
           </div>
         </div>
       </div>
-
       {/* Main Header */}
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
@@ -69,7 +93,13 @@ const Header: React.FC = () => {
               <li key={idx} className="relative group">
                 <Link
                   href={item.link}
-                  className="flex items-center gap-1 text-[#1a1c1e] font-medium hover:text-secondary transition-colors py-2"
+                  className={cn([
+                    "flex items-center gap-1 text-[#1a1c1e] font-medium hover:text-secondary transition-colors py-2",
+                    //@ts-expect-error
+                    isParentActive(item)
+                      ? "active text-secondary border-b-2 border-secondary"
+                      : "",
+                  ])}
                 >
                   {item.name}
                   {item.submenu && (
@@ -88,7 +118,12 @@ const Header: React.FC = () => {
                         <Link
                           key={sIdx}
                           href={sub.link}
-                          className="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary transition-colors"
+                          className={cn(
+                            "block px-6 py-3 text-sm transition-colors",
+                            pathname.startsWith(sub.link)
+                              ? "bg-gray-50 text-secondary font-medium"
+                              : "text-gray-700 hover:bg-gray-50 hover:text-secondary"
+                          )}
                         >
                           {sub.name}
                         </Link>
