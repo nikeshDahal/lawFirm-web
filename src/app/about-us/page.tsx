@@ -1,16 +1,24 @@
 "use client";
+import { MainHeading } from "@/components/internal/texture";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-const About = () => {
+
+const About: React.FC = () => {
   const pathname = usePathname();
   return (
     <>
       {/* About Us Section */}
-      <section className="py-24 bg-white">
+
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-6">
+          <MainHeading
+            title="About Us"
+            description="Meet the best law firm of Nepal"
+            customClass="mb-12 text-left"
+          />
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">

@@ -17,12 +17,16 @@ const OverviewCard = ({
 }: Props) => {
   const Icon = LucideIcons[icon as IconName] as LucideIcons.LucideIcon;
   const Item = (
-    <div className="p-8 border border-gray-100 rounded-lg hover:shadow-xl transition-shadow group bg-primary-foreground/20">
-      <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center mb-6 group-hover:bg-tertiary transition-colors">
-        {Icon && <Icon className="text-tertiary group-hover:text-white" />}
+    <div className="p-8 border group border-gray-100 rounded-lg transition-shadow group hover:bg-primary hover:text-white bg-primary-foreground/20">
+      <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center mb-6  group-hover:bg-white transition-colors  group-hover:animate-bounce">
+        {Icon && <Icon className="text-tertiary group-hover:text-primary" />}
       </div>
-      <h4 className="text-xl font-serif mb-4">{title}</h4>
-      <p className="text-gray-600 leading-relaxed">{descripiton}</p>
+      <h4 className="text-start text-xl font-serif mb-4 line-clamp-1">
+        {title}
+      </h4>
+      <p className="text-start text-gray-600 group-hover:text-white leading-relaxed line-clamp-3">
+        {descripiton}
+      </p>
     </div>
   );
   if (link) return <Link href={link}>{Item}</Link>;

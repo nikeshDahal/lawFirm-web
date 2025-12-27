@@ -12,7 +12,7 @@ const Teams = ({ isPreview = false }) => {
   return (
     <>
       {/* Team Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-slate-100">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div
             className={cn([
