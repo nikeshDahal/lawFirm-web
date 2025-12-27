@@ -2,32 +2,17 @@
 
 import OverviewCard from "@/components/internal/card";
 import { MainHeading } from "@/components/internal/texture";
-import { firmOverview } from "@/constant/home";
-import React from "react";
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { firmOverview } from "@/constant/home";
+import React from "react";
 
 const PraticeAreaOverview: React.FC = () => {
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
-  React.useEffect(() => {
-    if (!api) {
-      return;
-    }
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
   return (
     <section className="bg-slate-100 py-20" id="firm-overview">
       <div className="">
