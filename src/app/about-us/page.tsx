@@ -30,7 +30,7 @@ const About: React.FC = () => {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="absolute -bottom-10 -right-10 lg:w-64 lg:h-64 md:w-44  md:h-44 w-34  h-34  bg-gray-50 rounded-2xl -z-0 hidden xl:block border border-gray-100"></div>
+              <div className="absolute -bottom-10 -right-10 lg:w-64 lg:h-64 md:w-44  md:h-44 w-34  h-34  bg-gray-50 rounded-2xl z-0 hidden xl:block border border-gray-100"></div>
               <div className="absolute -top-6 -left-6 bg-secondary text-[#1a1c1e] p-8 rounded-2xl shadow-xl z-20">
                 <p className="text-4xl font-serif font-bold">25+</p>
                 <p className="text-[10px] uppercase font-black tracking-widest mt-1">

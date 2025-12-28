@@ -2,10 +2,9 @@
 import { MainHeading } from "@/components/internal/texture";
 import { PUBLICATIONS } from "@/constant/publication";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Calendar, ExternalLink, User } from "lucide-react";
+import { ArrowRight, Calendar, FileText, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 import {
   Carousel,
@@ -38,12 +37,13 @@ const Publications = () => {
             </div>
             {isPreview && (
               <Link href={"/publications"}>
-                <button className="text-[#1a1c1e] cursor-pointer font-bold text-sm uppercase tracking-widest flex items-center gap-2 group border-b-2 border-secondary pb-1 hover:text-secondary transition-colors">
-                  View All Journals{" "}
-                  <ExternalLink
-                    size={16}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
+                <button className="group cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
+                  <>
+                    <FileText size={16} /> View All Journals{" "}
+                    <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[10px]">
+                      +{PUBLICATIONS.length - 4}
+                    </span>
+                  </>
                 </button>
               </Link>
             )}

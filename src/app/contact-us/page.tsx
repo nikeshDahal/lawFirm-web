@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactProps, contactSchema } from "@/interface/contact.schema";
 import { MainHeading } from "@/components/internal/texture";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 const ContactUs = () => {
   const [formStatus, setFormStatus] = useState("idle");
   const {
@@ -38,11 +40,18 @@ const ContactUs = () => {
     reset();
     setTimeout(() => setFormStatus("idle"), 5000);
   };
+  const pathname = usePathname();
 
   return (
     <>
       {/* Contact Section */}
-      <section id="contact-section" className="py-24 bg-secondary/30">
+      <section
+        id="contact-section"
+        className={cn([
+          "py-24 ",
+          ["/contact-us"].includes(pathname) ? "" : "bg-slate-200",
+        ])}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Contact Info Column */}

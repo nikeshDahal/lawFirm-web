@@ -7,6 +7,7 @@ import PraticeAreaOverview from "./practice-area/page";
 import Publications from "./publications/page";
 import Teams from "./teams/page";
 import React from "react";
+import FAQOverview from "./(legal)/faq/page";
 const Page: React.FC = () => {
   return (
     <div>
@@ -20,6 +21,7 @@ const Page: React.FC = () => {
         <Teams isPreview />
         <ClientOverview />
         <ContactUs />
+        <FAQOverview />
       </section>
     </div>
   );

@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { name: "About Us", link: "/about-us" },
   {
     name: "Practice Areas",
-    link: "#",
+    link: "/practice-area",
     submenu: [
       {
         name: "Corporate Law",

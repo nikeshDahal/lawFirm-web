@@ -5,14 +5,21 @@ import { cn } from "@/lib/utils";
 import { Linkedin, Mail, Minus, Twitter, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 const Teams = ({ isPreview = false }) => {
   const [showAllTeam, setShowAllTeam] = useState<boolean>(false);
+  const pathname = usePathname();
   return (
     <>
       {/* Team Section */}
-      <section className="py-24 bg-slate-100">
+      <section
+        className={cn([
+          "py-24 ",
+          ["/teams"].includes(pathname) ? "" : "bg-slate-200",
+        ])}
+      >
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div
             className={cn([
@@ -43,23 +50,6 @@ const Teams = ({ isPreview = false }) => {
                 </button>
               </Link>
             )}
-            {/* <button
-              onClick={() => setShowAllTeam(!showAllTeam)}
-              className="group flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95"
-            >
-              {showAllTeam ? (
-                <>
-                  <Minus size={16} /> Show Main Partners
-                </>
-              ) : (
-                <>
-                  <Users size={16} /> View All Attorneys{" "}
-                  <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[10px]">
-                    +{TEAM_MEMBERS.length - 3}
-                  </span>
-                </>
-              )}
-            </button> */}
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">

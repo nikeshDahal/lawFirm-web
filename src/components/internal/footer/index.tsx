@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
                 <Scale size={24} className="text-primary" />
               </div>
               <h2 className="text-xl font-serif font-bold tracking-tight text-white leading-none">
-                JUSTICE & <span className="text-secondary">CO.</span>
+                Karma <span className="text-secondary">Legal </span> Atelier.
               </h2>
             </div>
             <p className="text-sm leading-relaxed text-white">
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               {NAV_ITEMS.map((item, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     href={item.link}
                     className="flex items-center gap-2 hover:text-secondary transition-colors group"
                   >
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                       className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,28 +80,24 @@ const Footer: React.FC = () => {
           {/* Column 4: Newsletter/Contact */}
           <div className="space-y-6">
             <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
-              Legal Insights
+              Walk In
             </h4>
-            <p className="text-sm text-white">
-              Subscribe to our newsletter for the latest legal updates and firm
-              news.
-            </p>
-            <form className="relative" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-sm focus:outline-none focus:border-secondary transition-colors"
-              />
-              <button className="absolute right-2 top-2 bg-secondary text-[#1a1c1e] p-1.5 rounded hover:bg-white transition-colors">
-                <ArrowRight size={16} />
-              </button>
-            </form>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56516.2777684411!2d85.28493293612318!3d27.70903024192621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600!5e0!3m2!1sen!2snp!4v1766937499815!5m2!1sen!2snp"
+              width="300"
+              height="200"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
 
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
-          <p>© 2025 Justice & Co. All Rights Reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Karma Legal Atelier. All Rights
+            Reserved.
+          </p>
           <div className="flex gap-8">
             <Link
               href="/privacy-policy"
