@@ -52,8 +52,8 @@ const ClientOverview: React.FC = () => {
         </div>
 
         {/* Gradient overlays to fade out edges */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute md:h-auto h-65.2 md:top-0 top-full inset-y-0 left-0 w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute md:h-auto h-65.2 md:top-0 top-full inset-y-0 right-0 w-32 bg-linear-to-l from-white to-transparent z-10 pointer-events-none"></div>
       </section>
     </>
   );
