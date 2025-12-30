@@ -2,7 +2,7 @@ import { MainHeading, TitleHeading } from "@/components/internal/texture";
 
 const page = () => {
   return (
-    <section className="lg:py-24 bg-white">
+    <section className="lg:py-24 ">
       <div className="max-w-7xl mx-auto px-6 text-center py-4">
         <MainHeading description="Tearms & Conditions" />
         <div className="text-start">

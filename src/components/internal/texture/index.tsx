@@ -1,4 +1,5 @@
 import { MainHeadingProps } from "@/interface";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
@@ -17,7 +18,9 @@ const MainHeading: React.FC<MainHeadingProps> = ({
         </p>
       )}
       {description && (
-        <h3 className="text-3xl font-serif text-[#1a1c1e]">{description}</h3>
+        <h3 className="text-3xl font-serif text-[#1a1c1e] border-b-2 w-fit pb-1 pe-2 border-primary">
+          {description}
+        </h3>
       )}
     </div>
   );

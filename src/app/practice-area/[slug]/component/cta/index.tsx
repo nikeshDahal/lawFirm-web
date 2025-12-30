@@ -5,22 +5,20 @@ import React from "react";
 const ExpertCTA: React.FC = () => {
   return (
     <>
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
+      <div className="">
+        <div className="bg-primary p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
           <div
             className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mx-auto mb-4"
             aria-hidden="true"
           >
             <MessageSquare className="text-secondary" size={24} />
           </div>
-          <h4 className="text-[#1a1c1e] font-bold text-sm mb-2">
-            Expert Consult
-          </h4>
-          <p className="text-gray-400 text-[11px] mb-6">
+          <h4 className="text-white font-bold text-sm mb-2">Expert Consult</h4>
+          <p className="text-white text-[11px] mb-6">
             Schedule a direct strategy session with Eleanor Vance.
           </p>
           <Link href={"/contact-us"}>
-            <button className="w-full cursor-pointer py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-secondary transition-all">
+            <button className="w-full cursor-pointer py-3 bg-secondary text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-white hover:text-primary transition-all">
               Book Now
             </button>
           </Link>
@@ -43,7 +41,7 @@ const AttachmentCTA: React.FC = () => {
             Download our 2024 AI Governance implementation roadmap.
           </p>
         </div>
-        <button className="relative z-10 bg-secondary text-[#1a1c1e] px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-white transition-all shadow-xl active:scale-95">
+        <button className="relative z-10 bg-secondary text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-white transition-all shadow-xl active:scale-95">
           <Download size={18} aria-hidden="true" /> Download PDF Guide
         </button>
       </section>

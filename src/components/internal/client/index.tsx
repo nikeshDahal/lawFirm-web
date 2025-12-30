@@ -19,10 +19,10 @@ const ClientOverview: React.FC = () => {
           animation-play-state: paused;
         }
       `}</style>
-      <section className="py-16 bg-white border-y border-gray-100 overflow-hidden relative">
+      <section className="py-16 border-y border-gray-100 overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-6 ">
           <MainHeading
-            title="Trusted By Global Corporations"
+            title="Trusted By"
             description="Distinguished Partnerships"
             customClass="mb-12 text-left"
           />
@@ -34,7 +34,7 @@ const ClientOverview: React.FC = () => {
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center justify-center w-62.5 shrink-0 grayscale hover:grayscale-0 opacity-40 hover:opacity-100 transition-all duration-700 group px-12"
+                className="flex flex-col items-center justify-center w-62.5 shrink-0 hover:opacity-100 transition-all duration-700 group px-12"
               >
                 <Image
                   height={200}

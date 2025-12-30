@@ -30,7 +30,7 @@ const PublicationAction = () => {
               className="group-hover:scale-110 transition-transform"
             />
           </button>
-          <button
+          {/* <button
             onClick={addBookmark}
             className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#c5a059] hover:bg-[#c5a059]/5 transition-all group"
             aria-label="Bookmark this article"
@@ -49,7 +49,7 @@ const PublicationAction = () => {
               size={20}
               className="group-hover:scale-110 transition-transform"
             />
-          </button>
+          </button> */}
         </div>
         <div className="w-px h-12 bg-gray-100 my-2"></div>
         <button

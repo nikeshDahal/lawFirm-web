@@ -78,7 +78,7 @@ const page = async ({ params }: Props) => {
               </div>
 
               {/* Resource Downloads - CTA Section */}
-              <AttachmentCTA />
+              {/* <AttachmentCTA /> */}
             </div>
 
             {/* Right Sidebar: Related & Call to Action */}
@@ -87,7 +87,7 @@ const page = async ({ params }: Props) => {
                 className="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-32"
                 aria-labelledby="sidebar-practice-title"
               >
-                <h2
+                {/* <h2
                   id="sidebar-practice-title"
                   className="text-[#1a1c1e] font-black text-[10px] uppercase tracking-[0.3em] mb-6 border-b border-gray-200 pb-4"
                 >
@@ -110,7 +110,7 @@ const page = async ({ params }: Props) => {
                       Cross-Border Data Compliance
                     </h3>
                   </a>
-                </nav>
+                </nav> */}
 
                 <ExpertCTA />
               </section>

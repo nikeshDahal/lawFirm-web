@@ -49,7 +49,7 @@ const ContactUs = () => {
         id="contact-section"
         className={cn([
           "py-24 ",
-          ["/contact-us"].includes(pathname) ? "" : "bg-slate-200",
+          ["/contact-us"].includes(pathname) ? "" : "bg-slate-100",
         ])}
       >
         <div className="max-w-7xl mx-auto px-6">
@@ -69,8 +69,8 @@ const ContactUs = () => {
                 </p>
               </div>
 
-              <div className="space-y-8">
-                <div className="flex gap-6 group">
+              <div className="space-y-4">
+                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
                     <MapPin
                       className="text-secondary group-hover:text-white"
@@ -89,7 +89,7 @@ const ContactUs = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-6 group">
+                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
                     <Phone
                       className="text-secondary group-hover:text-white"
@@ -108,7 +108,7 @@ const ContactUs = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-6 group">
+                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
                     <Clock
                       className="text-secondary group-hover:text-white"
@@ -130,7 +130,7 @@ const ContactUs = () => {
             </div>
 
             {/* Form Column */}
-            <div className="bg-[#f9f9f9] p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+            <div className="bg-[#f9f9f9] p-8 md:p-12 rounded-2xl shadow-sm  border-2 border-primary">
               {formStatus === "success" ? (
                 <div className="text-center py-12">
                   <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -263,11 +263,12 @@ const ContactUs = () => {
                   <button
                     disabled={isSubmitting || formStatus === "sending"}
                     type="submit"
-                    className={`w-full py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-3 ${
-                      isSubmitting || formStatus === "sending"
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-primary text-white hover:bg-secondary"
-                    }`}
+                    // className={`w-full py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-3 ${
+                    //   isSubmitting || formStatus === "sending"
+                    //     ? "bg-gray-400 cursor-not-allowed"
+                    //     : "bg-primary text-white hover:bg-secondary"
+                    // }`}
+                    className="group mx-auto w-full  justify-center cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95"
                   >
                     {isSubmitting || formStatus === "sending" ? (
                       "Processing..."

@@ -2,11 +2,11 @@
 import { MainHeading } from "@/components/internal/texture";
 import { TEAM_MEMBERS } from "@/constant/team";
 import { cn } from "@/lib/utils";
-import { Linkedin, Mail, Minus, Twitter, Users } from "lucide-react";
+import { Linkedin, Mail, Twitter, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Teams = ({ isPreview = false }) => {
   const [showAllTeam, setShowAllTeam] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const Teams = ({ isPreview = false }) => {
       <section
         className={cn([
           "py-24 ",
-          ["/teams"].includes(pathname) ? "" : "bg-slate-200",
+          ["/teams"].includes(pathname) ? "" : "bg-slate-100",
         ])}
       >
         <div className="max-w-7xl mx-auto px-6 text-center">

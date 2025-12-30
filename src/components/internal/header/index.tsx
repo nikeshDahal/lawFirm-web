@@ -141,7 +141,7 @@ const Header: React.FC = () => {
             {/* Call to Action */}
             <div className="hidden lg:block">
               <Link href={"/contact-us"}>
-                <button className="bg-primary cursor-pointer text-white px-6 py-2.5 rounded hover:bg-secondary transition-all duration-300 font-medium text-sm">
+                <button className="group cursor-pointer flex items-center gap-3 px-6 py-3 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
                   Free Consultation
                 </button>
               </Link>

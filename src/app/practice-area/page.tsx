@@ -4,6 +4,7 @@ import OverviewCard from "@/components/internal/card";
 import { MainHeading } from "@/components/internal/texture";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -19,6 +20,24 @@ import React from "react";
 const PraticeAreaOverview: React.FC = () => {
   const pathname = usePathname();
   const isPreview = !["/practice-area"].includes(pathname);
+
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    console.log("enter ok", api);
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   return (
     <section
       className={cn([`py-20`, isPreview ? "bg-slate-100" : ""])}
@@ -34,9 +53,9 @@ const PraticeAreaOverview: React.FC = () => {
           >
             <div className={cn([isPreview && "text-left"])}>
               <MainHeading
-                title="Firm Overview"
+                title="Pratice Area"
                 description="Commitment, Integrity & Success"
-                customClass={!isPreview ? "mb-12" : ""}
+                customClass={!isPreview ? "mb-18" : ""}
               />
             </div>
             {isPreview && (
@@ -60,6 +79,7 @@ const PraticeAreaOverview: React.FC = () => {
                   align: "start",
                 }}
                 className=""
+                setApi={setApi}
               >
                 <CarouselContent>
                   {firmOverview.map((item, i: number) => (
@@ -78,6 +98,22 @@ const PraticeAreaOverview: React.FC = () => {
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 py-4">
+                {Array.from({ length: count }).map((_, i) => (
+                  <button
+                    key={i}
+                    className={`h-2 w-2 rounded-full cursor-pointer transition-all ${
+                      i === current
+                        ? "bg-primary w-4"
+                        : "bg-muted-foreground/30"
+                    }`}
+                    onClick={() => api?.scrollTo(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
             <div className="grid md:grid-cols-3 gap-12 text-left">

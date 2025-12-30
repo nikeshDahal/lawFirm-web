@@ -2,7 +2,8 @@ import { PUBLICATIONS } from "@/constant/publication";
 import { TEAM_MEMBERS } from "@/constant/team";
 import { Calendar, Clock } from "lucide-react";
 import PublicationAction from "./component/action";
-import { AttachmentCTA, ExpertCTA } from "./component/cta";
+import { AttachmentCTA } from "./component/cta";
+import { ExpertCTA } from "@/app/practice-area/[slug]/component/cta";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -41,7 +42,7 @@ const page = async ({ params }: Props) => {
             {/* Main Content Column */}
             <div className="lg:col-span-8 order-1 lg:order-2">
               <header className="mb-12">
-                <div className="flex items-center gap-3 mb-8">
+                {/* <div className="flex items-center gap-3 mb-8">
                   <span
                     className="bg-[#c5a059]/10 text-[#c5a059] text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded"
                     itemProp="articleSection"
@@ -60,7 +61,7 @@ const page = async ({ params }: Props) => {
                     <Clock size={12} className="text-[#c5a059]" />{" "}
                     {ACTIVE_PUBLICATION.readTime}
                   </span>
-                </div>
+                </div> */}
 
                 <h1
                   className="text-4xl md:text-7xl font-serif text-[#1a1c1e] mb-6 leading-[1.1] tracking-tight text-left"
@@ -91,7 +92,7 @@ const page = async ({ params }: Props) => {
               </figure>
 
               {/* Author Bio (Semantic Link for SEO) */}
-              <section
+              {/* <section
                 className="flex items-center gap-5 p-6 bg-gray-50 rounded-2xl mb-12 border border-gray-100"
                 itemProp="author"
                 itemScope
@@ -122,7 +123,7 @@ const page = async ({ params }: Props) => {
                     {TEAM_MEMBERS[0].specialty}
                   </p>
                 </div>
-              </section>
+              </section> */}
 
               {/* Rich Text Body Content */}
               <div className="prose-container" itemProp="articleBody">
@@ -135,7 +136,7 @@ const page = async ({ params }: Props) => {
               </div>
 
               {/* Resource Downloads - CTA Section */}
-              <AttachmentCTA />
+              {/* <AttachmentCTA /> */}
             </div>
 
             {/* Right Sidebar: Related & Call to Action */}
@@ -144,7 +145,7 @@ const page = async ({ params }: Props) => {
                 className="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-32"
                 aria-labelledby="sidebar-practice-title"
               >
-                <h2
+                {/* <h2
                   id="sidebar-practice-title"
                   className="text-[#1a1c1e] font-black text-[10px] uppercase tracking-[0.3em] mb-6 border-b border-gray-200 pb-4"
                 >
@@ -167,7 +168,7 @@ const page = async ({ params }: Props) => {
                       Cross-Border Data Compliance
                     </h3>
                   </a>
-                </nav>
+                </nav> */}
 
                 <ExpertCTA />
               </section>

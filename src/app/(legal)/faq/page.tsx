@@ -13,7 +13,7 @@ const FAQOverview: React.FC = () => {
   return (
     <>
       {/* FAQ Section */}
-      <section id="faq-section" className="py-24 bg-white">
+      <section id="faq-section" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <MainHeading

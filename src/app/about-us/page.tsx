@@ -12,12 +12,12 @@ const About: React.FC = () => {
     <>
       {/* About Us Section */}
 
-      <section className="py-12 bg-white">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-6">
           <MainHeading
             title="About Us"
             description="Meet the best law firm of Nepal"
-            customClass="mb-12 text-left"
+            customClass="mb-14 text-left"
           />
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
