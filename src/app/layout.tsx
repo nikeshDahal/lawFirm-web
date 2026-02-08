@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/internal/header";
 import Footer from "@/components/internal/footer";
@@ -10,14 +9,11 @@ import {
   ClientPracticeAreasResponse,
 } from "./utils/interface/index.query";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import localFont from "next/font/local";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const geist = localFont({
+  src: "./Geist-VariableFont_wght.ttf",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
@@ -58,9 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-offwhite`}
-      >
+      <body className={`${geist.className} antialiased bg-offwhite`}>
         <Header contactData={contactData} pubData={pubData} />
         {children}
         <Footer contactData={contactData} pubData={pubData} />
