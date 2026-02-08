@@ -1,4 +1,9 @@
 "use client";
+import MarkUpHTML from "@/components/internal/markup";
+import { MainHeading } from "@/components/internal/texture";
+import { contactSchema } from "@/interface/contact.schema";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   AlertCircle,
   ArrowRight,
@@ -7,23 +12,23 @@ import {
   Phone,
   Send,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ContactProps, contactSchema } from "@/interface/contact.schema";
-import { MainHeading } from "@/components/internal/texture";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 import {
   ClientContactUsResponse,
   ClientPracticeArea,
   ClientPracticeAreasResponse,
 } from "../utils/interface/index.query";
 import { fetchData } from "../utils/service";
+import { POST_CONTACT } from "../utils/service/index.mutation";
 import { GET_CONTACT, GET_PRACTICE_HEADER } from "../utils/service/index.query";
-import MarkUpHTML from "@/components/internal/markup";
 const ContactUs = () => {
   const [data, setData] = React.useState<ClientContactUsResponse | null>();
+  const [publicationData, setPublicationData] = React.useState<
+    ClientPracticeArea[] | null
+  >();
+  const [formStatus, setFormStatus] = useState("idle");
 
   const getData = async () => {
     const contactData = await fetchData<ClientContactUsResponse>({
@@ -40,13 +45,6 @@ const ContactUs = () => {
     });
     setData(() => contactData);
   };
-  React.useEffect(() => {
-    getData();
-  }, []);
-
-  const [publicationData, setPublicationData] = React.useState<
-    ClientPracticeArea[] | null
-  >();
   const getPublicationData = async () => {
     const pubData = await fetchData<ClientPracticeAreasResponse>({
       query: GET_PRACTICE_HEADER,
@@ -62,33 +60,52 @@ const ContactUs = () => {
     });
     setPublicationData(() => pubData.data);
   };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   React.useEffect(() => {
     getPublicationData();
   }, []);
 
-  const [formStatus, setFormStatus] = useState("idle");
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
-      practiceArea: "Corporate Law",
+      phone: "",
+      practiceArea: "General Inquery",
       message: "",
     },
   });
 
-  const onContactSubmit = async (data: ContactProps) => {
+  const onContactSubmit = async () => {
     setFormStatus("sending");
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setFormStatus("success");
-    reset();
-    setTimeout(() => setFormStatus("idle"), 5000);
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
+    const response = await fetchData<ClientPracticeAreasResponse>({
+      query: POST_CONTACT,
+      variables: {
+        input: watch(),
+      },
+    });
+    if (!response.errors) {
+      setFormStatus("success");
+      reset();
+      setTimeout(() => setFormStatus("idle"), 5000);
+      return;
+    } else {
+      setFormStatus("failed");
+      setTimeout(() => setFormStatus("idle"), 5000);
+      return console.warn("contact form error", response.errors);
+    }
   };
   const pathname = usePathname();
 
@@ -215,18 +232,18 @@ const ContactUs = () => {
                         Full Name
                       </label>
                       <input
-                        {...register("fullName")}
+                        {...register("name")}
                         type="text"
                         placeholder="John Doe"
                         className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
-                          errors.fullName
+                          errors.name
                             ? "border-red-500"
                             : "border-gray-200 focus:border-secondary"
                         }`}
                       />
-                      {errors.fullName && (
+                      {errors.name && (
                         <p className="text-red-500 text-[11px] flex items-center gap-1">
-                          <AlertCircle size={12} /> {errors.fullName.message}
+                          <AlertCircle size={12} /> {errors.name.message}
                         </p>
                       )}
                     </div>
@@ -260,6 +277,7 @@ const ContactUs = () => {
                       {...register("practiceArea")}
                       className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all appearance-none cursor-pointer"
                     >
+                      <option value={"General Inquery"}>General Inquery</option>
                       {publicationData?.map((item, index: number) => {
                         return (
                           <option key={index} value={item.title}>
@@ -279,18 +297,18 @@ const ContactUs = () => {
                       Phone Number
                     </label>
                     <input
-                      {...register("phoneNumber")}
-                      type="phoneNumber"
+                      {...register("phone")}
+                      type="phone"
                       placeholder="+977 9806089009"
                       className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
-                        errors.phoneNumber
+                        errors.phone
                           ? "border-red-500"
                           : "border-gray-200 focus:border-secondary"
                       }`}
                     />
-                    {errors.phoneNumber && (
+                    {errors.phone && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.phoneNumber.message}
+                        <AlertCircle size={12} /> {errors.phone.message}
                       </p>
                     )}
                   </div>

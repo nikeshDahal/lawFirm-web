@@ -82,6 +82,7 @@ interface ClientPracticeAreasResponse {
     };
   };
   data: ClientPracticeArea[];
+  errors?: undefined;
 }
 
 interface ClientPracticeArea {
