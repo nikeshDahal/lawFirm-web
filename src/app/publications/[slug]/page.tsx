@@ -1,9 +1,12 @@
-import { PUBLICATIONS } from "@/constant/publication";
-import { TEAM_MEMBERS } from "@/constant/team";
-import { Calendar, Clock } from "lucide-react";
-import PublicationAction from "./component/action";
-import { AttachmentCTA } from "./component/cta";
 import { ExpertCTA } from "@/app/practice-area/[slug]/component/cta";
+import { ClientPracticeAreaDetail } from "@/app/utils/interface/index.query";
+import { fetchData } from "@/app/utils/service";
+import { GET_PUBLICATION_SLUG } from "@/app/utils/service/index.query";
+import Image from "next/image";
+import PublicationAction from "./component/action";
+import React from "react";
+import Link from "next/link";
+import NoData from "@/components/internal/nodata";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -12,10 +15,16 @@ type Props = {
 const page = async ({ params }: Props) => {
   const { slug } = await params;
   const currentSlug = await slug;
-  const ACTIVE_PUBLICATION = PUBLICATIONS.find(
-    (item) => item.id === currentSlug
-  );
-  if (!ACTIVE_PUBLICATION) return;
+
+  const pageData = await fetchData<ClientPracticeAreaDetail>({
+    query: GET_PUBLICATION_SLUG,
+    path: "data.getClientPublicationBySlug",
+    variables: {
+      slug: currentSlug,
+    },
+  });
+
+  if (!pageData) return <NoData />;
   return (
     <>
       {/* Main Publication Layout - Semantic <article> */}
@@ -25,10 +34,7 @@ const page = async ({ params }: Props) => {
           itemScope
           itemType="https://schema.org/TechArticle"
         >
-          <meta
-            itemProp="description"
-            content={ACTIVE_PUBLICATION.metaDescription}
-          />
+          <meta itemProp="description" content={pageData.metaData} />
 
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Left Sidebar: Utility & Engagement */}
@@ -67,28 +73,30 @@ const page = async ({ params }: Props) => {
                   className="text-4xl md:text-7xl font-serif text-[#1a1c1e] mb-6 leading-[1.1] tracking-tight text-left"
                   itemProp="headline"
                 >
-                  {ACTIVE_PUBLICATION.title}
+                  {pageData.title || ""}
                 </h1>
 
-                <p
+                {/* <p
                   className="text-xl md:text-2xl font-light text-gray-500 italic leading-relaxed text-left border-l-4 border-[#c5a059]/20 pl-6"
                   itemProp="alternativeHeadline"
                 >
                   {ACTIVE_PUBLICATION.subtitle}
-                </p>
+                </p> */}
               </header>
 
-              <figure className="relative aspect-[16/9] mb-16 rounded-3xl overflow-hidden shadow-2xl group">
-                <img
-                  src={ACTIVE_PUBLICATION.image}
+              <figure className="relative aspect-video mb-16 rounded-3xl overflow-hidden shadow-2xl group">
+                <Image
+                  height={400}
+                  width={800}
+                  src={pageData?.pageImage || "/noimage.png"}
                   alt="Legal professionals discussing AI implementation in a modern office"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   itemProp="image"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                <figcaption className="sr-only">
-                  Corporate legal analysis of artificial intelligence
-                </figcaption>
+                <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                <figcaption className="sr-only">{pageData?.title}</figcaption>
               </figure>
 
               {/* Author Bio (Semantic Link for SEO) */}
@@ -130,7 +138,7 @@ const page = async ({ params }: Props) => {
                 <div
                   className="publication-content text-gray-700 leading-relaxed font-light text-xl space-y-10"
                   dangerouslySetInnerHTML={{
-                    __html: ACTIVE_PUBLICATION.content,
+                    __html: pageData.content,
                   }}
                 />
               </div>

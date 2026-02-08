@@ -20,7 +20,7 @@ const FAQS = [
       "Yes, we provide secure video conferencing options for clients who prefer or require remote meetings. We utilize encrypted platforms to ensure attorney-client privilege is maintained at all times.",
   },
   {
-    question: "What makes Karma Legal Atelier. different from other firms?",
+    question: "What makes Top Legal Advisers. different from other firms?",
     answer:
       "Our distinction lies in our 'Boutique Service, Global Reach' philosophy. We combine the high-level resources typically found at massive international firms with the dedicated, personalized attention of a private counselor.",
   },

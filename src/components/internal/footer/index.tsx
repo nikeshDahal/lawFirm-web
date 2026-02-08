@@ -3,9 +3,17 @@ import { NAV_ITEMS } from "@/constant/menu";
 import { ArrowRight, Scale } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import {
+  ClientContactUsResponse,
+  ClientPracticeAreasResponse,
+} from "@/app/utils/interface/index.query";
 import SocialHandler from "../socialhandler";
 
-const Footer: React.FC = () => {
+type Props = {
+  contactData: ClientContactUsResponse;
+  pubData: ClientPracticeAreasResponse;
+};
+const Footer: React.FC<Props> = ({ contactData, pubData }) => {
   return (
     <footer className="bg-primary text-white">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
@@ -17,7 +25,7 @@ const Footer: React.FC = () => {
                 <Scale size={24} className="text-primary" />
               </div>
               <h2 className="text-xl font-serif font-bold tracking-tight text-white leading-none">
-                Karma <span className="text-secondary">Legal </span> Atelier.
+                Top <span className="text-secondary">Legal </span> Advisers.
               </h2>
             </div>
             <p className="text-sm leading-relaxed text-white">
@@ -26,7 +34,7 @@ const Footer: React.FC = () => {
               partner in navigating complex legal landscapes.
             </p>
             <div className="flex gap-4">
-              <SocialHandler />
+              <SocialHandler data={contactData.socialMedia} />
             </div>
           </div>
 
@@ -59,18 +67,18 @@ const Footer: React.FC = () => {
               Expertise
             </h4>
             <ul className="space-y-4 text-sm">
-              {NAV_ITEMS[2].submenu &&
-                NAV_ITEMS[2]?.submenu.map((item, idx) => (
+              {pubData &&
+                pubData?.data.map((item, idx) => (
                   <li key={idx}>
                     <Link
-                      href={item.link}
+                      href={`/practice-area/${item.slug}`}
                       className="flex items-center gap-2 hover:text-secondary transition-colors group"
                     >
                       <ArrowRight
                         size={12}
                         className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
                       />
-                      {item.name}
+                      {item.title}
                     </Link>
                   </li>
                 ))}
@@ -95,7 +103,7 @@ const Footer: React.FC = () => {
         {/* Bottom Copyright */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
           <p>
-            © {new Date().getFullYear()} Karma Legal Atelier. All Rights
+            © {new Date().getFullYear()} Top Legal Advisers. All Rights
             Reserved.
           </p>
           <div className="flex gap-8">

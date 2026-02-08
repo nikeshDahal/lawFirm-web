@@ -14,7 +14,58 @@ import { ContactProps, contactSchema } from "@/interface/contact.schema";
 import { MainHeading } from "@/components/internal/texture";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  ClientContactUsResponse,
+  ClientPracticeArea,
+  ClientPracticeAreasResponse,
+} from "../utils/interface/index.query";
+import { fetchData } from "../utils/service";
+import { GET_CONTACT, GET_PRACTICE_HEADER } from "../utils/service/index.query";
+import MarkUpHTML from "@/components/internal/markup";
 const ContactUs = () => {
+  const [data, setData] = React.useState<ClientContactUsResponse | null>();
+
+  const getData = async () => {
+    const contactData = await fetchData<ClientContactUsResponse>({
+      query: GET_CONTACT,
+      path: "data.getClientContactUsPageContent",
+      variables: {
+        input: {
+          limit: 50,
+          order: "desc",
+          orderBy: "_id",
+          skip: 0,
+        },
+      },
+    });
+    setData(() => contactData);
+  };
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  const [publicationData, setPublicationData] = React.useState<
+    ClientPracticeArea[] | null
+  >();
+  const getPublicationData = async () => {
+    const pubData = await fetchData<ClientPracticeAreasResponse>({
+      query: GET_PRACTICE_HEADER,
+      path: "data.findAllClientPracticeAreas",
+      variables: {
+        input: {
+          limit: 50,
+          order: "desc",
+          orderBy: "_id",
+          skip: 0,
+        },
+      },
+    });
+    setPublicationData(() => pubData.data);
+  };
+  React.useEffect(() => {
+    getPublicationData();
+  }, []);
+
   const [formStatus, setFormStatus] = useState("idle");
   const {
     register,
@@ -32,7 +83,6 @@ const ContactUs = () => {
   });
 
   const onContactSubmit = async (data: ContactProps) => {
-    console.log("🚀 ~ onContactSubmit ~ data:", data);
     setFormStatus("sending");
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -58,15 +108,19 @@ const ContactUs = () => {
             <div className="space-y-6">
               <div>
                 <MainHeading
-                  title="Get In Touch"
-                  description="Let`s Discuss Your Case"
+                  title={data?.title || "Get In Touch"}
+                  description={data?.subTitle || "Let`s Discuss Your Case"}
                   customClass="mb-6"
                 />
-                <p className="text-gray-600 leading-relaxed max-w-md">
+                <MarkUpHTML
+                  className="text-gray-600 leading-relaxed max-w-md"
+                  content={data?.content as string}
+                />
+                {/* <p className="text-gray-600 leading-relaxed max-w-md">
                   Our expert legal team is ready to provide you with the
                   guidance and representation you deserve. Send us a message or
                   visit our office.
-                </p>
+                </p> */}
               </div>
 
               <div className="space-y-4">
@@ -79,12 +133,12 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-[#1a1c1e] mb-1">
-                      Our Location
+                      {data?.location.label || "Our Location"}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      123 Legal Plaza, Suite 400
+                      {data?.location.city}
                       <br />
-                      Kathmandu, Nepal
+                      {data?.location.address}, {data?.location.country}
                     </p>
                   </div>
                 </div>
@@ -101,9 +155,9 @@ const ContactUs = () => {
                       Phone Number
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      (+977) 123-4567
+                      {data?.contactInfo.primaryPhone}
                       <br />
-                      (+977) 987-6543
+                      {data?.contactInfo.secondaryPhone}
                     </p>
                   </div>
                 </div>
@@ -120,9 +174,9 @@ const ContactUs = () => {
                       Office Hours
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      Mon - Fri: 9:00 AM - 6:00 PM
+                      {data?.officeHour.day}
                       <br />
-                      Sat - Sun: By Appointment
+                      {data?.officeHour.note}
                     </p>
                   </div>
                 </div>
@@ -206,11 +260,13 @@ const ContactUs = () => {
                       {...register("practiceArea")}
                       className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all appearance-none cursor-pointer"
                     >
-                      <option value="Corporate Law">Corporate Law</option>
-                      <option value="Family Law">Family Law</option>
-                      <option value="Criminal Defense">Criminal Defense</option>
-                      <option value="Real Estate">Real Estate</option>
-                      <option value="Other">Other</option>
+                      {publicationData?.map((item, index: number) => {
+                        return (
+                          <option key={index} value={item.title}>
+                            {item.title}
+                          </option>
+                        );
+                      })}
                     </select>
                     {errors.practiceArea && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">

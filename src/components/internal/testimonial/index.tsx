@@ -12,16 +12,44 @@ import { Quote, Star } from "lucide-react";
 import { testimonials } from "@/constant/testimonail";
 import { MainHeading } from "../texture";
 import Autoplay from "embla-carousel-autoplay";
+import { fetchData } from "@/app/utils/service";
+import {
+  ClientTestimonial,
+  ClientTestimonialsResponse,
+} from "@/app/utils/interface/index.query";
+import { GET_TESTIMONIAL } from "@/app/utils/service/index.query";
+import MarkUpHTML from "../markup";
+import Image from "next/image";
 
 // Mock data for the testimonials
 
 export default function TestimonialSection() {
+  const [data, setData] = React.useState<ClientTestimonialsResponse | null>();
+  const getData = async () => {
+    const testimonialData = await fetchData<ClientTestimonialsResponse>({
+      query: GET_TESTIMONIAL,
+      path: "data.getAllClientTestimonials",
+      variables: {
+        input: {
+          limit: 50,
+          order: "desc",
+          orderBy: "_id",
+          skip: 0,
+        },
+      },
+    });
+    setData(() => testimonialData);
+  };
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   const plugin = React.useRef(
     Autoplay({
       delay: 3000, // 3s
       stopOnInteraction: false,
       stopOnMouseEnter: true, // optional
-    })
+    }),
   );
 
   const [api, setApi] = React.useState<CarouselApi>();
@@ -40,12 +68,13 @@ export default function TestimonialSection() {
     });
   }, [api]);
 
+  if (Array.isArray(data?.data) && data?.data.length === 0) return;
   return (
     <section className="max-w-7xl mx-auto py-24 px-6">
       <div className="">
         <MainHeading
-          title="Trusted by Industry Leaders"
-          description="What our client says"
+          title={data?.metaData.title || "Trusted by Industry Leaders"}
+          description={data?.metaData.subTitle || "What our client says"}
           customClass="mb-12"
         />
 
@@ -60,7 +89,7 @@ export default function TestimonialSection() {
             }}
           >
             <CarouselContent>
-              {testimonials.map((item, index) => (
+              {(data?.data as ClientTestimonial[])?.map((item, index) => (
                 <CarouselItem key={index}>
                   <div className="p-1">
                     <div className="border-none shadow-lg bg-card/50 backdrop-blur-sm">
@@ -76,7 +105,7 @@ export default function TestimonialSection() {
                             <Star
                               key={i}
                               className={`h-5 w-5 ${
-                                i < item.stars
+                                i < item.rating
                                   ? "fill-yellow-400 text-yellow-400"
                                   : "text-muted"
                               }`}
@@ -86,25 +115,38 @@ export default function TestimonialSection() {
 
                         {/* Testimonial Text */}
                         <blockquote className="text-center">
-                          <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground italic">
-                            `{item.content}`
-                          </p>
+                          <MarkUpHTML
+                            content={`${item.message}`}
+                            className="text-xl md:text-2xl font-medium leading-relaxed text-foreground italic"
+                          />
+                          {/* <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground italic">
+                            `{item.message}`
+                          </p> */}
                         </blockquote>
 
                         {/* Author Info */}
                         <div className="mt-8 flex flex-col items-center">
                           <div className="h-14 w-14 rounded-full border-2 border-primary/20 overflow-hidden mb-3">
-                            <img
-                              src={item.image}
-                              alt={item.name}
+                            <Image
+                              height={50}
+                              width={50}
+                              src={
+                                (item.clientImage as string).startsWith("http")
+                                  ? item.clientImage
+                                  : "/noimage.png"
+                              }
+                              alt={item.clientName}
                               className="h-full w-full object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = "/noimage.png"; // your default image
+                              }}
                             />
                           </div>
                           <cite className="not-italic font-bold text-lg">
-                            {item.name}
+                            {item.clientName}
                           </cite>
                           <span className="text-sm text-muted-foreground">
-                            {item.role} @ {item.company}
+                            {item.clientDesignation} @ {item.clientDesignation}
                           </span>
                         </div>
                       </div>
@@ -113,8 +155,8 @@ export default function TestimonialSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="md:flex hidden" />
+            <CarouselNext className="md:flex hidden" />
           </Carousel>
 
           {/* Custom Dots / Pill Navigation */}

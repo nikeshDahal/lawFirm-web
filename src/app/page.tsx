@@ -5,10 +5,11 @@ import About from "./about-us/page";
 import ContactUs from "./contact-us/page";
 import PraticeAreaOverview from "./practice-area/page";
 import Publications from "./publications/page";
-import Teams from "./teams/page";
 import React from "react";
 import FAQOverview from "./(legal)/faq/page";
 import TestimonialSection from "@/components/internal/testimonial";
+import TeamPage from "./teams/page";
+
 const Page: React.FC = () => {
   return (
     <div>
@@ -17,10 +18,10 @@ const Page: React.FC = () => {
       <About />
 
       <section className="pt-24">
-        <PraticeAreaOverview />
+        <PraticeAreaOverview limit={10} />
         <Publications />
-        <Teams isPreview />
-        <ClientOverview />
+        <TeamPage limit={4} />
+        {/* <ClientOverview /> */}
         <TestimonialSection />
         <ContactUs />
         <FAQOverview />

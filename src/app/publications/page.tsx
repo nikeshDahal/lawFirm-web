@@ -16,7 +16,40 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
+import {
+  ClientPublication,
+  ClientPublicationsResponse,
+} from "../utils/interface/index.query";
+import { fetchData } from "../utils/service";
+import { GET_PUBLICATION } from "../utils/service/index.query";
+import { Spinner } from "@/components/internal/spinner";
+import { Content } from "@/components/internal/markup";
 const Publications = () => {
+  const [data, setData] = React.useState<ClientPublicationsResponse | null>();
+  const [pending, setPending] = React.useState<boolean>(false);
+
+  const getData = async () => {
+    setPending(true);
+    const publicationData = await fetchData<ClientPublicationsResponse>({
+      query: GET_PUBLICATION,
+      path: "data.getAllClientPublications",
+      variables: {
+        input: {
+          limit: 50,
+          order: "desc",
+          orderBy: "_id",
+          skip: 0,
+        },
+      },
+    });
+    setData(() => publicationData);
+    setPending(false);
+    return;
+  };
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   const pathname = usePathname();
   const isPreview = !["/publications"].includes(pathname);
 
@@ -25,7 +58,7 @@ const Publications = () => {
       delay: 3000, // 3s
       stopOnInteraction: false,
       stopOnMouseEnter: true, // optional
-    })
+    }),
   );
 
   const [api, setApi] = React.useState<CarouselApi>();
@@ -35,8 +68,6 @@ const Publications = () => {
   React.useEffect(() => {
     if (!api) return;
 
-    console.log("enter ok", api);
-
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
 
@@ -44,6 +75,19 @@ const Publications = () => {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
+
+  if (pending)
+    return (
+      <div className="min-h-[80vh] w-full flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
+
+  if (
+    (Array.isArray(data?.data) && data?.data.length === 0) ||
+    data == undefined
+  )
+    return <>No data found.</>;
 
   return (
     <>
@@ -58,8 +102,8 @@ const Publications = () => {
           >
             <div className={cn([isPreview && "text-left"])}>
               <MainHeading
-                title="Insights & News"
-                description="Latest Publications"
+                title={data?.metaData.title || "Insights & News"}
+                description={data?.metaData.subTitle || "Latest Publications"}
                 customClass={!isPreview ? "mb-12" : ""}
               />
             </div>
@@ -87,7 +131,7 @@ const Publications = () => {
                 setApi={setApi}
               >
                 <CarouselContent>
-                  {PUBLICATIONS.map((pub, idx) => (
+                  {(data?.data as ClientPublication[])?.map((pub, idx) => (
                     <CarouselItem
                       key={idx}
                       className="md:basis-1/2 lg:basis-1/3 py-2"
@@ -98,22 +142,27 @@ const Publications = () => {
                       >
                         <div className="relative h-64 overflow-hidden">
                           <img
-                            src={pub.image}
+                            src={pub.pageImage || "/noimage.png"}
                             alt={pub.title}
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                            onError={(e) => {
+                              e.currentTarget.src = "/noimage.png"; // your default image
+                            }}
                           />
-                          <div className="absolute top-4 left-4">
-                            <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
-                              {pub.category}
-                            </span>
-                          </div>
+                          {pub?.category && (
+                            <div className="absolute top-4 left-4">
+                              <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
+                                {pub?.category || "N/A"}
+                              </span>
+                            </div>
+                          )}
                         </div>
 
                         <div className="p-8 flex flex-col grow">
                           <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
                             <span className="flex items-center gap-1.5 group-hover:text-white ">
                               <Calendar size={14} className="text-secondary" />{" "}
-                              {pub.date}
+                              {pub.createdAt?.split("T")[0]}
                             </span>
                             <span className="flex items-center gap-1.5 group-hover:text-white ">
                               <User size={14} className="text-secondary" />{" "}
@@ -125,12 +174,13 @@ const Publications = () => {
                             {pub.title}
                           </h4>
 
-                          <p className="text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3">
-                            {pub.excerpt}
-                          </p>
+                          <Content
+                            className={`text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3`}
+                            html={pub.metaData}
+                          />
 
                           <div className="pt-6 border-t border-primary group-hover:border-white">
-                            <Link href={`/publications/${pub.id}`}>
+                            <Link href={`/publications/${pub.slug}`}>
                               <button className="flex cursor-pointer items-center gap-2 text-[#1a1c1e] group-hover:text-white text-xs font-black uppercase tracking-[0.2em] group/btn">
                                 Read Whitepaper{" "}
                                 <ArrowRight
@@ -145,8 +195,8 @@ const Publications = () => {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="md:flex hidden" />
+                <CarouselNext className="md:flex hidden" />
                 {/* 👇 Dots */}
               </Carousel>
 
@@ -166,9 +216,9 @@ const Publications = () => {
                 ))}
               </div>
             </div>
-          ) : (
+          ) : Array.isArray(data?.data) && data?.data.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-12">
-              {PUBLICATIONS.map((pub, idx) => (
+              {(data?.data as ClientPublication[])?.map((pub, idx) => (
                 <div key={idx} className="md:basis-1/2 lg:basis-1/3 py-2">
                   <div
                     key={idx}
@@ -176,22 +226,27 @@ const Publications = () => {
                   >
                     <div className="relative h-64 overflow-hidden">
                       <img
-                        src={pub.image}
+                        src={pub.pageImage || "/noimage.png"}
                         alt={pub.title}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        onError={(e) => {
+                          e.currentTarget.src = "/noimage.png"; // your default image
+                        }}
                       />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
-                          {pub.category}
-                        </span>
-                      </div>
+                      {pub.category && (
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
+                            {pub.category}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-8 flex flex-col grow">
                       <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
                         <span className="flex items-center gap-1.5 group-hover:text-white ">
                           <Calendar size={14} className="text-secondary" />{" "}
-                          {pub.date}
+                          {pub.createdAt?.split("T")[0]}
                         </span>
                         <span className="flex items-center gap-1.5 group-hover:text-white ">
                           <User size={14} className="text-secondary" />{" "}
@@ -204,11 +259,11 @@ const Publications = () => {
                       </h4>
 
                       <p className="text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3">
-                        {pub.excerpt}
+                        {pub.metaData}
                       </p>
 
                       <div className="pt-6 border-t border-primary group-hover:border-white">
-                        <Link href={`/publications/${pub.id}`}>
+                        <Link href={`/publications/${pub.slug}`}>
                           <button className="flex cursor-pointer items-center gap-2 text-[#1a1c1e] group-hover:text-white text-xs font-black uppercase tracking-[0.2em] group/btn">
                             Read Whitepaper{" "}
                             <ArrowRight
@@ -223,7 +278,7 @@ const Publications = () => {
                 </div>
               ))}
             </div>
-          )}
+          ) : null}
         </div>
       </section>
     </>

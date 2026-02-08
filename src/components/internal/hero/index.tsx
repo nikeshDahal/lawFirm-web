@@ -1,4 +1,14 @@
+import { ClientLandingPageContent } from "@/app/utils/interface/index.query";
+import { fetchData } from "@/app/utils/service";
+import { GET_BANNER } from "@/app/utils/service/index.query";
 import Link from "next/link";
+import { Content } from "../markup";
+import HighlightLastWord from "../highlighter";
+
+const data = await fetchData<ClientLandingPageContent>({
+  path: `data.getClientLandingPageContent` as string,
+  query: GET_BANNER,
+});
 
 const HeroBanner = () => {
   return (
@@ -15,15 +25,21 @@ const HeroBanner = () => {
           //   }}
         />
       </div>
-      <div className="relative z-20 text-center px-6">
-        <h2 className="text-white text-5xl md:text-7xl font-serif mb-6 leading-tight">
-          Defending Your Rights <br /> With{" "}
-          <span className="text-secondary">Excellence.</span>
+      <div className="relative z-20 text-center px-6 animate-elegant-fade-up">
+        <h2 className="text-white text-5xl md:text-7xl font-serif mb-6 leading-tight max-w-[80%] text-center mx-auto">
+          <HighlightLastWord text={data.title} />
         </h2>
-        <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
-          Premier legal representation in corporate, family, and criminal law
-          with over 25 years of proven excellence.
-        </p>
+        {data.content && (
+          <>
+            {/* <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+            {data.content}
+          </p> */}
+            <Content
+              html={data.content}
+              className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light"
+            />
+          </>
+        )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href={"https://maps.app.goo.gl/hTxqrAuioiz7FAvw5"}

@@ -24,7 +24,7 @@ const PublicationAction = () => {
     <>
       <div className="sticky top-32 flex flex-col items-center gap-6">
         <div className="flex flex-col gap-3">
-          <button
+          {/* <button
             className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#c5a059] hover:bg-[#c5a059]/5 transition-all group"
             aria-label="Share this article"
           >
@@ -32,7 +32,7 @@ const PublicationAction = () => {
               size={20}
               className="group-hover:scale-110 transition-transform"
             />
-          </button>
+          </button> */}
           {/* <button
             onClick={addBookmark}
             className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#c5a059] hover:bg-[#c5a059]/5 transition-all group"

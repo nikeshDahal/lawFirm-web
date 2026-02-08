@@ -1,6 +1,10 @@
-import { firmOverview } from "@/constant/home";
 import PublicationAction from "./component/action";
-import { AttachmentCTA, ExpertCTA } from "./component/cta";
+import { ExpertCTA } from "./component/cta";
+import { GET_PRACTICE_SLUG } from "@/app/utils/service/index.query";
+import { fetchData } from "@/app/utils/service";
+import { ClientPracticeAreaDetail } from "@/app/utils/interface/index.query";
+import Image from "next/image";
+import NoData from "@/components/internal/nodata";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -9,10 +13,17 @@ type Props = {
 const page = async ({ params }: Props) => {
   const { slug } = await params;
   const currentSlug = await slug;
-  const ACTIVE_PUBLICATION = firmOverview.find(
-    (item) => item.id == currentSlug
-  );
-  if (!ACTIVE_PUBLICATION) return;
+
+  const pageData = await fetchData<ClientPracticeAreaDetail>({
+    query: GET_PRACTICE_SLUG,
+    path: "data.getClientPracticeAreaDetailBySlug",
+    variables: {
+      slug: currentSlug,
+    },
+  });
+
+  if (!pageData) return <NoData />;
+
   return (
     <>
       {/* Main Publication Layout - Semantic <article> */}
@@ -22,10 +33,7 @@ const page = async ({ params }: Props) => {
           itemScope
           itemType="https://schema.org/TechArticle"
         >
-          <meta
-            itemProp="description"
-            content={ACTIVE_PUBLICATION?.metaDescription}
-          />
+          <meta itemProp="description" content={pageData?.metaData || ""} />
 
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Left Sidebar: Utility & Engagement */}
@@ -43,28 +51,23 @@ const page = async ({ params }: Props) => {
                   className="text-4xl md:text-7xl font-serif text-[#1a1c1e] mb-6 leading-[1.1] tracking-tight text-left"
                   itemProp="headline"
                 >
-                  {ACTIVE_PUBLICATION?.title}
+                  {pageData?.title}
                 </h1>
-
-                <p
-                  className="text-xl md:text-2xl font-light text-gray-500 italic leading-relaxed text-left border-l-4 border-[#c5a059]/20 pl-6"
-                  itemProp="alternativeHeadline"
-                >
-                  {ACTIVE_PUBLICATION?.subtitle}
-                </p>
               </header>
 
               <figure className="relative aspect-video mb-16 rounded-3xl overflow-hidden shadow-2xl group">
-                <img
-                  src={ACTIVE_PUBLICATION?.image}
+                <Image
+                  height={400}
+                  width={800}
+                  src={pageData?.pageImage || "/noimage.png"}
                   alt="Legal professionals discussing AI implementation in a modern office"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   itemProp="image"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
-                <figcaption className="sr-only">
-                  Corporate legal analysis of artificial intelligence
-                </figcaption>
+                <figcaption className="sr-only">{pageData?.title}</figcaption>
               </figure>
 
               {/* Rich Text Body Content */}
@@ -72,7 +75,7 @@ const page = async ({ params }: Props) => {
                 <div
                   className="publication-content text-gray-700 leading-relaxed font-light text-xl space-y-10"
                   dangerouslySetInnerHTML={{
-                    __html: ACTIVE_PUBLICATION?.detailedContent,
+                    __html: pageData?.content,
                   }}
                 />
               </div>
@@ -87,31 +90,6 @@ const page = async ({ params }: Props) => {
                 className="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-32"
                 aria-labelledby="sidebar-practice-title"
               >
-                {/* <h2
-                  id="sidebar-practice-title"
-                  className="text-[#1a1c1e] font-black text-[10px] uppercase tracking-[0.3em] mb-6 border-b border-gray-200 pb-4"
-                >
-                  Specialized Practice
-                </h2>
-                <nav className="space-y-6">
-                  <a href="#" className="block group">
-                    <p className="text-[#c5a059] text-[10px] font-bold uppercase mb-1">
-                      Upcoming Journal
-                    </p>
-                    <h3 className="text-[#1a1c1e] font-serif group-hover:text-[#c5a059] transition-colors text-lg">
-                      Liability in Decentralized Systems
-                    </h3>
-                  </a>
-                  <a href="#" className="block group">
-                    <p className="text-[#c5a059] text-[10px] font-bold uppercase mb-1">
-                      Case Study
-                    </p>
-                    <h3 className="text-[#1a1c1e] font-serif group-hover:text-[#c5a059] transition-colors text-lg">
-                      Cross-Border Data Compliance
-                    </h3>
-                  </a>
-                </nav> */}
-
                 <ExpertCTA />
               </section>
             </aside>
