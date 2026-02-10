@@ -113,6 +113,22 @@ const GET_PRACTICE = `query FindAllClientPracticeAreas($input: GetAllPagesInputD
   }
 }`;
 
+const GET_PRACTICE_SEO = `query FindAllClientPracticeAreas($input: GetAllPagesInputDTO!) {
+  findAllClientPracticeAreas(input: $input) {
+    message
+   
+    metaData {
+      title
+      seoTags {
+        title
+        description
+        tags
+      }
+      subTitle
+    }
+  }
+}`;
+
 const GET_PRACTICE_SLUG = `query GetClientPracticeAreaDetailBySlug($slug: String!) {
   getClientPracticeAreaDetailBySlug(slug: $slug) {
     _id
@@ -235,6 +251,22 @@ const GET_PUBLICATION = `query GetAllClientPublications($input: GetAllPagesInput
     }
   }
 }`;
+const GET_PUBLICATION_SEO = `query GetAllClientPublications($input: GetAllPagesInputDTO!) {
+  getAllClientPublications(input: $input) {
+    message
+   
+    metaData {
+      title
+      seoTags {
+        title
+        description
+        tags
+      }
+      subTitle
+    }
+  
+  }
+}`;
 const GET_PUBLICATION_HEADER = `query GetAllClientPublications($input: GetAllPagesInputDTO!) {
   getAllClientPublications(input: $input) {
     message
@@ -347,4 +379,6 @@ export {
   GET_CONTACT,
   GET_FAQ,
   GET_PRACTICE_HEADER,
+  GET_PRACTICE_SEO,
+  GET_PUBLICATION_SEO,
 };

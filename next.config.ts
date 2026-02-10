@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "toplegaladvisers-storage-2026.s3.us-west-2.amazonaws.com",
+      },
+      {
+        protocol: "https",
         hostname: "mycomms-stage-public-bucket.s3.ap-southeast-2.amazonaws.com",
       },
     ],

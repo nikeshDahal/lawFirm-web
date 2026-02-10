@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Teams from ".";
 import { ClientTeamsResponse } from "../utils/interface/index.query";
 import { fetchData } from "../utils/service";
@@ -5,6 +6,10 @@ import { GET_TEAM } from "../utils/service/index.query";
 
 type TeamPageProps = {
   limit?: number; // optional, default value
+};
+
+export const metadata: Metadata = {
+  title: "Our Team",
 };
 
 export default async function TeamPage({ limit = 50 }: TeamPageProps) {

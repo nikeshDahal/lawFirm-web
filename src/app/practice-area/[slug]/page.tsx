@@ -5,10 +5,46 @@ import { fetchData } from "@/app/utils/service";
 import { ClientPracticeAreaDetail } from "@/app/utils/interface/index.query";
 import Image from "next/image";
 import NoData from "@/components/internal/nodata";
+import { Metadata } from "next";
 
 type Props = {
   params: { slug: Promise<string> };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const { slug } = await params;
+
+  const pageData = await fetchData<ClientPracticeAreaDetail>({
+    query: GET_PRACTICE_SLUG,
+    path: "data.getClientPracticeAreaDetailBySlug",
+    variables: {
+      slug,
+    },
+  });
+
+  if (!pageData) {
+    return {
+      title: "Pratice Area",
+      description: "Pratice Area page",
+    };
+  }
+
+  return {
+    title: pageData.title,
+    description: pageData.metaData || pageData.title,
+    keywords: pageData.metaData || [],
+    openGraph: {
+      title: pageData.title,
+      description: pageData.metaData,
+      images: [
+        {
+          url: pageData.pageImage || "/noimage.png",
+        },
+      ],
+    },
+  };
+}
 
 const page = async ({ params }: Props) => {
   const { slug } = await params;

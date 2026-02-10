@@ -10,6 +10,7 @@ type Props = {
   content?: string | null;
   link?: string | null;
   pageImage?: string;
+  metaData?: string;
 };
 
 const OverviewCard = ({
@@ -18,10 +19,11 @@ const OverviewCard = ({
   title = "Legal Strategy",
   pageImage = "",
   content = null,
+  metaData = "",
 }: Props) => {
   // const Icon = LucideIcons[icon as IconName] as LucideIcons.LucideIcon;
   const Item = (
-    <div className="p-8 border group border-gray-100 rounded-lg transition-shadow group hover:bg-primary hover:text-white bg-primary-foreground/80">
+    <div className="p-8 h-[280px] border group border-gray-100 rounded-lg transition-shadow group hover:bg-primary hover:text-white bg-primary-foreground/80">
       <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center mb-6  group-hover:bg-white transition-colors  group-hover:animate-bounce">
         {/* {Icon && <Icon className="text-tertiary group-hover:text-primary" />} */}
         <Image
@@ -39,7 +41,7 @@ const OverviewCard = ({
       </h4>
       {content && (
         <Content
-          html={content}
+          html={metaData}
           className="text-start text-gray-600 group-hover:text-white leading-relaxed line-clamp-3"
         />
       )}

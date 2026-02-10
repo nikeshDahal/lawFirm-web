@@ -2,15 +2,49 @@ import { ExpertCTA } from "@/app/practice-area/[slug]/component/cta";
 import { ClientPracticeAreaDetail } from "@/app/utils/interface/index.query";
 import { fetchData } from "@/app/utils/service";
 import { GET_PUBLICATION_SLUG } from "@/app/utils/service/index.query";
+import NoData from "@/components/internal/nodata";
+import { Metadata } from "next";
 import Image from "next/image";
 import PublicationAction from "./component/action";
-import React from "react";
-import Link from "next/link";
-import NoData from "@/components/internal/nodata";
 
 type Props = {
   params: { slug: Promise<string> };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const { slug } = await params;
+
+  const pageData = await fetchData<ClientPracticeAreaDetail>({
+    query: GET_PUBLICATION_SLUG,
+    path: "data.getClientPublicationBySlug",
+    variables: {
+      slug,
+    },
+  });
+
+  if (!pageData) {
+    return {
+      title: "Publication",
+      description: "Publication page",
+    };
+  }
+
+  return {
+    title: pageData.title,
+    description: pageData.metaData || pageData.title,
+    keywords: pageData.metaData || [],
+    openGraph: {
+      title: pageData.title,
+      description: pageData.metaData,
+      images: [
+        {
+          url: pageData.pageImage || "/noimage.png",
+        },
+      ],
+    },
+  };
+}
 
 const page = async ({ params }: Props) => {
   const { slug } = await params;

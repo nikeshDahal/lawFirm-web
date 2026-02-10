@@ -1,14 +1,13 @@
 import AwardsOverview from "@/components/internal/awards";
-import ClientOverview from "@/components/internal/client";
 import HeroBanner from "@/components/internal/hero";
 import About from "./about-us/page";
-import ContactUs from "./contact-us/page";
 import PraticeAreaOverview from "./practice-area/page";
 import Publications from "./publications/page";
 import React from "react";
 import FAQOverview from "./(legal)/faq/page";
 import TestimonialSection from "@/components/internal/testimonial";
 import TeamPage from "./teams/page";
+import ContactPage from "./contact-us/page";
 
 const Page: React.FC = () => {
   return (
@@ -23,7 +22,7 @@ const Page: React.FC = () => {
         <TeamPage limit={4} />
         {/* <ClientOverview /> */}
         <TestimonialSection />
-        <ContactUs />
+        <ContactPage />
         <FAQOverview />
       </section>
     </div>

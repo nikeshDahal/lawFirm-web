@@ -149,6 +149,22 @@
   }
 }
 
+@layer base {
+  ul {
+    @apply list-disc list-inside;
+  }
+  ol {
+    @apply list-decimal list-inside;
+  }
+  table {
+    @apply border-collapse w-full;
+  }
+  th,
+  td {
+    @apply border border-gray-300 p-2;
+  }
+}
+
 @keyframes elegantFadeUp {
   0% {
     opacity: 0;

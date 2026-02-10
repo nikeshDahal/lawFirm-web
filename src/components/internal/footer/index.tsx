@@ -43,7 +43,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
             <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
               Quick Links
             </h4>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-4 text-sm list-none">
               {NAV_ITEMS.map((item, idx) => (
                 <li key={idx}>
                   <Link
@@ -66,7 +66,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
             <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
               Expertise
             </h4>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-4 text-sm  list-none">
               {pubData &&
                 pubData?.data.map((item, idx) => (
                   <li key={idx}>

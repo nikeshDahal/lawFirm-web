@@ -64,6 +64,11 @@ interface ClientAboutUsPageContent {
   subTitle: string;
   yearsOfExperience: number;
   metaData: AboutUsMetaData;
+  seoTags: {
+    title: string;
+    description: string;
+    tags: string;
+  };
 }
 
 interface ClientPracticeAreasResponse {

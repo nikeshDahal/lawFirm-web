@@ -4,11 +4,6 @@ import {
   ClientPracticeArea,
   ClientPracticeAreasResponse,
 } from "@/app/utils/interface/index.query";
-import { fetchData } from "@/app/utils/service";
-import {
-  GET_CONTACT,
-  GET_PRACTICE_HEADER,
-} from "@/app/utils/service/index.query";
 import { NAV_ITEMS } from "@/constant/menu";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Mail, MapPin, Phone, Scale } from "lucide-react";
@@ -64,14 +59,18 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
         <div className="hidden lg:block bg-primary text-white py-2 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-sm font-light">
             <div className="flex items-center space-x-6">
-              <span className="flex items-center gap-2  font-light">
-                <Phone size={14} className="text-secondary" />{" "}
-                {contactData?.contactInfo.primaryPhone}
-              </span>
-              <span className="flex items-center gap-2  font-light">
-                <Mail size={14} className="text-secondary" />{" "}
-                {contactData?.contactInfo.primaryEmail}
-              </span>
+              <a href={`tel:+${contactData?.contactInfo.primaryPhone}`}>
+                <span className="flex items-center gap-2  font-light">
+                  <Phone size={14} className="text-secondary" />{" "}
+                  {contactData?.contactInfo.primaryPhone}
+                </span>
+              </a>
+              <a href={`mailto:${contactData?.contactInfo.primaryEmail}`}>
+                <span className="flex items-center gap-2  font-light">
+                  <Mail size={14} className="text-secondary" />{" "}
+                  {contactData?.contactInfo.primaryEmail}
+                </span>
+              </a>
             </div>
             <div className="flex items-center gap-2  font-light">
               <MapPin size={14} className="text-secondary" />{" "}
@@ -111,7 +110,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center space-x-8">
+          <ul className="hidden lg:flex items-center space-x-8 list-none">
             {NAV_ITEMS.map((item, idx) => (
               <li key={idx} className="relative group">
                 <Link
@@ -264,12 +263,25 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                 Free Consultation
               </button>
               <div className="flex flex-col items-center gap-3 text-gray-500 text-sm italic">
-                <span className="flex items-center gap-2">
-                  <Phone size={16} /> {contactData?.contactInfo.primaryPhone}
-                </span>
-                <span className="flex items-center gap-2">
-                  <Mail size={16} /> {contactData?.contactInfo.primaryEmail}
-                </span>
+                <a
+                  href={`tel:${contactData?.contactInfo.primaryPhone}`}
+                  className="hover:underline"
+                >
+                  <span className="flex items-center gap-2">
+                    <Phone size={16} />
+                    {contactData?.contactInfo.primaryPhone}
+                  </span>
+                </a>
+
+                <a
+                  href={`mailto:${contactData?.contactInfo.primaryEmail}`}
+                  className="hover:underline"
+                >
+                  <span className="flex items-center gap-2">
+                    <Mail size={16} />
+                    {contactData?.contactInfo.primaryEmail}
+                  </span>
+                </a>
               </div>
             </div>
           </div>
