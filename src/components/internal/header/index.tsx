@@ -195,20 +195,22 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
         </nav>
 
         {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Drawer */}
         <div
           className={`fixed inset-0 bg-white z-40 transition-transform duration-500 ease-in-out lg:hidden ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex flex-col h-full pt-24 px-8 pb-10 overflow-y-auto">
-            <ul className="space-y-4">
+            {/* Nav Items */}
+            <ul className="space-y-4 list-none p-0 m-0">
               {NAV_ITEMS.map((item, idx: number) => (
                 <li
                   key={idx}
                   className="border-b border-gray-100 last:border-0"
                 >
                   <div
-                    className="flex items-center justify-between py-4"
+                    className="flex items-center justify-between py-4 cursor-pointer"
                     onClick={() =>
                       item.submenu &&
                       setActiveSubmenu(activeSubmenu === idx ? null : idx)
@@ -241,14 +243,19 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                       }`}
                     >
                       <div className="pl-4 space-y-3">
-                        {item.submenu.map((sub, sIdx) => (
+                        {(item.link === "/practice-area" &&
+                        Array.isArray(pubData?.data) &&
+                        pubData?.data.length > 0
+                          ? (pubData?.data as ClientPracticeArea[])
+                          : []
+                        )?.map((sub, sIdx) => (
                           <Link
                             key={sIdx}
-                            href={sub.link}
+                            href={`/practice-area/${sub.slug}`}
                             className="block text-gray-600 hover:text-secondary"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            {sub.name}
+                            {sub.title}
                           </Link>
                         ))}
                       </div>
@@ -258,6 +265,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
               ))}
             </ul>
 
+            {/* Bottom Section */}
             <div className="mt-auto space-y-6">
               <button className="w-full bg-primary text-white py-4 rounded font-bold text-lg">
                 Free Consultation

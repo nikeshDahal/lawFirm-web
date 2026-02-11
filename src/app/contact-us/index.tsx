@@ -11,6 +11,7 @@ import {
   MapPin,
   Phone,
   Send,
+  Mail,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -107,7 +108,7 @@ const ContactUs = ({
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Contact Info Column */}
-            <div className="space-y-6">
+            <div className="space-y-5">
               <div>
                 <MainHeading
                   title={contactData?.title || "Get In Touch"}
@@ -128,8 +129,8 @@ const ContactUs = ({
               </div>
 
               <div className="space-y-4">
-                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
+                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
+                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
                     <MapPin
                       className="text-secondary group-hover:text-white"
                       size={24}
@@ -148,8 +149,8 @@ const ContactUs = ({
                   </div>
                 </div>
 
-                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
+                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
+                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
                     <Phone
                       className="text-secondary group-hover:text-white"
                       size={24}
@@ -167,8 +168,25 @@ const ContactUs = ({
                   </div>
                 </div>
 
-                <div className="flex gap-6 group border-2 border-primary w-75 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-secondary transition-colors duration-300">
+                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
+                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                    <Mail
+                      className="text-secondary group-hover:text-white"
+                      size={24}
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#1a1c1e] mb-1">Email</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      {contactData?.contactInfo?.primaryEmail}
+                      <br />
+                      {contactData?.contactInfo?.secondaryEmail}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
+                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
                     <Clock
                       className="text-secondary group-hover:text-white"
                       size={24}
@@ -309,7 +327,7 @@ const ContactUs = ({
                       {...register("message")}
                       rows={4}
                       placeholder="Briefly describe your situation..."
-                      className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all resize-none ${
+                      className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all resize-y ${
                         errors.message
                           ? "border-red-500"
                           : "border-gray-200 focus:border-secondary"
@@ -340,7 +358,7 @@ const ContactUs = ({
                       </>
                     )}
                   </button>
-                  <p className="text-[10px] text-gray-400 text-center leading-relaxed">
+                  <p className="text-[12px] text-gray-400 text-center leading-relaxed">
                     By submitting this form, you acknowledge that this contact
                     does not establish an attorney-client relationship.
                   </p>
