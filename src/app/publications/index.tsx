@@ -182,7 +182,7 @@ const Publications = () => {
                           <div className="pt-6 border-t border-primary group-hover:border-white">
                             <Link href={`/publications/${pub.slug}`}>
                               <button className="flex cursor-pointer items-center gap-2 text-[#1a1c1e] group-hover:text-white text-xs font-black uppercase tracking-[0.2em] group/btn">
-                                Read Whitepaper{" "}
+                                Read More{" "}
                                 <ArrowRight
                                   size={14}
                                   className="text-secondary group-hover/btn:translate-x-1 transition-transform"
