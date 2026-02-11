@@ -1,0 +1,55 @@
+name: Deploy Top legal advisers client site
+
+on:
+  push:
+    branches:
+      - predevelopment  # or main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: production
+      NEXT_PUBLIC_API: ${{ secrets.NEXT_PUBLIC_API }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Build Next.js project
+        run: npm run build
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          script: |
+            cd /root/lawFirm-web
+
+            echo "📥 Pulling latest code..."
+            git pull origin dev
+
+            echo "📦 Installing dependencies..."
+            run: npm install --force
+
+            echo "🏗 Building project on server..."
+            npm run build
+
+            echo "🔄 Restarting PM2..."
+            pm2 reload lawFirm-web || pm2 start npm --name lawFirm-web -- start
+
+            pm2 save
+
+            echo "✅ Top legal advisers client site deployment completed!"
