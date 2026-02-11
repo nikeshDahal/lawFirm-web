@@ -39,7 +39,7 @@ jobs:
             cd /root/lawFirm-web
 
             echo "📥 Pulling latest code..."
-            git pull origin dev
+            git pull origin predevelopment
 
             echo "📦 Installing dependencies..."
             run: npm install --force
