@@ -14,8 +14,8 @@ jobs:
       NEXT_PUBLIC_API: ${{ secrets.NEXT_PUBLIC_API }}
 
     steps:
-      # 1️⃣ Checkout repository
-      - name: Checkout code
+      # 1️⃣ Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       # 2️⃣ Setup Node.js
@@ -24,15 +24,19 @@ jobs:
         with:
           node-version: "24"
 
-      # 3️⃣ Install dependencies locally (in GitHub Actions)
+      # 3️⃣ Install dependencies locally
       - name: Install dependencies
         run: npm install --force
 
-      # 4️⃣ Build Next.js project in CI
+      # 4️⃣ Build Next.js project
       - name: Build Next.js
         run: npm run build
 
-      # 5️⃣ Copy build and public files to server
+      # 5️⃣ Debug - check files before copying
+      - name: List files
+        run: ls -la
+
+      # 6️⃣ Copy build and public folder to server
       - name: Copy build to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -47,7 +51,7 @@ jobs:
             public
           target: /root/lawFirm-web
 
-      # 6️⃣ Stop old PM2 process and start fresh
+      # 7️⃣ Stop old PM2 process, install dependencies on server, and start fresh
       - name: Restart PM2 on server
         uses: appleboy/ssh-action@v1.0.3
         with:
