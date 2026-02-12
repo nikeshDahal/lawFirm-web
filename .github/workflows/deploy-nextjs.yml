@@ -1,4 +1,4 @@
-name: Deploy Top Legal Advisers Next.js App
+name: Deploy Web to Ubuntu
 
 on:
   push:
@@ -9,43 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      NODE_ENV: production
-      NEXT_PUBLIC_API: ${{ secrets.NEXT_PUBLIC_API }}
-
     steps:
-      # 1️⃣ Checkout repo
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-
-      # 3️⃣ Install dependencies
-      - name: Install dependencies
-        run: npm install --force
-
-      # 4️⃣ Build Next.js
-      - name: Build Next.js
-        run: npm run build
-
-      # 5️⃣ Debug: confirm build exists
-      - name: List files
-        run: ls -la
-
-      # 6️⃣ Deploy to server using rsync
-      - name: Sync build to server
-        run: |
-          rsync -avz --delete \
-            -e "ssh -i ${{ secrets.SERVER_SSH_KEY }} -p 22 -o StrictHostKeyChecking=no" \
-            .next package.json package-lock.json public/ \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/lawFirm-web
-
-      # 7️⃣ Restart PM2
-      - name: Restart PM2 on server
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -54,7 +19,19 @@ jobs:
           port: 22
           script: |
             cd /root/lawFirm-web
-            pm2 delete lawfirm-web || true
+
+            echo "📥 Pulling latest code..."
+            git pull origin predevelopment
+
+            echo "📦 Installing dependencies..."
             npm install --force
-            pm2 start npm --name lawfirm-web -- start
+
+            echo "🏗 Building project..."
+            npm run build
+
+            echo "🔄 Reloading PM2..."
+            pm2 reload lawfirm-web || pm2 start dist/main.js --name lawfirm-web
+
             pm2 save
+
+            echo "✅ Deployment completed!"
