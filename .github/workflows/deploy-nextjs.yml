@@ -1,9 +1,9 @@
-name: Deploy Top legal advisers client site
+name: Deploy Top Legal Advisers Client Site
 
 on:
   push:
     branches:
-      - predevelopment  # or main
+      - predevelopment
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
-      - name: Build Next.js project
+      - name: Build project
         run: npm run build
 
       - name: Deploy via SSH
@@ -39,17 +39,24 @@ jobs:
             cd /root/lawFirm-web
 
             echo "📥 Pulling latest code..."
-            git pull origin predevelopment
+            git fetch --all
+            git reset --hard origin/predevelopment
+
+            echo "🧹 Cleaning old build..."
+            rm -rf node_modules .next
 
             echo "📦 Installing dependencies..."
-            run: npm install --force
+            npm install --force
 
-            echo "🏗 Building project on server..."
+            echo "🏗 Building project..."
             npm run build
 
-            echo "🔄 Restarting PM2..."
-            pm2 reload lawFirm-web || pm2 start npm --name lawFirm-web -- start
+            echo "🛑 Stopping old PM2 process..."
+            pm2 delete lawFirm-web || true
+
+            echo "▶️ Starting new PM2 process..."
+            pm2 start npm --name lawFirm-web -- start
 
             pm2 save
 
-            echo "✅ Top legal advisers client site deployment completed!"
+            echo "✅ Deployment completed successfully!"
