@@ -27,7 +27,7 @@ jobs:
             npm install --force
 
             echo "🏗 Building project..."
-            npm run build
+            npm run build:standalone
 
             echo "🔄 Reloading PM2..."
             pm2 reload lawfirm-web || pm2 start dist/main.js --name lawfirm-web
