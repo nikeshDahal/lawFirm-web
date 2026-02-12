@@ -91,7 +91,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
               Walk In
             </h4>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56516.2777684411!2d85.28493293612318!3d27.70903024192621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600!5e0!3m2!1sen!2snp!4v1766937499815!5m2!1sen!2snp"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d683.9782623527177!2d85.32859008535301!3d27.696889989880596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19fb4d5bbb4d%3A0x41e633f97dbc5148!2sTop%20Legal%20Advisers!5e1!3m2!1sen!2snp!4v1770908819499!5m2!1sen!2snp"
               width="300"
               height="200"
               loading="lazy"

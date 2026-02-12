@@ -16,38 +16,44 @@ type Props = {
 const About: React.FC<Props> = ({ aboutData }) => {
   const pathname = usePathname();
   const isPreview = !["/about-us"].includes(pathname);
-
+  console.log(aboutData);
   return (
     <>
       {/* About Us Section */}
 
-      <section className="py-12">
+      <section className={`${isPreview ? "py-15" : "py-3 md:py-3"}`}>
         <div className="max-w-7xl mx-auto px-6">
+          {/* Main Heading */}
           <MainHeading
-            title={aboutData?.title || `About us`}
+            title={aboutData?.title || "About Us"}
             description={
               aboutData?.subTitle || "Meet the best law firm of Nepal"
             }
-            customClass="mb-14 text-left"
+            customClass="mb-15 md:mb-15"
           />
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            {/* Image Section */}
             <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src={
-                    "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1200"
-                  }
+                  src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&q=80&w=1200"
                   alt="Our legacy"
                   height={382}
                   width={300}
-                  className="w-full h-auto"
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="absolute -bottom-10 -right-10 lg:w-64 lg:h-64 md:w-44  md:h-44 w-34  h-34  bg-gray-50 rounded-2xl z-0 hidden xl:block border border-gray-100"></div>
+
+              {/* Decorative Box */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 bg-gray-50 rounded-2xl z-0 hidden xl:block border border-gray-100"></div>
+
+              {/* Experience Badge */}
               {aboutData?.yearsOfExperience && (
-                <div className="absolute -top-6 -left-6 bg-secondary text-[#1a1c1e] p-8 rounded-2xl shadow-xl z-20">
-                  <p className="text-4xl font-serif font-bold">
-                    {aboutData?.yearsOfExperience}
+                <div className="absolute -top-6 -left-6 bg-secondary text-[#1a1c1e] p-6 md:p-8 rounded-2xl shadow-xl z-20">
+                  <p className="text-3xl md:text-4xl font-serif font-bold">
+                    {aboutData.yearsOfExperience}
                   </p>
                   <p className="text-[10px] uppercase font-black tracking-widest mt-1">
                     Years of Legacy
@@ -56,16 +62,19 @@ const About: React.FC<Props> = ({ aboutData }) => {
               )}
             </div>
 
-            <div className="space-y-8">
-              <div>
-                {aboutData?.metaData.secondaryTitle && (
-                  <p className="text-secondary font-bold uppercase tracking-[0.3em] mb-4">
-                    {aboutData?.metaData.secondaryTitle || `Our Heritage`}
+            {/* Text Section */}
+            <div className="flex flex-col gap-6 md:gap-">
+              {/* Secondary Heading */}
+              <div className="flex flex-col gap-5">
+                {aboutData?.metaData?.secondaryTitle && (
+                  <p className="text-secondary font-bold uppercase tracking-[0.05em] text-sm md:text-base">
+                    {aboutData.metaData.secondaryTitle || "Our Heritage"}
                   </p>
                 )}
-                {aboutData?.metaData.secondaryTitle && (
-                  <h3 className="text-4xl md:text-5xl font-serif text-[#1a1c1e] leading-tight">
-                    {aboutData?.metaData.secondarySubTitle || (
+
+                {aboutData?.metaData?.secondarySubTitle && (
+                  <h3 className="text-2xl md:text-2xl lg:text-2xl font-serif text-[#1a1c1e] leading-tight">
+                    {aboutData.metaData.secondarySubTitle || (
                       <>
                         A Legacy of Integrity and{" "}
                         <span className="text-secondary">
@@ -77,32 +86,36 @@ const About: React.FC<Props> = ({ aboutData }) => {
                 )}
               </div>
 
-              {aboutData.metaData.description && (
+              {/* Description */}
+              {aboutData?.metaData?.description && (
                 <p
                   className={cn([
                     isPreview && "line-clamp-5",
-                    `text-gray-600 leading-relaxed font-light text-lg`,
+                    "text-gray-600 leading-relaxed font-light text-base md:text-lg",
                   ])}
                 >
                   {aboutData.metaData.description ||
-                    `Founded in 1999, Justice & Co. began with a singular vision: to
-                provide elite-level legal representation that combines
-                large-firm resources with the personal attention of a boutique
-                practice.`}
+                    `Founded in 1999, Justice & Co. began with a singular vision:
+              to provide elite-level legal representation that combines
+              large-firm resources with the personal attention of a boutique practice.`}
                 </p>
               )}
 
-              {aboutData.metaData.items.length > 0 && (
-                <div className="grid sm:grid-cols-2 gap-8 pt-4">
-                  {aboutData.metaData.items?.map((item, index: number) => (
-                    <div className="space-y-3" key={index}>
+              {/* Items Grid */}
+              {aboutData?.metaData?.items?.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  {aboutData.metaData.items.map((item, index: number) => (
+                    <div key={index} className="flex flex-col gap-3">
                       <div className="flex items-center gap-2 text-[#1a1c1e] font-bold">
-                        <CheckCircle2 size={18} className="text-secondary" />
+                        <CheckCircle2
+                          size={18}
+                          className="text-secondary shrink-0"
+                        />
                         <span className="text-sm uppercase tracking-wider">
                           {item.title}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 leading-relaxed">
+                      <p className="text-sm text-gray-500 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -110,10 +123,11 @@ const About: React.FC<Props> = ({ aboutData }) => {
                 </div>
               )}
 
+              {/* CTA Button */}
               {!["/about-us"].includes(pathname) && (
-                <div className="pt-6">
-                  <Link href={"/about-us"}>
-                    <button className="flex items-center cursor-pointer gap-2 text-[#1a1c1e] font-black text-xs uppercase tracking-[0.2em] group">
+                <div>
+                  <Link href="/about-us">
+                    <button className="flex items-center gap-2 text-[#1a1c1e] font-black text-xs md:text-sm uppercase tracking-[0.2em] group transition-all mt-5">
                       Learn More About Our Story
                       <ArrowRight
                         size={16}
@@ -125,11 +139,13 @@ const About: React.FC<Props> = ({ aboutData }) => {
               )}
             </div>
           </div>
+
+          {/* Full Content (Only About Page) */}
           {["/about-us"].includes(pathname) && (
-            <div className="mt-10 space-y-3">
+            <div className="mt-16 md:mt-20">
               <Content
-                html={aboutData.content}
-                className="text-[18px] text-gray-600 leading-relaxed font-light text-lg"
+                html={aboutData?.content}
+                className="text-lg text-gray-600 leading-relaxed font-light space-y-4"
               />
             </div>
           )}

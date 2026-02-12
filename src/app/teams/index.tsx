@@ -22,8 +22,8 @@ const Teams: React.FC<Props> = ({ teamData }) => {
       {/* Team Section */}
       <section
         className={cn([
-          "py-24 ",
-          ["/teams"].includes(pathname) ? "" : "bg-slate-100",
+          isPreview ? "py-15" : "py-3",
+          !["/teams"].includes(pathname) && "bg-slate-100",
         ])}
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -33,32 +33,33 @@ const Teams: React.FC<Props> = ({ teamData }) => {
                 "flex flex-col  md:flex-row md:items-end md:justify-between mb-16 gap-6",
             ])}
           >
-            <div className={cn([isPreview && "text-left"])}>
-              <MainHeading
-                title="Our Leadership"
-                description="Expert Legal Minds"
-                customClass={!isPreview ? "mb-12 text-left" : ""}
-              />
-            </div>
-
-            {isPreview && (
+            {/* <div className={cn([isPreview && "text-left"])}> */}
+            <MainHeading
+              title="Our Leadership"
+              description="Expert Legal Minds"
+              customClass={!isPreview ? "mb-12 text-left" : ""}
+            />
+            {/* </div> */}
+          </div>
+          {isPreview && (
+            <div className="flex justify-center md:justify-end mt-6 md:mt-0 mb-6 md:mb-10">
               <Link href={"/teams"}>
                 <button
                   onClick={() => setShowAllTeam(!showAllTeam)}
-                  className="group cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95"
+                  className="group cursor-pointer flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-[10px] sm:text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95"
                 >
                   <>
                     <Users size={16} /> View All Teams{" "}
                     {teamData.data.length > 4 && (
-                      <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[10px]">
+                      <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[8px] sm:text-[10px]">
                         +{teamData.data.length - 4}
                       </span>
                     )}
                   </>
                 </button>
               </Link>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {(isPreview ? teamData.data.slice(0, 4) : teamData.data).map(

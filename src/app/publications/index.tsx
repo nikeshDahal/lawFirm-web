@@ -92,7 +92,10 @@ const Publications = () => {
   return (
     <>
       {/* Publications Section */}
-      <section id="publications" className="py-24 overflow-hidden">
+      <section
+        id="publications"
+        className={`${isPreview ? "py-15" : "py-3"} overflow-hidden`}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div
             className={cn([
@@ -100,14 +103,17 @@ const Publications = () => {
                 "flex flex-col  md:flex-row md:items-end md:justify-between mb-16 gap-6",
             ])}
           >
-            <div className={cn([isPreview && "text-left"])}>
-              <MainHeading
-                title={data?.metaData.title || "Insights & News"}
-                description={data?.metaData.subTitle || "Latest Publications"}
-                customClass={!isPreview ? "mb-12" : ""}
-              />
-            </div>
-            {isPreview && (
+            {/* <div className={cn([isPreview && "text-left"])}> */}
+            <MainHeading
+              title={data?.metaData.title || "Insights & News"}
+              description={data?.metaData.subTitle || "Latest Publications"}
+              customClass={!isPreview ? "mb-12" : ""}
+            />
+          </div>
+          {/* </div> */}
+
+          {isPreview && (
+            <div className="flex justify-center md:justify-end mt-6 md:mt-0 mb-6 md:mb-10">
               <Link href={"/publications"}>
                 <button className="group cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
                   <>
@@ -118,8 +124,8 @@ const Publications = () => {
                   </>
                 </button>
               </Link>
-            )}
-          </div>
+            </div>
+          )}
 
           {isPreview ? (
             <div className="">
