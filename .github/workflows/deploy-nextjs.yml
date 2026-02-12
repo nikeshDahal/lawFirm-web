@@ -1,4 +1,4 @@
-name: Deploy Top Legal Advisers Client Site
+name: Deploy Top Legal Advisers Next.js App
 
 on:
   push:
@@ -14,21 +14,41 @@ jobs:
       NEXT_PUBLIC_API: ${{ secrets.NEXT_PUBLIC_API }}
 
     steps:
+      # 1️⃣ Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "24"
 
+      # 3️⃣ Install dependencies locally (in GitHub Actions)
       - name: Install dependencies
         run: npm install --force
 
-      - name: Build project
+      # 4️⃣ Build Next.js project in CI
+      - name: Build Next.js
         run: npm run build
 
-      - name: Deploy via SSH
+      # 5️⃣ Copy build and public files to server
+      - name: Copy build to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          source: |
+            .next
+            package.json
+            package-lock.json
+            public
+          target: /root/lawFirm-web
+
+      # 6️⃣ Stop old PM2 process and start fresh
+      - name: Restart PM2 on server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -38,23 +58,13 @@ jobs:
           script: |
             cd /root/lawFirm-web
 
-            echo "📥 Pulling latest code..."
-            git fetch --all
-            git reset --hard origin/predevelopment
-
-            echo "🧹 Cleaning old build..."
-            rm -rf node_modules .next
-
-            echo "📦 Installing dependencies..."
-            npm install --force
-
-            echo "🏗 Building project..."
-            npm run build
-
             echo "🛑 Stopping old PM2 process..."
             pm2 delete lawfirm-web || true
 
-            echo "▶️ Starting new PM2 process..."
+            echo "📦 Installing dependencies on server..."
+            npm install --force
+
+            echo "▶️ Starting PM2 process fresh..."
             pm2 start npm --name lawfirm-web -- start
 
             pm2 save
