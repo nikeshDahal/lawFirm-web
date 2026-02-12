@@ -52,10 +52,10 @@ jobs:
             npm run build
 
             echo "🛑 Stopping old PM2 process..."
-            pm2 delete lawFirm-web || true
+            pm2 delete lawfirm-web || true
 
             echo "▶️ Starting new PM2 process..."
-            pm2 start npm --name lawFirm-web -- start
+            pm2 start npm --name lawfirm-web -- start
 
             pm2 save
 
