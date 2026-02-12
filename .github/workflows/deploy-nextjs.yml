@@ -14,7 +14,7 @@ jobs:
       NEXT_PUBLIC_API: ${{ secrets.NEXT_PUBLIC_API }}
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -28,30 +28,23 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
-      # 4️⃣ Build Next.js in CI
+      # 4️⃣ Build Next.js
       - name: Build Next.js
         run: npm run build
 
-      # 5️⃣ Debug: list files after build
+      # 5️⃣ Debug: confirm build exists
       - name: List files
         run: ls -la
 
-      # 6️⃣ Copy build + public + package files to server
-      - name: Copy build to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 22
-          source: |
-            .next
-            package.json
-            package-lock.json
-            public
-          target: /root/lawFirm-web
+      # 6️⃣ Deploy to server using rsync
+      - name: Sync build to server
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ${{ secrets.SERVER_SSH_KEY }} -p 22 -o StrictHostKeyChecking=no" \
+            .next package.json package-lock.json public/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/lawFirm-web
 
-      # 7️⃣ Stop old PM2 process and start fresh
+      # 7️⃣ Restart PM2
       - name: Restart PM2 on server
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -61,16 +54,7 @@ jobs:
           port: 22
           script: |
             cd /root/lawFirm-web
-
-            echo "🛑 Stopping old PM2 process..."
             pm2 delete lawfirm-web || true
-
-            echo "📦 Installing dependencies on server..."
             npm install --force
-
-            echo "▶️ Starting PM2 process fresh..."
             pm2 start npm --name lawfirm-web -- start
-
             pm2 save
-
-            echo "✅ Deployment completed successfully!"
