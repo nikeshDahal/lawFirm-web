@@ -19,13 +19,19 @@ jobs:
           port: 22
           script: |
             cd /root/lawFirm-web
+
             echo "📥 Pulling latest code..."
             git pull origin predevelopment
+
             echo "📦 Installing dependencies..."
             npm install --force
+
             echo "🏗 Building project..."
-            npm run build
+            npm run build:standalone
+
             echo "🔄 Reloading PM2..."
             pm2 reload lawfirm-web || pm2 start dist/main.js --name lawfirm-web
+
             pm2 save
+
             echo "✅ Deployment completed!"
