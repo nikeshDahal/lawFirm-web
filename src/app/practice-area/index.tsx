@@ -42,7 +42,10 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
 
   return (
     <section
-      className={cn([`py-20`, isPreview ? "bg-slate-100" : ""])}
+      className={cn([
+        isPreview ? "py-15" : "py-3",
+        isPreview && "bg-slate-100",
+      ])}
       id="firm-overview"
     >
       <div className="">
@@ -53,31 +56,33 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
                 "flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6",
             ])}
           >
-            <div className={cn([isPreview && "text-left"])}>
-              <MainHeading
-                title={practiceData.metaData.title || "Pratice Area"}
-                description={
-                  practiceData.metaData.subTitle ||
-                  "Commitment, Integrity & Success"
-                }
-                customClass={!isPreview ? "mb-18 text-left" : ""}
-              />
-            </div>
-            {isPreview && (
+            {/* <div className={cn([isPreview && "text-left"])}> */}
+            <MainHeading
+              title={practiceData.metaData.title || "Pratice Area"}
+              description={
+                practiceData.metaData.subTitle ||
+                "Commitment, Integrity & Success"
+              }
+              customClass={!isPreview ? "mb-18 text-left" : ""}
+            />
+          </div>
+          {/* </div> */}
+          {isPreview && (
+            <div className="flex justify-center md:justify-end mt-6 md:mt-0 mb-6 md:mb-10">
               <Link href={"/practice-area"}>
-                <button className="group cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
+                <button className="group cursor-pointer flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-[10px] sm:text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
                   <>
-                    <Lightbulb size={16} /> View All Pratice Area{" "}
+                    <Lightbulb size={16} /> View All Practice Area{" "}
                     {practiceData.data.length > 3 && (
-                      <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[10px]">
+                      <span className="ml-1 bg-[#c5a059] text-white px-2 py-0.5 rounded-full text-[8px] sm:text-[10px]">
                         +{practiceData.data.length - 3}
                       </span>
                     )}
                   </>
                 </button>
               </Link>
-            )}
-          </div>
+            </div>
+          )}
 
           {Array.isArray(practiceData.data) && practiceData.data.length > 0 && (
             <>

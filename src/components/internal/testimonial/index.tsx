@@ -70,7 +70,7 @@ export default function TestimonialSection() {
 
   if (Array.isArray(data?.data) && data?.data.length === 0) return;
   return (
-    <section className="max-w-7xl mx-auto py-24 px-6">
+    <section className="max-w-7xl mx-auto py-15 px-6">
       <div className="">
         <MainHeading
           title={data?.metaData.title || "Trusted by Industry Leaders"}

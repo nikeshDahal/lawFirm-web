@@ -101,33 +101,26 @@ const ContactUs = ({
       <section
         id="contact-section"
         className={cn([
-          "py-24 ",
+          "py-15 ",
           ["/contact-us"].includes(pathname) ? "" : "bg-slate-100",
         ])}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <MainHeading
+              title={contactData?.title || "Get In Touch"}
+              description={contactData?.subTitle || "Let`s Discuss Your Case"}
+              customClass="mb-6"
+            />
+          </div>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mt-15">
             {/* Contact Info Column */}
-            <div className="space-y-5">
-              <div>
-                <MainHeading
-                  title={contactData?.title || "Get In Touch"}
-                  description={
-                    contactData?.subTitle || "Let`s Discuss Your Case"
-                  }
-                  customClass="mb-6"
-                />
-                <Content
-                  className="text-gray-600 leading-relaxed max-w-md"
-                  html={contactData?.content as string}
-                />
-                {/* <p className="text-gray-600 leading-relaxed max-w-md">
-                  Our expert legal team is ready to provide you with the
-                  guidance and representation you deserve. Send us a message or
-                  visit our office.
-                </p> */}
-              </div>
 
+            <div className="space-y-5">
+              <Content
+                className="text-gray-600 leading-relaxed max-w-md"
+                html={contactData?.content as string}
+              />
               <div className="space-y-4">
                 <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">

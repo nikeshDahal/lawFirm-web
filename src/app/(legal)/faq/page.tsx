@@ -36,7 +36,7 @@ const FAQOverview: React.FC = () => {
   return (
     <>
       {/* FAQ Section */}
-      <section id="faq-section" className="py-24">
+      <section id="faq-section" className="py-15">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <MainHeading
@@ -44,13 +44,13 @@ const FAQOverview: React.FC = () => {
               description="Common Inquiries"
               customClass={!isPreview ? "mb-12" : ""}
             />
-            <p className="text-gray-500 mt-4 font-light max-w-lg leading-relaxed">
-              Find answers to the most frequent questions regarding our legal
-              processes and consultancy standards.
-            </p>
           </div>
         </div>
         <div className="max-w-4xl mx-auto px-6">
+          <p className="text-gray-500 mt-4 font-light max-w-lg leading-relaxed mb-10">
+            Find answers to the most frequent questions regarding our legal
+            processes and consultancy standards.
+          </p>
           <div className="space-y-4">
             {Array.isArray(data?.page.items) && data?.page.items.length > 0
               ? data?.page.items?.map((faq, idx) => (

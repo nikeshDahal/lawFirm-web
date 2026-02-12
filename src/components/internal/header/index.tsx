@@ -88,7 +88,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
       {/* Main Header */}
       <header
         className={` w-full bg-white  sticky top-0 z-99 transition-all duration-300 ${
-          scrolled ? "shadow-lg py-3" : "py-5"
+          scrolled ? "shadow-lg py-5" : "py-5"
         }`}
       >
         <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
