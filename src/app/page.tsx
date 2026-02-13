@@ -16,15 +16,15 @@ const Page: React.FC = () => {
       <AwardsOverview />
       <About />
 
-      <section className="pt-24">
-        <PraticeAreaOverview limit={10} />
-        <Publications />
-        <TeamPage limit={4} />
-        {/* <ClientOverview /> */}
-        <TestimonialSection />
-        <ContactPage />
-        <FAQOverview />
-      </section>
+      {/* <section className="pt-12"> */}
+      <PraticeAreaOverview limit={10} />
+      <Publications />
+      <TeamPage limit={4} />
+      {/* <ClientOverview /> */}
+      <TestimonialSection />
+      <ContactPage />
+      <FAQOverview />
+      {/* </section> */}
     </div>
   );
 };

@@ -53,47 +53,48 @@ const MainHeading: React.FC<MainHeadingProps> = ({
   link = null,
   title = null,
   description = null,
-  customClass = "",
+  customClass,
 }) => {
   if (!title && !description) return null;
 
-  const Item = (
+  const content = (
     <div
-      className={`${customClass} flex flex-col items-center text-center relative w-full`}
+      className={cn(
+        "flex flex-col items-center text-center relative w-full",
+        customClass,
+      )}
     >
-      {/* Horizontal Lines with Heading */}
+      {/* Horizontal Lines + Title */}
       {title && (
-        <div className="flex items-center w-full mb-4 flex-wrap">
+        <div className="flex items-center justify-center w-full mb-4">
           {/* Left Line */}
-          <div className="h-1 bg-secondary rounded-full flex-1 min-w-[20px] mr-2 md:mr-4"></div>
+          <div className="hidden md:block flex-1 h-0.5 bg-secondary rounded-full mr-6" />
+          <div className="block md:hidden h-0.5 bg-secondary rounded-full w-6 sm:w-10 mr-3" />
 
-          {/* Heading */}
-          <p className="text-secondary font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase tracking-[0.05em] break-words text-center">
+          {/* Title */}
+          <p className="text-secondary font-extrabold text-xl sm:text-3xl md:text-5xl uppercase tracking-[0.05em] whitespace-nowrap">
             {title}
           </p>
 
           {/* Right Line */}
-          <div className="h-1 bg-secondary rounded-full flex-1 min-w-[20px] ml-2 md:ml-4"></div>
+          <div className="hidden md:block flex-1 h-0.5 bg-secondary rounded-full ml-6" />
+          <div className="block md:hidden h-0.5 bg-secondary rounded-full w-6 sm:w-10 ml-3" />
         </div>
       )}
 
       {/* Description */}
       {description && (
-        <p
-          className={cn([
-            "line-clamp-5",
-            "text-gray-600 leading-relaxed font-light text-base sm:text-lg md:text-lg",
-          ])}
-        >
+        <p className="line-clamp-5 text-gray-600 leading-relaxed font-light text-base sm:text-lg md:text-lg">
           {description}
         </p>
       )}
     </div>
   );
 
-  if (link) return <Link href={link}>{Item}</Link>;
-  return Item;
+  return link ? <Link href={link}>{content}</Link> : content;
 };
+
+export default MainHeading;
 const TitleHeading: React.FC<MainHeadingProps> = ({
   link = null,
   title = null,

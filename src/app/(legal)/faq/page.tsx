@@ -36,9 +36,9 @@ const FAQOverview: React.FC = () => {
   return (
     <>
       {/* FAQ Section */}
-      <section id="faq-section" className="py-15">
+      <section id="faq-section" className="py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
+          <div className="mb-12">
             <MainHeading
               title="Legal Clarity"
               description="Common Inquiries"
@@ -105,7 +105,7 @@ const FAQOverview: React.FC = () => {
               : `No FAQ's`}
           </div>
 
-          <div className="mt-16 p-8 bg-primary rounded-3xl text-center relative overflow-hidden group">
+          <div className="mt-16 mb-4 p-8 bg-primary rounded-3xl text-center relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-125 transition-transform duration-1000">
               <HelpCircle size={120} className="text-white" />
             </div>

@@ -94,13 +94,13 @@ const Publications = () => {
       {/* Publications Section */}
       <section
         id="publications"
-        className={`${isPreview ? "py-15" : "py-3"} overflow-hidden`}
+        className={`${isPreview ? "py-12" : "py-3"} overflow-hidden`}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div
             className={cn([
               isPreview &&
-                "flex flex-col  md:flex-row md:items-end md:justify-between mb-16 gap-6",
+                "flex flex-col  md:flex-row md:items-end md:justify-between mb-12 gap-6",
             ])}
           >
             {/* <div className={cn([isPreview && "text-left"])}> */}
@@ -111,7 +111,7 @@ const Publications = () => {
             />
           </div>
           {/* </div> */}
-
+          {/* 
           {isPreview && (
             <div className="flex justify-center md:justify-end mt-6 md:mt-0 mb-6 md:mb-10">
               <Link href={"/publications"}>
@@ -122,6 +122,15 @@ const Publications = () => {
                       +{PUBLICATIONS.length - 4}
                     </span>
                   </>
+                </button>
+              </Link>
+            </div>
+          )} */}
+          {isPreview && (
+            <div className="hidden md:flex justify-end -mt-17 mb-12">
+              <Link href="/publications">
+                <button className="group flex items-center gap-2 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95">
+                  <FileText size={16} /> View All Publications{" "}
                 </button>
               </Link>
             </div>
@@ -221,9 +230,17 @@ const Publications = () => {
                   />
                 ))}
               </div>
+              {/* Mobile Button (Only below md, at bottom) */}
+              <div className="flex md:hidden justify-center mt-6">
+                <Link href="/publications">
+                  <button className="group flex items-center gap-2 px-4 py-2 border border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 font-semibold text-[11px] uppercase tracking-wide text-primary bg-transparent shadow-md active:scale-95">
+                    <FileText size={16} /> View All Publications{" "}
+                  </button>
+                </Link>
+              </div>
             </div>
           ) : Array.isArray(data?.data) && data?.data.length > 0 ? (
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid md:grid-cols-3 gap-12 mb-12">
               {(data?.data as ClientPublication[])?.map((pub, idx) => (
                 <div key={idx} className="md:basis-1/2 lg:basis-1/3 py-2">
                   <div
