@@ -16,12 +16,11 @@ type Props = {
 const About: React.FC<Props> = ({ aboutData }) => {
   const pathname = usePathname();
   const isPreview = !["/about-us"].includes(pathname);
-  console.log(aboutData);
   return (
     <>
       {/* About Us Section */}
 
-      <section className={`${isPreview ? "py-15" : "py-3 md:py-3"}`}>
+      <section className={`${isPreview ? "py-12" : "py-3 md:py-3"}`}>
         <div className="max-w-7xl mx-auto px-6">
           {/* Main Heading */}
           <MainHeading
@@ -29,7 +28,7 @@ const About: React.FC<Props> = ({ aboutData }) => {
             description={
               aboutData?.subTitle || "Meet the best law firm of Nepal"
             }
-            customClass="mb-15 md:mb-15"
+            customClass="mb-12 md:mb-12"
           />
 
           {/* Content Grid */}
@@ -125,9 +124,11 @@ const About: React.FC<Props> = ({ aboutData }) => {
 
               {/* CTA Button */}
               {!["/about-us"].includes(pathname) && (
-                <div>
+                <div className="mb-5">
+                  {" "}
+                  {/* Reduce bottom margin */}
                   <Link href="/about-us">
-                    <button className="flex items-center gap-2 text-[#1a1c1e] font-black text-xs md:text-sm uppercase tracking-[0.2em] group transition-all mt-5">
+                    <button className="flex items-center gap-2 mt-8 text-[#1a1c1e] font-black text-xs md:text-sm uppercase tracking-[0.2em] group transition-all">
                       Learn More About Our Story
                       <ArrowRight
                         size={16}
@@ -142,7 +143,7 @@ const About: React.FC<Props> = ({ aboutData }) => {
 
           {/* Full Content (Only About Page) */}
           {["/about-us"].includes(pathname) && (
-            <div className="mt-16 md:mt-20">
+            <div className="mt-10 mb-12 md:mt-10 mb-12">
               <Content
                 html={aboutData?.content}
                 className="text-lg text-gray-600 leading-relaxed font-light space-y-4"
