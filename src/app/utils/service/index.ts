@@ -4,15 +4,18 @@ interface FetchDataArgs<V = Record<string, any>> {
   path?: string | null;
   query: string;
   variables?: V;
+  cache?: "no-cache" | "force-cache" | "default" | "no-store";
 }
 const fetchData = async <T = unknown, V = Record<string, any>>({
   path = null,
   query,
   variables,
+  cache = "default",
 }: FetchDataArgs<V>): Promise<T> => {
   const res = await fetch(
     (process.env.NEXT_API as string) || (process.env.NEXT_PUBLIC_API as string),
     {
+      cache,
       method: "POST",
       headers: {
         "Content-Type": "application/json",

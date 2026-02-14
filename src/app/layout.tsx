@@ -16,7 +16,7 @@ const geist = localFont({
   weight: "100 900",
 });
 
-export const revalidate = 5;
+export const revalidate = 10;
 export const metadata: Metadata = {
   title: "Top Legal Advisers",
   description: "Attorneys At Law",

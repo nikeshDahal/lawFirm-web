@@ -4,14 +4,20 @@ import { ClientAboutUsPageContent } from "../utils/interface/index.query";
 import { fetchData } from "../utils/service";
 import { GET_ABOUT } from "../utils/service/index.query";
 
-const aboutData = await fetchData<ClientAboutUsPageContent>({
+const seoData = await fetchData<ClientAboutUsPageContent>({
   query: GET_ABOUT,
   path: "data.getClientAboutUsPageContent",
 });
 export const metadata: Metadata = {
-  ...aboutData.seoTags,
-  keywords: aboutData.seoTags.tags,
+  ...seoData.seoTags,
+  keywords: seoData.seoTags.tags,
 };
 export default async function AboutPage() {
+  const aboutData = await fetchData<ClientAboutUsPageContent>({
+    query: GET_ABOUT,
+    path: "data.getClientAboutUsPageContent",
+    cache: "no-store",
+  });
+
   return <About aboutData={aboutData} />;
 }

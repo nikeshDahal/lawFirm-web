@@ -15,7 +15,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import {
   ClientPublication,
   ClientPublicationsResponse,
@@ -24,12 +24,21 @@ import { fetchData } from "../utils/service";
 import { GET_PUBLICATION } from "../utils/service/index.query";
 import { Spinner } from "@/components/internal/spinner";
 import { Content } from "@/components/internal/markup";
+import NoData from "@/components/internal/nodata";
 const Publications = () => {
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const [data, setData] = React.useState<ClientPublicationsResponse | null>();
-  const [pending, setPending] = React.useState<boolean>(false);
+  const [pending, setPending] = React.useState<boolean>(true);
 
   const getData = async () => {
-    setPending(true);
+    setPending(false);
     const publicationData = await fetchData<ClientPublicationsResponse>({
       query: GET_PUBLICATION,
       path: "data.getAllClientPublications",
@@ -43,7 +52,7 @@ const Publications = () => {
       },
     });
     setData(() => publicationData);
-    setPending(false);
+    setPending(true);
     return;
   };
   React.useEffect(() => {
@@ -76,18 +85,14 @@ const Publications = () => {
     });
   }, [api]);
 
-  if (pending)
+  if (!pending)
     return (
       <div className="min-h-[80vh] w-full flex justify-center items-center">
         <Spinner />
       </div>
     );
 
-  if (
-    (Array.isArray(data?.data) && data?.data.length === 0) ||
-    data == undefined
-  )
-    return <>No data found.</>;
+  if (Array.isArray(data?.data) && data?.data.length === 0) return <NoData />;
 
   return (
     <>
