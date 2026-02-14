@@ -100,9 +100,29 @@
   /* ✨ LUXURY GOLD GRADIENT */
 --gradient-gold: linear-gradient(
   135deg,
-  #C6A75E 0%,
-  #D4AF37 50%,
+  #E0C56F 0%,
+  #D4AF37 30%,
+  #E6C76A 60%,
   #F2D57E 100%
+);
+--gradient-gold-metal: linear-gradient(
+  135deg,
+  #B8962E 0%,
+  #C9A227 35%,
+  #E6C76A 55%,
+  #C9A227 75%,
+  #B8962E 100%
+);
+
+
+--gradient-gold-shiny: linear-gradient(
+  135deg,
+  #B8962E 0%,
+  #F2D57E 25%,
+  #C9A227 50%,
+  #F2D57E 75%,
+  #B8962E 100%
+
 );
 
 /* Optional darker luxury gold (for hover / dark bg) */
