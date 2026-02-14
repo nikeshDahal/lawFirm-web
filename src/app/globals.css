@@ -97,12 +97,11 @@
   --chart-5: oklch(0.25 0.06 150);
 
 
-  /* ✨ LUXURY GOLD GRADIENT */
+/* ✨ LUXURY GOLD GRADIENT */
 --gradient-gold: linear-gradient(
   135deg,
-  #E0C56F 0%,
-  #D4AF37 30%,
-  #E6C76A 60%,
+  #CFB06A 0%,
+  #D9B44A 45%,
   #F2D57E 100%
 );
 --gradient-gold-metal: linear-gradient(
