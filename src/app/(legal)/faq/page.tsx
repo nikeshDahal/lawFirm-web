@@ -117,7 +117,7 @@ const FAQOverview: React.FC = () => {
             </p>
             <Link
               href="/contact-us"
-              className="inline-flex items-center gap-2 bg-secondary text-primary px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-white transition-all duration-300 relative z-10"
+              className="inline-flex items-center gap-2 bg-gradient-gold text-primary px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-white transition-all duration-300 relative z-10"
             >
               Contact Specialist <ArrowRight size={14} />
             </Link>

@@ -50,7 +50,7 @@ const About: React.FC<Props> = ({ aboutData }) => {
 
               {/* Experience Badge */}
               {aboutData?.yearsOfExperience && (
-                <div className="absolute -top-6 -left-6 bg-secondary text-[#1a1c1e] p-6 md:p-8 rounded-2xl shadow-xl z-20">
+                <div className="absolute -top-6 -left-6 bg-gradient-gold text-[#1a1c1e] p-6 md:p-8 rounded-2xl shadow-xl z-20">
                   <p className="text-3xl md:text-4xl font-serif font-bold">
                     {aboutData.yearsOfExperience}
                   </p>

@@ -72,7 +72,7 @@ const MainHeading: React.FC<MainHeadingProps> = ({
           <div className="block md:hidden h-0.5 bg-secondary rounded-full w-6 sm:w-10 mr-3" />
 
           {/* Title */}
-          <p className="text-secondary font-extrabold text-xl sm:text-3xl md:text-5xl uppercase tracking-[0.05em] whitespace-nowrap">
+          <p className="text-gradient-gold font-extrabold text-xl sm:text-3xl md:text-5xl uppercase tracking-[0.05em] whitespace-nowrap">
             {title}
           </p>
 
