@@ -128,10 +128,10 @@ const Teams: React.FC<Props> = ({ teamData }) => {
                       </div>
                     </div>
                   </div>
-                  <h4 className="text-xl font-serif text-primary mb-1 group-hover:text-[#c5a059] transition-colors">
+                  <h4 className="text-xl font-serif mb-1 text-primary transition-all gradient-hover-gold">
                     {member.name}
                   </h4>
-                  <p className="text-[#c5a059] text-xs font-bold uppercase tracking-widest mb-2">
+                  <p className="text-gradient-gold text-xs font-bold uppercase tracking-widest mb-2">
                     {member.designation}
                   </p>
                   <p className="text-gray-500 text-sm italic">

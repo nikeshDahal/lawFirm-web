@@ -25,6 +25,7 @@ import { GET_PUBLICATION } from "../utils/service/index.query";
 import { Spinner } from "@/components/internal/spinner";
 import { Content } from "@/components/internal/markup";
 import NoData from "@/components/internal/nodata";
+import GradientIcon from "@/components/ui/gradientIcon";
 const Publications = () => {
   useLayoutEffect(() => {
     window.scrollTo({
@@ -181,11 +182,16 @@ const Publications = () => {
                         <div className="p-8 flex flex-col grow">
                           <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
                             <span className="flex items-center gap-1.5 group-hover:text-white ">
-                              <Calendar size={14} className="text-secondary" />{" "}
+                              {/* <Calendar size={14} className="text-secondary" />{" "} */}
+                              <GradientIcon icon={Calendar} size={14} />
                               {pub.createdAt?.split("T")[0]}
                             </span>
                             <span className="flex items-center gap-1.5 group-hover:text-white ">
-                              <User size={14} className="text-secondary" />{" "}
+                              <GradientIcon
+                                icon={User}
+                                size={14}
+                                // className="text-secondary"
+                              />
                               {pub.author}
                             </span>
                           </div>

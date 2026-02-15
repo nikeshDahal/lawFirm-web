@@ -8,6 +8,7 @@ import {
   ClientPracticeAreasResponse,
 } from "@/app/utils/interface/index.query";
 import SocialHandler from "../socialhandler";
+import GradientIcon from "@/components/ui/gradientIcon";
 
 type Props = {
   contactData: ClientContactUsResponse;
@@ -21,11 +22,11 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
           {/* Column 1: Brand & Bio */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="bg-secondary p-2 rounded">
+              <div className="bg-gradient-gold p-2 rounded">
                 <Scale size={24} className="text-primary" />
               </div>
               <h2 className="text-xl font-serif font-bold tracking-tight text-white leading-none">
-                Top <span className="text-secondary">Legal </span> Advisers.
+                Top <span className="text-gradient-gold">Legal </span> Advisers.
               </h2>
             </div>
             <p className="text-sm leading-relaxed text-white">
@@ -40,7 +41,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
+            <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 border-bottom-gradient-gold">
               Quick Links
             </h4>
             <ul className="space-y-4 text-sm list-none">
@@ -48,10 +49,16 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
                 <li key={idx}>
                   <Link
                     href={item.link}
-                    className="flex items-center gap-2 hover:text-secondary transition-colors group"
+                    className="flex items-center gap-2 gradient-hover-gold transition-colors group"
                   >
-                    <ArrowRight
+                    {/* <ArrowRight
                       size={12}
+                      className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
+                    /> */}
+                    <GradientIcon
+                      icon={ArrowRight}
+                      size={16}
+                      strokeWidth={2}
                       className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
                     />
                     {item.name}
@@ -63,7 +70,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
 
           {/* Column 3: Practice Areas */}
           <div>
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
+            <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-gradient-gold">
               Expertise
             </h4>
             <ul className="space-y-4 text-sm  list-none">
@@ -72,10 +79,12 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
                   <li key={idx}>
                     <Link
                       href={`/practice-area/${item.slug}`}
-                      className="flex items-center gap-2 hover:text-secondary transition-colors group"
+                      className="flex items-center gap-2 gradient-hover-gold transition-colors group"
                     >
-                      <ArrowRight
-                        size={12}
+                      <GradientIcon
+                        icon={ArrowRight}
+                        size={16}
+                        strokeWidth={2}
                         className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
                       />
                       {item.title}
@@ -87,7 +96,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
 
           {/* Column 4: Newsletter/Contact */}
           <div className="space-y-6">
-            <h4 className="text-white font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-secondary">
+            <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-gradient-gold">
               Walk In
             </h4>
             <iframe
