@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import CustomBreadcrumb from "../breadcrumb";
 import SocialHandler from "../socialhandler";
+import GradientIcon from "@/components/ui/gradientIcon";
 
 type Props = {
   contactData: ClientContactUsResponse;
@@ -61,19 +62,19 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
             <div className="flex items-center space-x-6">
               <a href={`tel:+${contactData?.contactInfo.primaryPhone}`}>
                 <span className="flex items-center gap-2  font-light">
-                  <Phone size={14} className="text-secondary" />{" "}
+                  <GradientIcon icon={Phone} size={14} strokeWidth={3} />
                   {contactData?.contactInfo.primaryPhone}
                 </span>
               </a>
               <a href={`mailto:${contactData?.contactInfo.primaryEmail}`}>
                 <span className="flex items-center gap-2  font-light">
-                  <Mail size={14} className="text-secondary" />{" "}
+                  <GradientIcon icon={Mail} size={14} strokeWidth={3} />
                   {contactData?.contactInfo.primaryEmail}
                 </span>
               </a>
             </div>
             <div className="flex items-center gap-2  font-light">
-              <MapPin size={14} className="text-secondary" />{" "}
+              <GradientIcon icon={MapPin} size={14} strokeWidth={3} />
               {contactData?.location.address}, {contactData?.location.country}{" "}
               &nbsp;
               <SocialHandler
@@ -96,11 +97,12 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
           <Link href={"/"}>
             <div className="flex items-center gap-2 group cursor-pointer">
               <div className="bg-primary p-2 rounded transform transition-transform group-hover:rotate-12">
-                <Scale size={28} className="text-secondary" />
+                <Scale size={28} className="text-gradient-gold" />
               </div>
               <div>
                 <h1 className="text-xl font-serif font-bold tracking-tight text-[#1a1c1e] leading-none">
-                  Top <span className="text-secondary">Legal </span> Advisers
+                  Top <span className="text-gradient-gold">Legal </span>{" "}
+                  Advisers
                 </h1>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 mt-1">
                   Attorneys At Law
@@ -116,10 +118,10 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                 <Link
                   href={item.link}
                   className={cn([
-                    "flex items-center gap-1 text-[#1a1c1e] font-medium hover:text-secondary transition-colors py-2",
+                    "flex items-center gap-1 text-[#1a1c1e] font-medium gradient-hover-gold transition-colors py-2",
                     //@ts-expect-error
                     isParentActive(item)
-                      ? "active text-secondary border-b-2 border-secondary"
+                      ? "text-gradient-gold relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#C6A75E] after:via-[#E3C65A] after:to-[#D4AF37]"
                       : "",
                   ])}
                 >
@@ -148,8 +150,8 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                           className={cn(
                             "block px-6 py-3 text-sm transition-colors",
                             pathname.startsWith(sub.slug)
-                              ? "bg-gray-50 text-secondary font-medium"
-                              : "text-gray-700 hover:bg-gray-50 hover:text-secondary",
+                              ? "bg-gray-50 text-gradient-gold font-medium"
+                              : "text-gray-700 hover:bg-gray-50 gradient-hover-gold",
                           )}
                         >
                           {sub.title}
@@ -252,7 +254,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                           <Link
                             key={sIdx}
                             href={`/practice-area/${sub.slug}`}
-                            className="block text-gray-600 hover:text-secondary"
+                            className="block text-gray-600 hover:text-gradient-gold"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
                             {sub.title}

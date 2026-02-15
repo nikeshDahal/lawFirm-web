@@ -8,6 +8,7 @@ import React from "react";
 import { ClientAboutUsPageContent } from "../utils/interface/index.query";
 import { cn } from "@/lib/utils";
 import { Content } from "@/components/internal/markup";
+import GradientIcon from "@/components/ui/gradientIcon";
 
 type Props = {
   aboutData: ClientAboutUsPageContent;
@@ -66,13 +67,13 @@ const About: React.FC<Props> = ({ aboutData }) => {
               {/* Secondary Heading */}
               <div className="flex flex-col gap-5">
                 {aboutData?.metaData?.secondaryTitle && (
-                  <p className="text-secondary font-bold uppercase tracking-[0.05em] text-sm md:text-base">
+                  <p className="text-gradient-gold -mb-2 -mt-2 font-bold uppercase tracking-[0.05em] text-sm md:text-base">
                     {aboutData.metaData.secondaryTitle || "Our Heritage"}
                   </p>
                 )}
 
                 {aboutData?.metaData?.secondarySubTitle && (
-                  <h3 className="text-2xl md:text-2xl lg:text-2xl font-serif text-[#1a1c1e] leading-tight">
+                  <h3 className="text-2xl md:text-2xl lg:text-2xl font-serif text-[#1a1c1e] leading-tight -mb-2">
                     {aboutData.metaData.secondarySubTitle || (
                       <>
                         A Legacy of Integrity and{" "}
@@ -106,7 +107,8 @@ const About: React.FC<Props> = ({ aboutData }) => {
                   {aboutData.metaData.items.map((item, index: number) => (
                     <div key={index} className="flex flex-col gap-3">
                       <div className="flex items-center gap-2 text-[#1a1c1e] font-bold">
-                        <CheckCircle2
+                        <GradientIcon
+                          icon={CheckCircle2}
                           size={18}
                           className="text-secondary shrink-0"
                         />
@@ -130,9 +132,10 @@ const About: React.FC<Props> = ({ aboutData }) => {
                   <Link href="/about-us">
                     <button className="flex items-center gap-2 mt-8 text-[#1a1c1e] font-black text-xs md:text-sm uppercase tracking-[0.2em] group transition-all">
                       Learn More About Our Story
-                      <ArrowRight
+                      <GradientIcon
+                        icon={ArrowRight}
                         size={16}
-                        className="text-secondary group-hover:translate-x-2 transition-transform"
+                        className="text-secondary group-hover:translate-x-4 transition-transform"
                       />
                     </button>
                   </Link>

@@ -13,7 +13,7 @@ const HighlightLastWord: React.FC<Props> = ({ text = "", className }) => {
     const lastWord = words.pop();
     return (
       <>
-        {words.join(" ")} <span className="text-secondary">{lastWord}</span>
+        {words.join(" ")} <span className="text-gradient-gold">{lastWord}</span>
       </>
     );
   };

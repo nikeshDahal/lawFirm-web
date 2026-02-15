@@ -1,4 +1,5 @@
 import { ClientContactUsResponse } from "@/app/utils/interface/index.query";
+import GradientIcon from "@/components/ui/gradientIcon";
 import { cn } from "@/lib/utils";
 import { Facebook, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
@@ -45,10 +46,10 @@ const SocialHandler: React.FC<Props> = ({
             rel="noopener noreferrer"
             className={cn(
               size === "lg" ? "w-10 h-10" : "w-5 h-5",
-              "rounded border border-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1a1c1e] hover:border-secondary transition-all duration-300",
+              "rounded border border-white/10 flex items-center justify-center hover:bg-gradient-gold hover:text-[#1a1c1e] hover:border-secondary transition-all duration-300",
             )}
           >
-            <Icon size={iconSize} />
+            <GradientIcon icon={Icon} size={iconSize} />
           </Link>
         ))}
     </>

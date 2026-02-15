@@ -19,7 +19,7 @@ import React from "react";
 //       {title && (
 //         <div className="relative flex items-center w-full mb-4">
 //           {/* Left Line */}
-//           <div className="hidden md:block flex-1 h-1 bg-secondary rounded-full"></div>
+//           <div className="hidden md:block flex-1 h-1 bg-gradient-gold rounded-full"></div>
 
 //           {/* Heading */}
 //           <p className="mx-4 text-secondary font-extrabold text-5xl uppercase tracking-[0.05em] relative z-10">
@@ -27,7 +27,7 @@ import React from "react";
 //           </p>
 
 //           {/* Right Line */}
-//           <div className="hidden md:block flex-1 h-1 bg-secondary rounded-full"></div>
+//           <div className="hidden md:block flex-1 h-1 bg-gradient-gold rounded-full"></div>
 //         </div>
 //       )}
 
@@ -66,19 +66,19 @@ const MainHeading: React.FC<MainHeadingProps> = ({
     >
       {/* Horizontal Lines + Title */}
       {title && (
-        <div className="flex items-center justify-center w-full mb-4">
+        <div className="flex items-center justify-center w-full mb-2">
           {/* Left Line */}
-          <div className="hidden md:block flex-1 h-0.5 bg-secondary rounded-full mr-6" />
-          <div className="block md:hidden h-0.5 bg-secondary rounded-full w-6 sm:w-10 mr-3" />
+          <div className="hidden md:block flex-1 h-0.5 rounded-full mr-6 bg-[#E3C65A]" />
+          <div className="block md:hidden h-0.5 rounded-full w-6 sm:w-10 mr-3 bg-[#E3C65A]" />
 
           {/* Title */}
-          <p className="text-gradient-gold font-extrabold text-xl sm:text-3xl md:text-5xl uppercase tracking-[0.05em] whitespace-nowrap">
+          <p className="text-gradient-gold font-extrabold text-xl sm:text-3xl md:text-4xl uppercase tracking-[0.05em] whitespace-nowrap">
             {title}
           </p>
 
           {/* Right Line */}
-          <div className="hidden md:block flex-1 h-0.5 bg-secondary rounded-full ml-6" />
-          <div className="block md:hidden h-0.5 bg-secondary rounded-full w-6 sm:w-10 ml-3" />
+          <div className="hidden md:block flex-1 h-0.5 bg-[#E3C65A] rounded-full ml-6" />
+          <div className="block md:hidden h-0.5 bg-[#E3C65A] rounded-full w-6 sm:w-10 ml-3" />
         </div>
       )}
 

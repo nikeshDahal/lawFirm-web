@@ -24,6 +24,7 @@ import {
 import { fetchData } from "../utils/service";
 import { POST_CONTACT } from "../utils/service/index.mutation";
 import { GET_PRACTICE_HEADER } from "../utils/service/index.query";
+import GradientIcon from "@/components/ui/gradientIcon";
 
 const ContactUs = ({
   contactData,
@@ -124,10 +125,7 @@ const ContactUs = ({
               <div className="space-y-4">
                 <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <MapPin
-                      className="text-secondary group-hover:text-white"
-                      size={24}
-                    />
+                    <GradientIcon icon={MapPin} size={24} strokeWidth={2} />
                   </div>
                   <div>
                     <h4 className="font-bold text-[#1a1c1e] mb-1">
@@ -144,10 +142,7 @@ const ContactUs = ({
 
                 <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <Phone
-                      className="text-secondary group-hover:text-white"
-                      size={24}
-                    />
+                    <GradientIcon icon={Phone} size={24} strokeWidth={2} />
                   </div>
                   <div>
                     <h4 className="font-bold text-[#1a1c1e] mb-1">
@@ -163,10 +158,7 @@ const ContactUs = ({
 
                 <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <Mail
-                      className="text-secondary group-hover:text-white"
-                      size={24}
-                    />
+                    <GradientIcon icon={Mail} size={24} strokeWidth={2} />
                   </div>
                   <div>
                     <h4 className="font-bold text-[#1a1c1e] mb-1">Email</h4>
@@ -180,10 +172,7 @@ const ContactUs = ({
 
                 <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
                   <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <Clock
-                      className="text-secondary group-hover:text-white"
-                      size={24}
-                    />
+                    <GradientIcon icon={Clock} size={24} strokeWidth={2} />
                   </div>
                   <div>
                     <h4 className="font-bold text-[#1a1c1e] mb-1">
@@ -226,40 +215,51 @@ const ContactUs = ({
                   className="space-y-6"
                 >
                   <div className="grid md:grid-cols-2 gap-6">
+                    {/* Full Name */}
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
                         Full Name
                       </label>
-                      <input
-                        {...register("name")}
-                        type="text"
-                        placeholder="John Doe"
-                        className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
-                          errors.name
-                            ? "border-red-500"
-                            : "border-gray-200 focus:border-secondary"
-                        }`}
-                      />
+
+                      <div className="rounded-xl focus-within:ring-0 transition-all">
+                        <input
+                          {...register("name")}
+                          type="text"
+                          placeholder="John Doe"
+                          className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
+                            errors.name
+                              ? "border-red-500"
+                              : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
+                          }`}
+                        />
+                      </div>
+
                       {errors.name && (
                         <p className="text-red-500 text-[11px] flex items-center gap-1">
                           <AlertCircle size={12} /> {errors.name.message}
                         </p>
                       )}
                     </div>
+
+                    {/* Email */}
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
                         Email Address
                       </label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        placeholder="john@example.com"
-                        className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
-                          errors.email
-                            ? "border-red-500"
-                            : "border-gray-200 focus:border-secondary"
-                        }`}
-                      />
+
+                      <div className="rounded-xl focus-within:ring-0 transition-all">
+                        <input
+                          {...register("email")}
+                          type="email"
+                          placeholder="john@example.com"
+                          className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
+                            errors.email
+                              ? "border-red-500"
+                              : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
+                          }`}
+                        />
+                      </div>
+
                       {errors.email && (
                         <p className="text-red-500 text-[11px] flex items-center gap-1">
                           <AlertCircle size={12} /> {errors.email.message}
@@ -268,43 +268,52 @@ const ContactUs = ({
                     </div>
                   </div>
 
+                  {/* Practice Area */}
                   <div className="space-y-2">
                     <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
                       Practice Area
                     </label>
+
                     <select
                       {...register("practiceArea")}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all appearance-none cursor-pointer"
+                      className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
+                        errors.practiceArea
+                          ? "border-red-500"
+                          : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
+                      } appearance-none cursor-pointer`}
                     >
                       <option value={"General Inquery"}>General Inquery</option>
-                      {publicationData?.map((item, index: number) => {
-                        return (
-                          <option key={index} value={item.title}>
-                            {item.title}
-                          </option>
-                        );
-                      })}
+                      {publicationData?.map((item, index: number) => (
+                        <option key={index} value={item.title}>
+                          {item.title}
+                        </option>
+                      ))}
                     </select>
+
                     {errors.practiceArea && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.practiceArea.message}
                       </p>
                     )}
                   </div>
+
+                  {/* Phone Number */}
                   <div className="space-y-2">
                     <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
                       Phone Number
                     </label>
+
                     <input
                       {...register("phone")}
                       type="phone"
                       placeholder="+977 9806089009"
-                      className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all ${
+                      className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
                         errors.phone
                           ? "border-red-500"
-                          : "border-gray-200 focus:border-secondary"
+                          : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
                       }`}
                     />
+
                     {errors.phone && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.phone.message}
@@ -312,20 +321,23 @@ const ContactUs = ({
                     )}
                   </div>
 
+                  {/* Message */}
                   <div className="space-y-2">
                     <label className="text-xs uppercase font-bold tracking-wider text-gray-400">
                       Your Message
                     </label>
+
                     <textarea
                       {...register("message")}
                       rows={4}
                       placeholder="Briefly describe your situation..."
-                      className={`w-full bg-white border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all resize-y ${
+                      className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all resize-y ${
                         errors.message
                           ? "border-red-500"
-                          : "border-gray-200 focus:border-secondary"
+                          : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
                       }`}
                     ></textarea>
+
                     {errors.message && (
                       <p className="text-red-500 text-[11px] flex items-center gap-1">
                         <AlertCircle size={12} /> {errors.message.message}
@@ -333,15 +345,11 @@ const ContactUs = ({
                     )}
                   </div>
 
+                  {/* Submit Button */}
                   <button
                     disabled={isSubmitting || formStatus === "sending"}
                     type="submit"
-                    // className={`w-full py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-3 ${
-                    //   isSubmitting || formStatus === "sending"
-                    //     ? "bg-gray-400 cursor-not-allowed"
-                    //     : "bg-primary text-white hover:bg-secondary"
-                    // }`}
-                    className="group mx-auto w-full  justify-center cursor-pointer flex items-center gap-3 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-500 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-xl active:scale-95"
+                    className="group mx-auto w-full justify-center flex items-center gap-3 px-6 py-3 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-md active:scale-95"
                   >
                     {isSubmitting || formStatus === "sending" ? (
                       "Processing..."
@@ -351,6 +359,7 @@ const ContactUs = ({
                       </>
                     )}
                   </button>
+
                   <p className="text-[12px] text-gray-400 text-center leading-relaxed">
                     By submitting this form, you acknowledge that this contact
                     does not establish an attorney-client relationship.

@@ -8,6 +8,7 @@ import { ClientRecognitionsPageContent } from "@/app/utils/interface/index.query
 import { Content } from "../markup";
 import HighlightLastWord from "../highlighter";
 import Image from "next/image";
+import GradientIcon from "@/components/ui/gradientIcon";
 
 const data = await fetchData<ClientRecognitionsPageContent>({
   path: `data.getClientRecognitionsPageContent` as string,
@@ -35,28 +36,25 @@ const AwardsOverview: React.FC = () => {
               data.recognitions.length > 0 && (
                 <div className="lg:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-8">
                   {data.recognitions.map((award, index) => {
-                    const Icon = LucideIcons[
-                      AWARDS[index].icon as IconName
-                    ] as LucideIcons.LucideIcon;
+                    // const Icon = LucideIcons[
+                    //   AWARDS[index].icon as IconName
+                    // ] as LucideIcons.LucideIcon;
                     return (
                       <div
                         key={index}
                         className="flex flex-col items-center text-center group cursor-default"
                       >
                         <div className="mb-4 transform transition-transform group-hover:scale-110 duration-300">
-                          {<Icon className="text-secondary" size={32} />}
-                          {/* <Image
-                            height={40}
-                            width={40}
-                            className="min-h-[40px] min-w-[40px] object-contain icon-secondary"
-                            alt="icon"
-                            src={award.icon || "/noimage.png"}
-                          /> */}
+                          <GradientIcon
+                            icon={AWARDS[index].icon}
+                            size={32}
+                            strokeWidth={2}
+                          />
                         </div>
                         <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-1">
                           {award.title}
                         </h4>
-                        <p className="text-secondary text-[10px] uppercase tracking-tighter mb-2">
+                        <p className="text-gradient-gold text-[10px] uppercase tracking-tighter mb-2">
                           {award.subtitle}
                         </p>
                         <p className="text-white text-[10px] leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-300">

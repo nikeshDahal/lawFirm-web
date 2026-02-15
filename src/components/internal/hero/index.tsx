@@ -45,7 +45,7 @@ const HeroBanner = () => {
             href={"https://maps.app.goo.gl/hTxqrAuioiz7FAvw5"}
             target="_blank"
           >
-            <button className="bg-primary cursor-pointer text-white px-8 py-4 rounded font-bold hover:bg-secondary transition-colors uppercase tracking-wider text-sm">
+            <button className="bg-primary cursor-pointer text-white px-8 py-4 rounded font-bold hover:bg-gradient-gold transition-colors uppercase tracking-wider text-sm">
               View our location
             </button>
           </Link>
