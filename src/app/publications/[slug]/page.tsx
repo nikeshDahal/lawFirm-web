@@ -6,6 +6,7 @@ import NoData from "@/components/internal/nodata";
 import { Metadata } from "next";
 import Image from "next/image";
 import PublicationAction from "./component/action";
+import DOMPurify from "isomorphic-dompurify";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -112,7 +113,7 @@ const page = async ({ params }: Props) => {
               <div
                 className="publication-content"
                 dangerouslySetInnerHTML={{
-                  __html: pageData.content,
+                  __html: DOMPurify.sanitize(pageData.content),
                 }}
               />
               {/* </div> */}
