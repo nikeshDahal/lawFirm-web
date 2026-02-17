@@ -123,68 +123,91 @@ const ContactUs = ({
                 html={contactData?.content as string}
               />
               <div className="space-y-4">
-                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <GradientIcon icon={MapPin} size={24} strokeWidth={2} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#1a1c1e] mb-1">
-                      {contactData?.location.label || "Our Location"}
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {contactData?.location.city}
-                      <br />
-                      {contactData?.location.address},{" "}
-                      {contactData?.location.country}
-                    </p>
-                  </div>
-                </div>
+                {/* Location Card */}
+                {contactData?.location && (
+                  <a
+                    href={"https://maps.app.goo.gl/ktTvj1bT1wNwBmQx6"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px] hover:bg-primary/10 transition-colors duration-300"
+                  >
+                    <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                      <GradientIcon icon={MapPin} size={24} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[#1a1c1e] mb-1">
+                        {contactData.location.label || "Our Location"}
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {contactData.location.city}
+                        <br />
+                        {contactData.location.address},{" "}
+                        {contactData.location.country}
+                      </p>
+                    </div>
+                  </a>
+                )}
 
-                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <GradientIcon icon={Phone} size={24} strokeWidth={2} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#1a1c1e] mb-1">
-                      Phone Number
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {contactData?.contactInfo.primaryPhone}
-                      <br />
-                      {contactData?.contactInfo.secondaryPhone}
-                    </p>
-                  </div>
-                </div>
+                {/* Phone Card */}
+                {contactData?.contactInfo && (
+                  <a
+                    href={`tel:${contactData.contactInfo.primaryPhone}`}
+                    className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px] hover:bg-primary/10 transition-colors duration-300"
+                  >
+                    <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                      <GradientIcon icon={Phone} size={24} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[#1a1c1e] mb-1">
+                        Phone Number
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {contactData.contactInfo.primaryPhone}
+                        <br />
+                        {contactData.contactInfo.secondaryPhone}
+                      </p>
+                    </div>
+                  </a>
+                )}
 
-                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <GradientIcon icon={Mail} size={24} strokeWidth={2} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#1a1c1e] mb-1">Email</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {contactData?.contactInfo?.primaryEmail}
-                      <br />
-                      {contactData?.contactInfo?.secondaryEmail}
-                    </p>
-                  </div>
-                </div>
+                {/* Email Card */}
+                {contactData?.contactInfo && (
+                  <a
+                    href={`mailto:${contactData.contactInfo.primaryEmail}`}
+                    className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px] hover:bg-primary/10 transition-colors duration-300"
+                  >
+                    <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                      <GradientIcon icon={Mail} size={24} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[#1a1c1e] mb-1">Email</h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {contactData.contactInfo.primaryEmail}
+                        <br />
+                        {contactData.contactInfo.secondaryEmail}
+                      </p>
+                    </div>
+                  </a>
+                )}
 
-                <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
-                  <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <GradientIcon icon={Clock} size={24} strokeWidth={2} />
+                {/* Office Hours Card */}
+                {contactData?.officeHour && (
+                  <div className="flex gap-6 group border-2 border-primary w-80 p-3 rounded-[12px]">
+                    <div className="w-12 h-12 bg-gray-50 rounded flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300">
+                      <GradientIcon icon={Clock} size={24} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[#1a1c1e] mb-1">
+                        Office Hours
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {contactData.officeHour.day}
+                        <br />
+                        {contactData.officeHour.note}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-[#1a1c1e] mb-1">
-                      Office Hours
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {contactData?.officeHour.day}
-                      <br />
-                      {contactData?.officeHour.note}
-                    </p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 
@@ -225,7 +248,7 @@ const ContactUs = ({
                         <input
                           {...register("name")}
                           type="text"
-                          placeholder="John Doe"
+                          placeholder="Full Name"
                           className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
                             errors.name
                               ? "border-red-500"
@@ -251,7 +274,7 @@ const ContactUs = ({
                         <input
                           {...register("email")}
                           type="email"
-                          placeholder="john@example.com"
+                          placeholder="Email Address"
                           className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
                             errors.email
                               ? "border-red-500"
@@ -306,7 +329,7 @@ const ContactUs = ({
                     <input
                       {...register("phone")}
                       type="phone"
-                      placeholder="+977 9806089009"
+                      placeholder="Phone Number"
                       className={`w-full bg-white rounded-xl px-4 py-3 text-sm border border-gray-200 focus:outline-none transition-all ${
                         errors.phone
                           ? "border-red-500"

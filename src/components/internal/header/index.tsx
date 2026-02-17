@@ -89,15 +89,19 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
       {/* Main Header */}
       <header
         className={` w-full bg-white  sticky top-0 z-99 transition-all duration-300 ${
-          scrolled ? "shadow-lg py-5" : "py-5"
+          scrolled ? "shadow-lg py-3" : "py-3"
         }`}
       >
         <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href={"/"}>
             <div className="flex items-center gap-2 group cursor-pointer">
-              <div className="bg-primary p-2 rounded transform transition-transform group-hover:rotate-12">
-                <Scale size={28} className="text-gradient-gold" />
+              <div className="bg-primary w-16 h-14 rounded flex items-center justify-center transform transition-transform duration-900 ease-in-out scale-100 group-hover:rotate-360 group-hover:scale-110">
+                <img
+                  src="/logo-only.png"
+                  alt="Top Legal Advisers Logo"
+                  className="w-15 h-13 object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-xl font-serif font-bold tracking-tight text-[#1a1c1e] leading-none">

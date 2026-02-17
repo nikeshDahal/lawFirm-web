@@ -42,15 +42,15 @@ const HeroBanner = () => {
         )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href={"https://maps.app.goo.gl/hTxqrAuioiz7FAvw5"}
+            href={"https://maps.app.goo.gl/YgReYibWpU7bg1hJ8"}
             target="_blank"
           >
-            <button className="bg-primary cursor-pointer text-white px-8 py-4 rounded font-bold hover:bg-gradient-gold transition-colors uppercase tracking-wider text-sm">
+            <button className="h-14 bg-primary cursor-pointer text-white px-8 rounded font-bold hover:bg-gradient-gold transition-colors uppercase tracking-wider text-sm">
               View our location
             </button>
           </Link>
           <Link href={"/contact-us"}>
-            <button className="bg-white/10 cursor-pointer backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded font-bold hover:bg-white/20 transition-colors uppercase tracking-wider text-sm">
+            <button className="h-14 bg-white/10 cursor-pointer backdrop-blur-md border border-white/20 text-white px-8 rounded font-bold hover:bg-white/20 transition-colors uppercase tracking-wider text-sm">
               Book with us
             </button>
           </Link>

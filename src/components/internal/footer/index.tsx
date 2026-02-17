@@ -22,11 +22,13 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
           {/* Column 1: Brand & Bio */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="bg-gradient-gold p-2 rounded">
-                <Scale size={24} className="text-primary" />
-              </div>
+              <img
+                src="/logo-only.png"
+                alt="Top Legal Advisers Logo"
+                className="w-16 h- object-contain"
+              />
               <h2 className="text-xl font-serif font-bold tracking-tight text-white leading-none">
-                Top <span className="text-gradient-gold">Legal </span> Advisers.
+                Top <span className="text-gradient-gold">Legal</span> Advisers.
               </h2>
             </div>
             <p className="text-sm leading-relaxed text-white">
@@ -40,8 +42,8 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div>
-            <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 border-bottom-gradient-gold">
+          <div className="space-y-6">
+            <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-gradient-gold">
               Quick Links
             </h4>
             <ul className="space-y-4 text-sm list-none">
@@ -51,10 +53,6 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
                     href={item.link}
                     className="flex items-center gap-2 gradient-hover-gold transition-colors group"
                   >
-                    {/* <ArrowRight
-                      size={12}
-                      className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-                    /> */}
                     <GradientIcon
                       icon={ArrowRight}
                       size={16}
@@ -69,13 +67,13 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
           </div>
 
           {/* Column 3: Practice Areas */}
-          <div>
+          <div className="space-y-6">
             <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-gradient-gold">
               Expertise
             </h4>
-            <ul className="space-y-4 text-sm  list-none">
+            <ul className="space-y-4 text-sm list-none">
               {pubData &&
-                pubData?.data.map((item, idx) => (
+                pubData.data.map((item, idx) => (
                   <li key={idx}>
                     <Link
                       href={`/practice-area/${item.slug}`}
@@ -94,15 +92,16 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter/Contact */}
+          {/* Column 4: Walk In */}
           <div className="space-y-6">
             <h4 className="text-gradient-gold font-serif font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-gradient-gold">
               Walk In
             </h4>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d683.9782623527177!2d85.32859008535301!3d27.696889989880596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19fb4d5bbb4d%3A0x41e633f97dbc5148!2sTop%20Legal%20Advisers!5e1!3m2!1sen!2snp!4v1770908819499!5m2!1sen!2snp"
-              width="300"
+              width="100%"
               height="200"
+              className="rounded-md border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
@@ -110,7 +109,7 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
+        <div className="pt-8 border-t-1 border-gold flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
           <p>
             © {new Date().getFullYear()} Top Legal Advisers. All Rights
             Reserved.

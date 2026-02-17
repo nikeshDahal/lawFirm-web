@@ -61,7 +61,6 @@ const page = async ({ params }: Props) => {
 
   if (!pageData) return <NoData />;
 
-  console.log("Publication Page Data:", pageData.content);
   return (
     <>
       {/* Main Publication Layout - Semantic <article> */}
@@ -84,25 +83,22 @@ const page = async ({ params }: Props) => {
 
             {/* Main Content Column */}
             <div className="lg:col-span-8 order-1 lg:order-2">
-              <header className="mb-12">
+              <header className="mb-8">
                 <h1
-                  className="text-4xl md:text-7xl font-serif text-[#1a1c1e] mb-6 leading-[1.1] tracking-tight text-left"
+                  className="text-2xl  md:text-3xl font-serif text-gradient-gold mb-6 leading-[1.1] tracking-tight text-left"
                   itemProp="headline"
                 >
                   {pageData.title || ""}
                 </h1>
               </header>
-
-              <figure className="relative aspect-video mb-16 rounded-3xl overflow-hidden shadow-2xl group">
+              <figure className="relative h-100 mb-8 rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  height={400}
-                  width={800}
                   src={pageData?.pageImage || "/noimage.png"}
                   alt="Legal professionals discussing AI implementation in a modern office"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  itemProp="image"
+                  className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-105"
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
+                  fill
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                 <figcaption className="sr-only">{pageData?.title}</figcaption>

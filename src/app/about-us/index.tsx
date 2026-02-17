@@ -73,7 +73,7 @@ const About: React.FC<Props> = ({ aboutData }) => {
                 )}
 
                 {aboutData?.metaData?.secondarySubTitle && (
-                  <h3 className="text-2xl md:text-2xl lg:text-2xl font-serif text-[#1a1c1e] leading-tight -mb-2">
+                  <h3 className="text-2xl md:text-2xl lg:text-2xl font-serif text-[#1a1c1e] leading-tight -mb-2 text-justify">
                     {aboutData.metaData.secondarySubTitle || (
                       <>
                         A Legacy of Integrity and{" "}
@@ -91,13 +91,13 @@ const About: React.FC<Props> = ({ aboutData }) => {
                 <p
                   className={cn([
                     isPreview && "line-clamp-5",
-                    "text-gray-600 leading-relaxed font-light text-base md:text-lg",
+                    "text-gray-600 leading-relaxed font-light text-base md:text-lg text-justify",
                   ])}
                 >
                   {aboutData.metaData.description ||
                     `Founded in 1999, Justice & Co. began with a singular vision:
-              to provide elite-level legal representation that combines
-              large-firm resources with the personal attention of a boutique practice.`}
+       to provide elite-level legal representation that combines
+       large-firm resources with the personal attention of a boutique practice.`}
                 </p>
               )}
 
@@ -112,11 +112,11 @@ const About: React.FC<Props> = ({ aboutData }) => {
                           size={18}
                           className="text-secondary shrink-0"
                         />
-                        <span className="text-sm uppercase tracking-wider">
+                        <span className="text-sm uppercase tracking-wider text-justify">
                           {item.title}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-500 leading-relaxed">
+                      <p className="text-sm text-gray-500 leading-relaxed text-justify">
                         {item.description}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ const About: React.FC<Props> = ({ aboutData }) => {
             <div className="mt-10 mb-12 md:mt-10 mb-12">
               <Content
                 html={aboutData?.content}
-                className="text-lg text-gray-600 leading-relaxed font-light space-y-4"
+                className="text-lg text-gray-600 leading-relaxed font-light space-y-4 text-justify"
               />
             </div>
           )}
