@@ -157,56 +157,57 @@ const Publications = () => {
                       key={idx}
                       className="md:basis-1/2 lg:basis-1/3 py-2"
                     >
-                      <div
-                        key={idx}
-                        className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
-                      >
-                        <div className="relative h-64 overflow-hidden">
-                          <img
-                            src={pub.pageImage || "/noimage.png"}
-                            alt={pub.title}
-                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                            onError={(e) => {
-                              e.currentTarget.src = "/noimage.png"; // your default image
-                            }}
-                          />
-                          {pub?.category && (
-                            <div className="absolute top-4 left-4">
-                              <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
-                                {pub?.category || "N/A"}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="p-8 flex flex-col grow">
-                          <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
-                            <span className="flex items-center gap-1.5 group-hover:text-white ">
-                              {/* <Calendar size={14} className="text-secondary" />{" "} */}
-                              <GradientIcon icon={Calendar} size={14} />
-                              {pub.createdAt?.split("T")[0]}
-                            </span>
-                            <span className="flex items-center gap-1.5 group-hover:text-white ">
-                              <GradientIcon
-                                icon={User}
-                                size={14}
-                                // className="text-secondary"
-                              />
-                              {pub.author}
-                            </span>
+                      <Link href={`/publications/${pub.slug}`}>
+                        <div
+                          key={idx}
+                          className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
+                        >
+                          <div className="relative h-64 overflow-hidden">
+                            <img
+                              src={pub.pageImage || "/noimage.png"}
+                              alt={pub.title}
+                              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                              onError={(e) => {
+                                e.currentTarget.src = "/noimage.png"; // your default image
+                              }}
+                            />
+                            {pub?.category && (
+                              <div className="absolute top-4 left-4">
+                                <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
+                                  {pub?.category || "N/A"}
+                                </span>
+                              </div>
+                            )}
                           </div>
 
-                          <h4 className="text-xl group-hover:text-white  font-serif text-[#1a1c1e] mb-4 transition-colors duration-300 leading-snug line-clamp-2">
-                            {pub.title}
-                          </h4>
+                          <div className="p-8 flex flex-col grow">
+                            <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
+                              <span className="flex items-center gap-1.5 group-hover:text-white ">
+                                {/* <Calendar size={14} className="text-secondary" />{" "} */}
+                                <GradientIcon icon={Calendar} size={14} />
+                                {pub.createdAt?.split("T")[0]}
+                              </span>
+                              <span className="flex items-center gap-1.5 group-hover:text-white ">
+                                <GradientIcon
+                                  icon={User}
+                                  size={14}
+                                  // className="text-secondary"
+                                />
+                                {pub.author}
+                              </span>
+                            </div>
 
-                          <Content
-                            className={`text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3`}
-                            html={pub.metaData}
-                          />
+                            <h4 className="text-xl group-hover:text-white  font-serif text-[#1a1c1e] mb-4 transition-colors duration-300 leading-snug line-clamp-2">
+                              {pub.title}
+                            </h4>
 
-                          <div className="pt-6 border-t border-primary group-hover:border-white">
-                            <Link href={`/publications/${pub.slug}`}>
+                            <Content
+                              className={`text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3`}
+                              html={pub.metaData}
+                            />
+
+                            <div className="pt-6 border-t border-primary group-hover:border-white">
+                              {/* <Link href={`/publications/${pub.slug}`}> */}
                               <button className="flex cursor-pointer items-center gap-2 text-[#1a1c1e] group-hover:text-white text-xs font-black uppercase tracking-[0.2em] group/btn">
                                 Read More{" "}
                                 <ArrowRight
@@ -214,10 +215,11 @@ const Publications = () => {
                                   className="text-secondary group-hover/btn:translate-x-1 transition-transform"
                                 />
                               </button>
-                            </Link>
+                              {/* </Link> */}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -254,50 +256,50 @@ const Publications = () => {
             <div className="grid md:grid-cols-3 gap-12 mb-12">
               {(data?.data as ClientPublication[])?.map((pub, idx) => (
                 <div key={idx} className="md:basis-1/2 lg:basis-1/3 py-2">
-                  <div
-                    key={idx}
-                    className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
-                  >
-                    <div className="relative h-64 overflow-hidden">
-                      <img
-                        src={pub.pageImage || "/noimage.png"}
-                        alt={pub.title}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                        onError={(e) => {
-                          e.currentTarget.src = "/noimage.png"; // your default image
-                        }}
-                      />
-                      {pub.category && (
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
-                            {pub.category}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-8 flex flex-col grow">
-                      <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
-                        <span className="flex items-center gap-1.5 group-hover:text-white ">
-                          <Calendar size={14} className="text-secondary" />{" "}
-                          {pub.createdAt?.split("T")[0]}
-                        </span>
-                        <span className="flex items-center gap-1.5 group-hover:text-white ">
-                          <User size={14} className="text-secondary" />{" "}
-                          {pub.author}
-                        </span>
+                  <Link href={`/publications/${pub.slug}`}>
+                    <div
+                      key={idx}
+                      className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
+                    >
+                      <div className="relative h-64 overflow-hidden">
+                        <img
+                          src={pub.pageImage || "/noimage.png"}
+                          alt={pub.title}
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.src = "/noimage.png"; // your default image
+                          }}
+                        />
+                        {pub.category && (
+                          <div className="absolute top-4 left-4">
+                            <span className="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full backdrop-blur-md bg-opacity-80  max-w-55 truncate line-clamp-1">
+                              {pub.category}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
-                      <h4 className="text-xl group-hover:text-white  font-serif text-[#1a1c1e] mb-4 transition-colors duration-300 leading-snug line-clamp-2">
-                        {pub.title}
-                      </h4>
+                      <div className="p-8 flex flex-col grow">
+                        <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
+                          <span className="flex items-center gap-1.5 group-hover:text-white ">
+                            <Calendar size={14} className="text-secondary" />{" "}
+                            {pub.createdAt?.split("T")[0]}
+                          </span>
+                          <span className="flex items-center gap-1.5 group-hover:text-white ">
+                            <User size={14} className="text-secondary" />{" "}
+                            {pub.author}
+                          </span>
+                        </div>
 
-                      <p className="text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3">
-                        {pub.metaData}
-                      </p>
+                        <h4 className="text-xl group-hover:text-white  font-serif text-[#1a1c1e] mb-4 transition-colors duration-300 leading-snug line-clamp-2">
+                          {pub.title}
+                        </h4>
 
-                      <div className="pt-6 border-t border-primary group-hover:border-white">
-                        <Link href={`/publications/${pub.slug}`}>
+                        <p className="text-gray-500 group-hover:text-white  text-sm font-light leading-relaxed mb-8 grow line-clamp-3">
+                          {pub.metaData}
+                        </p>
+
+                        <div className="pt-6 border-t border-primary group-hover:border-white">
                           <button className="flex cursor-pointer items-center gap-2 text-[#1a1c1e] group-hover:text-white text-xs font-black uppercase tracking-[0.2em] group/btn">
                             Read Whitepaper{" "}
                             <ArrowRight
@@ -305,10 +307,10 @@ const Publications = () => {
                               className="text-secondary group-hover/btn:translate-x-1 transition-transform"
                             />
                           </button>
-                        </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

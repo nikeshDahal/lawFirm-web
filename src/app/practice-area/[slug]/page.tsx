@@ -6,6 +6,7 @@ import { ClientPracticeAreaDetail } from "@/app/utils/interface/index.query";
 import Image from "next/image";
 import NoData from "@/components/internal/nodata";
 import { Metadata } from "next";
+import DOMPurify from "isomorphic-dompurify";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -62,7 +63,7 @@ const page = async ({ params }: Props) => {
 
   return (
     <>
-      {/* Main Publication Layout - Semantic <article> */}
+      {/* Main Practice Area Layout - Semantic <article> */}
       <main className="grow pt-8" id="main-content">
         <article
           className="max-w-7xl mx-auto px-6"
@@ -84,40 +85,35 @@ const page = async ({ params }: Props) => {
             <div className="lg:col-span-8 order-1 lg:order-2">
               <header className="mb-12">
                 <h1
-                  className="text-4xl md:text-7xl font-serif text-[#1a1c1e] mb-6 leading-[1.1] tracking-tight text-left"
+                  className="text-2xl  md:text-3xl font-serif text-gradient-gold mb-6 leading-[1.1] tracking-tight text-left"
                   itemProp="headline"
                 >
                   {pageData?.title}
                 </h1>
               </header>
 
-              <figure className="relative aspect-video mb-16 rounded-3xl overflow-hidden shadow-2xl group">
+              <figure className="relative h-100 mb-8 rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  height={400}
-                  width={800}
                   src={pageData?.pageImage || "/noimage.png"}
                   alt="Legal professionals discussing AI implementation in a modern office"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  itemProp="image"
+                  className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-105"
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
+                  fill
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
                 <figcaption className="sr-only">{pageData?.title}</figcaption>
               </figure>
 
               {/* Rich Text Body Content */}
-              <div className="prose-container" itemProp="articleBody">
-                <div
-                  className="publication-content text-gray-700 leading-relaxed font-light text-xl space-y-10"
-                  dangerouslySetInnerHTML={{
-                    __html: pageData?.content,
-                  }}
-                />
-              </div>
-
-              {/* Resource Downloads - CTA Section */}
-              {/* <AttachmentCTA /> */}
+              {/* <div className="prose-container" itemProp="articleBody"> */}
+              <div
+                className="publication-content"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(pageData.content),
+                }}
+              />
+              {/* </div> */}
             </div>
 
             {/* Right Sidebar: Related & Call to Action */}
@@ -137,45 +133,63 @@ const page = async ({ params }: Props) => {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .publication-content h3 {
-          font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-          font-size: 2.25rem;
-          color: #1a1c1e;
-          margin-top: 4.5rem;
-          margin-bottom: 2rem;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-        }
-        .publication-content p {
-          margin-bottom: 2rem;
-          line-height: 1.8;
-          text-align: left;
-        }
-        .publication-content p.lead {
-          font-size: 1.5rem;
-          color: #1a1c1e;
-          font-weight: 400;
-          line-height: 1.6;
-        }
-        .publication-content blockquote {
-          border-left: 5px solid #c5a059;
-          padding: 2rem 0 2rem 3rem;
-          margin: 4rem 0;
-          font-style: italic;
-          font-size: 1.75rem;
-          color: #1a1c1e;
-          font-family: ui-serif, Georgia, serif;
-          background: #fcfcfc;
-          border-radius: 0 1rem 1rem 0;
-          text-align: left;
-        }
-        @media print {
-          header, footer, aside, .cta-section { display: none !important; }
-          main { pt: 0 !important; }
-          .lg\\:col-span-8 { width: 100% !important; grid-column: span 12 / span 12 !important; }
-          .publication-content { font-size: 12pt !important; }
-        }
-      `,
+
+/* Minimal content renderer — preserves API HTML */
+
+.publication-content {
+  all: revert;
+}
+
+/* Ensure responsiveness */
+.publication-content img,
+.publication-content video,
+.publication-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tables scroll on mobile */
+.publication-content table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Preserve alignment attributes */
+.publication-content [align="center"] { text-align: center; }
+.publication-content [align="right"] { text-align: right; }
+.publication-content [align="justify"] { text-align: justify; }
+
+/* Prevent layout breaking */
+.publication-content * {
+  box-sizing: border-box;
+}
+
+/* Remove unwanted inherited styles from parent */
+.publication-content p,
+.publication-content h1,
+.publication-content h2,
+.publication-content h3,
+.publication-content h4,
+.publication-content h5,
+.publication-content h6,
+.publication-content ul,
+.publication-content ol,
+.publication-content li,
+.publication-content table,
+.publication-content tr,
+.publication-content td,
+.publication-content th {
+  margin: revert;
+  padding: revert;
+  font-size: revert;
+  font-weight: revert;
+  line-height: revert;
+  text-align: revert;
+}
+
+`,
         }}
       />
     </>
