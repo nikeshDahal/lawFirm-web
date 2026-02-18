@@ -147,13 +147,6 @@ const page = async ({ params }: Props) => {
   height: auto;
 }
 
-/* Tables scroll on mobile */
-.publication-content table {
-  display: block;
-  overflow-x: auto;
-  width: 100%;
-  border-collapse: collapse;
-}
 
 /* Preserve alignment attributes */
 .publication-content [align="center"] { text-align: center; }
