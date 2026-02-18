@@ -29,37 +29,36 @@ export const metadata: Metadata = {
   category: "Legal Services",
 };
 
-const contactData = await fetchData<ClientContactUsResponse>({
-  query: GET_CONTACT,
-  path: "data.getClientContactUsPageContent",
-  variables: {
-    input: {
-      limit: 50,
-      order: "desc",
-      orderBy: "_id",
-      skip: 0,
-    },
-  },
-});
-
-const pubData = await fetchData<ClientPracticeAreasResponse>({
-  query: GET_PRACTICE_HEADER,
-  path: "data.findAllClientPracticeAreas",
-  variables: {
-    input: {
-      limit: 50,
-      order: "desc",
-      orderBy: "_id",
-      skip: 0,
-    },
-  },
-});
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const contactData = await fetchData<ClientContactUsResponse>({
+    query: GET_CONTACT,
+    path: "data.getClientContactUsPageContent",
+    variables: {
+      input: {
+        limit: 50,
+        order: "desc",
+        orderBy: "_id",
+        skip: 0,
+      },
+    },
+  });
+
+  const pubData = await fetchData<ClientPracticeAreasResponse>({
+    query: GET_PRACTICE_HEADER,
+    path: "data.findAllClientPracticeAreas",
+    variables: {
+      input: {
+        limit: 50,
+        order: "desc",
+        orderBy: "_id",
+        skip: 0,
+      },
+    },
+  });
   return (
     <html lang="en">
       <body className={`${geist.className} antialiased bg-offwhite`}>
