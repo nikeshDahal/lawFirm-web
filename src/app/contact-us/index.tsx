@@ -305,7 +305,7 @@ const ContactUs = ({
                           : "focus:border-[2px] focus:border-transparent focus:ring-2 focus:ring-gradient-gold"
                       } appearance-none cursor-pointer`}
                     >
-                      <option value={"General Inquery"}>General Inquery</option>
+                      <option value={"General Inquiry"}>General Inquiry</option>
                       {publicationData?.map((item, index: number) => (
                         <option key={index} value={item.title}>
                           {item.title}
