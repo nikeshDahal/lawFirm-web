@@ -10,6 +10,7 @@ import {
 } from "./utils/interface/index.query";
 
 import localFont from "next/font/local";
+import FloatingContact from "@/components/internal/stickyWidget";
 
 const geist = localFont({
   src: "./Geist-VariableFont_wght.ttf",
@@ -64,6 +65,7 @@ export default async function RootLayout({
       <body className={`${geist.className} antialiased bg-offwhite`}>
         <Header contactData={contactData} pubData={pubData} />
         {children}
+        <FloatingContact contactData={contactData} />
         <Footer contactData={contactData} pubData={pubData} />
       </body>
     </html>
