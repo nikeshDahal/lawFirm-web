@@ -3,9 +3,14 @@ import "./globals.css";
 import Header from "@/components/internal/header";
 import Footer from "@/components/internal/footer";
 import { fetchData } from "./utils/service";
-import { GET_CONTACT, GET_PRACTICE_HEADER } from "./utils/service/index.query";
+import {
+  GET_BANNER,
+  GET_CONTACT,
+  GET_PRACTICE_HEADER,
+} from "./utils/service/index.query";
 import {
   ClientContactUsResponse,
+  ClientLandingPageContent,
   ClientPracticeAreasResponse,
 } from "./utils/interface/index.query";
 
@@ -13,23 +18,43 @@ import localFont from "next/font/local";
 import FloatingContact from "@/components/internal/stickyWidget";
 import SchemaMarkup from "@/components/internal/schema";
 
+const seoData = await fetchData<ClientLandingPageContent>({
+  path: `data.getClientLandingPageContent` as string,
+  query: GET_BANNER,
+});
+
+export const metadata: Metadata = {
+  ...seoData.seoTags,
+  keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
+  category: "Legal Services",
+  openGraph: {
+    title: seoData.seoTags.title,
+    description: seoData.seoTags.description,
+    images: [
+      {
+        url: "/logo-only.png",
+      },
+    ],
+  },
+};
+
 const geist = localFont({
   src: "./Geist-VariableFont_wght.ttf",
   weight: "100 900",
 });
 
 export const revalidate = 10;
-export const metadata: Metadata = {
-  title: "Top Legal Advisers",
-  description: "Attorneys At Law",
-  keywords: [
-    "Defense Lawyer",
-    "Legal Advice",
-    "Attorney at Law",
-    "Civil Rights",
-  ],
-  category: "Legal Services",
-};
+// export const metadata: Metadata = {
+//   title: "Top Legal Advisers",
+//   description: "Attorneys At Law",
+//   keywords: [
+//     "Defense Lawyer",
+//     "Legal Advice",
+//     "Attorney at Law",
+//     "Civil Rights",
+//   ],
+//   category: "Legal Services",
+// };
 
 export default async function RootLayout({
   children,

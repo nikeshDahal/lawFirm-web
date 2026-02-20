@@ -9,11 +9,11 @@ export default function SchemaMarkup() {
     description: "Expert legal advice and consultancy services.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Your Street Address",
-      addressLocality: "Your City",
-      addressRegion: "State",
-      postalCode: "12345",
-      addressCountry: "US",
+      streetAddress: "Anamnagar, Kathmandu",
+      addressLocality: "Kathmandu",
+      addressRegion: "Bagmati",
+      postalCode: "44600",
+      addressCountry: "NP",
     },
   };
 

@@ -29,7 +29,7 @@ const OverviewCard = ({
       <div className="w-15 h-14 bg-gray-50 rounded flex items-center justify-center mb-6 group-hover:bg-white transition-colors group-hover:animate-bounce overflow-hidden">
         <Image
           src={pageImage || "/noimage.png"}
-          alt="icon"
+          alt={title || "Legal Service"}
           width={48}
           height={48}
           className="w-full h-full object-cover object-center"
