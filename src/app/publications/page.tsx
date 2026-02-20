@@ -19,7 +19,10 @@ const publicationSeoData = await fetchData<ClientPublicationsResponse>({
 
 export const metadata: Metadata = {
   ...publicationSeoData.metaData.seoTags,
-  keywords: publicationSeoData.metaData.seoTags.tags,
+  keywords:
+    publicationSeoData.metaData.seoTags.tags
+      ?.split(",")
+      .map((tag) => tag.trim()) || [],
 };
 
 export default async function PublicationPage() {

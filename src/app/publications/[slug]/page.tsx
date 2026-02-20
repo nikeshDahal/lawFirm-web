@@ -5,8 +5,9 @@ import { GET_PUBLICATION_SLUG } from "@/app/utils/service/index.query";
 import NoData from "@/components/internal/nodata";
 import { Metadata } from "next";
 import Image from "next/image";
-import PublicationAction from "./component/action";
 import DOMPurify from "isomorphic-dompurify";
+import TableOfContents from "@/components/internal/tableOfContent";
+import ShareRail from "@/components/internal/shareRails";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -32,9 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: pageData.title,
-    description: pageData.metaData || pageData.title,
-    keywords: pageData.metaData || [],
+    title: pageData.seoTags?.title || pageData.title,
+    description: pageData.seoTags?.description || pageData.title,
+    keywords: pageData.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],
     openGraph: {
       title: pageData.title,
       description: pageData.metaData,
@@ -78,7 +79,8 @@ const page = async ({ params }: Props) => {
               className="hidden lg:block lg:col-span-1 order-2 lg:order-1 pt-24"
               aria-label="Article utilities"
             >
-              <PublicationAction />
+              <ShareRail />
+              {/* <PublicationAction /> */}
             </aside>
 
             {/* Main Content Column */}
@@ -116,14 +118,29 @@ const page = async ({ params }: Props) => {
             </div>
 
             {/* Right Sidebar: Related & Call to Action */}
-            <aside className="lg:col-span-3 order-3 space-y-12">
-              <section
-                className="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-32"
-                aria-labelledby="sidebar-practice-title"
-              >
-                <ExpertCTA />
-              </section>
+            <aside className="lg:col-span-3 order-3 space-y-8">
+              {/* RELATED PUBLICATIONS */}
+              {/* <RelatedPublicationsCard /> */}
+
+              {/* PRIMARY FEATURE CARD */}
+              {/* <section className="sticky top-28">
+                <div className="bg-gradient-to-br from-primaryMain to-primaryLight text-white p-8 rounded-3xl shadow-xl">
+                  <ExpertCTA />
+                </div>
+              </section> */}
+              <TableOfContents />
             </aside>
+          </div>
+
+          {/* CTA Section at Bottom - Aligned with Content */}
+          <div className="grid lg:grid-cols-12 gap-16 mt-2 mb-10">
+            <div className="hidden lg:block lg:col-span-1 order-2 lg:order-1"></div>
+            <section className="lg:col-span-8 order-1 lg:order-2">
+              <div className="bg-gradient-to-br from-primaryMain to-primaryLight text-white rounded-3xl">
+                <ExpertCTA />
+              </div>
+            </section>
+            {/* <div className="hidden lg:block lg:col-span-3 order-3"></div> */}
           </div>
         </article>
       </main>

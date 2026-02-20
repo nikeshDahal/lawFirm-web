@@ -10,7 +10,7 @@ const seoData = await fetchData<ClientAboutUsPageContent>({
 });
 export const metadata: Metadata = {
   ...seoData.seoTags,
-  keywords: seoData.seoTags.tags,
+  keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
 };
 export default async function AboutPage() {
   const aboutData = await fetchData<ClientAboutUsPageContent>({
