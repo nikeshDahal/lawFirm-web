@@ -10,7 +10,8 @@ const contactData = await fetchData<ClientContactUsResponse>({
 });
 export const metadata: Metadata = {
   ...contactData.seoTags,
-  keywords: contactData.seoTags.tags,
+  keywords:
+    contactData?.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],
 };
 export default async function ContactPage() {
   return <ContactUs contactData={contactData} />;

@@ -20,10 +20,12 @@ const practiceSeoData = await fetchData<ClientPracticeAreasResponse>({
     },
   },
 });
-
 export const metadata: Metadata = {
   ...practiceSeoData.metaData.seoTags,
-  keywords: practiceSeoData.metaData.seoTags.tags,
+  keywords:
+    practiceSeoData.metaData.seoTags?.tags
+      ?.split(",")
+      .map((tag) => tag.trim()) || [],
 };
 
 export default async function PracticePage({ limit = 50 }: PracticePageProps) {
