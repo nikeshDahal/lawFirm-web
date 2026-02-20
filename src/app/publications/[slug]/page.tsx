@@ -94,7 +94,7 @@ const page = async ({ params }: Props) => {
               <figure className="relative h-100 mb-8 rounded-2xl overflow-hidden shadow-xl group">
                 <Image
                   src={pageData?.pageImage || "/noimage.png"}
-                  alt="Legal professionals discussing AI implementation in a modern office"
+                  alt={pageData?.title || "Publication Image"}
                   className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-105"
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
