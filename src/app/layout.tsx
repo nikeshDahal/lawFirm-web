@@ -89,6 +89,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="RIwlaFhKDkWMANTKyUqExS4soPtZKLwOCgkbIa4ryyM"
+        />
         <SchemaMarkup />
       </head>
       <body className={`${geist.className} antialiased bg-offwhite`}>
