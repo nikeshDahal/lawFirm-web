@@ -44,17 +44,6 @@ const geist = localFont({
 });
 
 export const revalidate = 10;
-// export const metadata: Metadata = {
-//   title: "Top Legal Advisers",
-//   description: "Attorneys At Law",
-//   keywords: [
-//     "Defense Lawyer",
-//     "Legal Advice",
-//     "Attorney at Law",
-//     "Civil Rights",
-//   ],
-//   category: "Legal Services",
-// };
 
 export default async function RootLayout({
   children,

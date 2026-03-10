@@ -14,5 +14,9 @@ export const metadata: Metadata = {
     contactData?.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],
 };
 export default async function ContactPage() {
+  const contactData = await fetchData<ClientContactUsResponse>({
+    query: GET_CONTACT,
+    path: "data.getClientContactUsPageContent",
+  });
   return <ContactUs contactData={contactData} />;
 }
