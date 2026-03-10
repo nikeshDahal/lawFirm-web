@@ -5,41 +5,37 @@ import Link from "next/link";
 import { Content } from "../markup";
 import HighlightLastWord from "../highlighter";
 
-const data = await fetchData<ClientLandingPageContent>({
-  path: `data.getClientLandingPageContent` as string,
-  query: GET_BANNER,
-});
+const HeroBanner = async () => {
+  const data = await fetchData<ClientLandingPageContent>({
+    path: `data.getClientLandingPageContent`,
+    query: GET_BANNER,
+    cache: "no-store",
+  });
 
-const HeroBanner = () => {
   return (
     <main className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/60 z-10"></div>
+
         <img
           src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000"
           alt="Law office"
           className="w-full h-full object-cover"
-          //   onError={(e) => {
-          //     e.target.src =
-          //       "https://via.placeholder.com/1920x1080?text=Legal+Office";
-          //   }}
         />
       </div>
+
       <div className="relative z-20 text-center px-6 animate-elegant-fade-up">
         <h2 className="text-white text-5xl md:text-7xl font-serif mb-6 leading-tight max-w-[80%] text-center mx-auto">
-          <HighlightLastWord text={data.title} />
+          <HighlightLastWord text={data?.title} />
         </h2>
-        {data.content && (
-          <>
-            {/* <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
-            {data.content}
-          </p> */}
-            <Content
-              html={data.content}
-              className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light"
-            />
-          </>
+
+        {data?.content && (
+          <Content
+            html={data.content}
+            className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light"
+          />
         )}
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href={"https://maps.app.goo.gl/YgReYibWpU7bg1hJ8"}
@@ -49,6 +45,7 @@ const HeroBanner = () => {
               View our location
             </button>
           </Link>
+
           <Link href={"/contact-us"}>
             <button className="h-14 bg-white/10 cursor-pointer backdrop-blur-md border border-white/20 text-white px-8 rounded font-bold hover:bg-white/20 transition-colors uppercase tracking-wider text-sm">
               Book with us
