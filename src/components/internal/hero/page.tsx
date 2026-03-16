@@ -12,3 +12,5 @@ export default async function HeroPage() {
 
   return <VideoHeroBanner data={data} />;
 }
+
+/** end of file */
