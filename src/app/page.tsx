@@ -8,11 +8,14 @@ import FAQOverview from "./(legal)/faq/page";
 import TestimonialSection from "@/components/internal/testimonial";
 import TeamPage from "./teams/page";
 import ContactPage from "./contact-us/page";
+import VideoHeroBanner from "@/components/internal/hero/videoIndex";
+import HeroPage from "@/components/internal/hero/page";
 
 const Page: React.FC = () => {
   return (
     <div>
-      <HeroBanner />
+      {/* <HeroBanner /> */}
+      <HeroPage />
       <AwardsOverview />
       <About />
 

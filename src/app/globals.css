@@ -152,7 +152,7 @@
   border-right: 0px;
   border: 2px solid transparent; /* required */
   border-image: var(--gradient-gold) 1; /* uses your gradient variable */
-  border-radius: 1rem; /* optional, matches Tailwind rounded-lg */
+  border-radius: 3rem; /* optional, matches Tailwind rounded-lg */
 }
 
 /* Gradient underline */
