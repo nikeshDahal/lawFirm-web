@@ -150,7 +150,7 @@ const page = async ({ params }: Props) => {
         dangerouslySetInnerHTML={{
           __html: `
 
-/* Minimal content renderer — preserves API HTML */
+* Minimal content renderer — preserves API HTML */
 
 .publication-content {
   all: revert;
@@ -196,6 +196,14 @@ const page = async ({ params }: Props) => {
   font-weight: revert;
   line-height: revert;
   text-align: revert;
+},
+.publication-content ul,
+.publication-content ol {
+  padding-left: 1.5rem; /* adjust spacing */
+}
+
+.publication-content li {
+  list-style-position: outside; /* key fix */
 }
 
 `,
