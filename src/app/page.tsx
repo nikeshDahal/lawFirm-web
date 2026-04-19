@@ -22,7 +22,7 @@ const Page: React.FC = () => {
       {/* <section className="pt-12"> */}
       <PraticeAreaOverview limit={10} />
       <Publications />
-      <TeamPage limit={4} />
+      <TeamPage />
       {/* <ClientOverview /> */}
       <TestimonialSection />
       <ContactPage />
