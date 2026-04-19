@@ -162,11 +162,11 @@ const Publications = () => {
                           key={idx}
                           className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
                         >
-                          <div className="relative h-64 overflow-hidden">
+                          <div className="relative bg-gray-100 aspect-video overflow-hidden flex items-center justify-center">
                             <img
                               src={pub.pageImage || "/noimage.png"}
                               alt={pub.title}
-                              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                              className="max-w-full max-h-full object-contain transition-transform duration-1000 group-hover:scale-105"
                               onError={(e) => {
                                 e.currentTarget.src = "/noimage.png"; // your default image
                               }}
@@ -183,8 +183,10 @@ const Publications = () => {
                           <div className="p-8 flex flex-col grow">
                             <div className="flex items-center gap-6 text-[11px] text-gray-400 uppercase tracking-widest mb-4">
                               <span className="flex items-center gap-1.5 group-hover:text-white ">
-                                {/* <Calendar size={14} className="text-secondary" />{" "} */}
-                                <GradientIcon icon={Calendar} size={14} />
+                                <Calendar
+                                  size={14}
+                                  className="text-secondary"
+                                />{" "}
                                 {pub.createdAt?.split("T")[0]}
                               </span>
                               <span className="flex items-center gap-1.5 group-hover:text-white ">
@@ -261,11 +263,11 @@ const Publications = () => {
                       key={idx}
                       className=" group bg-primary-foreground/80 hover:bg-primary rounded-3xl overflow-hidden shadow-sm hover:shadow-2xs transition-all duration-500 border border-gray-100 flex flex-col h-full"
                     >
-                      <div className="relative h-64 overflow-hidden">
+                      <div className="relative bg-gray-100 aspect-video overflow-hidden flex items-center justify-center">
                         <img
                           src={pub.pageImage || "/noimage.png"}
                           alt={pub.title}
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                          className="max-w-full max-h-full object-contain transition-transform duration-1000 group-hover:scale-105"
                           onError={(e) => {
                             e.currentTarget.src = "/noimage.png"; // your default image
                           }}

@@ -3,7 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  output: "standalone",
+  // Use standalone output for production deployments
+  // For development, use: npm run dev
+  // For production with standalone: npm run build:standalone && node .next/standalone/server.js
+  output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
   images: {
     remotePatterns: [
       {

@@ -77,7 +77,11 @@ const Teams: React.FC<Props> = ({ teamData }) => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {(isPreview ? teamData.data.slice(0, 4) : teamData.data).map(
               (member, idx) => (
-                <div key={idx} className="group">
+                <Link
+                  key={idx}
+                  href={`/teams/${member.slug}`}
+                  className="group"
+                >
                   <div className="relative overflow-hidden aspect-3/4 rounded-xl mb-6 shadow-md border border-gray-100 bg-white">
                     <Image
                       height={100}
@@ -95,36 +99,54 @@ const Teams: React.FC<Props> = ({ teamData }) => {
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-primary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-left">
                       <div className="flex gap-4 mb-2">
-                        <a
-                          href={`${member?.socialLinks?.linkedIn}` || "#"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Linkedin
-                            size={18}
-                            className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
-                          />
-                        </a>
-                        <a
-                          href={`${member?.socialLinks?.twitter}` || "#"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Twitter
-                            size={18}
-                            className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
-                          />
-                        </a>
-                        <a
-                          href={`mailto:${member?.socialLinks?.email}` || "#"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Mail
-                            size={18}
-                            className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
-                          />
-                        </a>
+                        {member?.socialLinks?.linkedIn && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(
+                                member.socialLinks.linkedIn,
+                                "_blank",
+                              );
+                            }}
+                            aria-label="LinkedIn"
+                            className="hover:opacity-80 transition-opacity"
+                          >
+                            <Linkedin
+                              size={18}
+                              className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
+                            />
+                          </button>
+                        )}
+                        {member?.socialLinks?.twitter && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(member.socialLinks.twitter, "_blank");
+                            }}
+                            aria-label="Twitter"
+                            className="hover:opacity-80 transition-opacity"
+                          >
+                            <Twitter
+                              size={18}
+                              className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
+                            />
+                          </button>
+                        )}
+                        {member?.socialLinks?.email && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.location.href = `mailto:${member.socialLinks.email}`;
+                            }}
+                            aria-label="Email"
+                            className="hover:opacity-80 transition-opacity"
+                          >
+                            <Mail
+                              size={18}
+                              className="text-[#c5a059] cursor-pointer hover:text-white transition-colors"
+                            />
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -137,7 +159,7 @@ const Teams: React.FC<Props> = ({ teamData }) => {
                   <p className="text-gray-500 text-sm italic">
                     {member.practiceArea}
                   </p>
-                </div>
+                </Link>
               ),
             )}
           </div>

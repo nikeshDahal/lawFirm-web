@@ -93,11 +93,11 @@ const page = async ({ params }: Props) => {
                   {pageData.title || ""}
                 </h1>
               </header>
-              <figure className="relative h-100 mb-8 rounded-2xl overflow-hidden shadow-xl group">
+              <figure className="relative bg-gray-100 aspect-video mb-8 rounded-2xl overflow-hidden shadow-xl group">
                 <Image
                   src={pageData?.pageImage || "/noimage.png"}
                   alt={pageData?.title || "Publication Image"}
-                  className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-105"
+                  className="object-contain w-full h-full transition-transform duration-1000 group-hover:scale-105"
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+ZNPQAIXwM4U69XWAAAAABJRU5ErkJggg=="
                   fill

@@ -25,6 +25,9 @@ const seoData = await fetchData<ClientLandingPageContent>({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+  ),
   ...seoData.seoTags,
   keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
   category: "Legal Services",

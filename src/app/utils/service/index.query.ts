@@ -174,6 +174,7 @@ const GET_TEAM = `query GetAllClientTeams($input: GetAllPagesInputDTO!) {
     }
     data {
       _id
+      slug
       createdAt
       updatedAt
       name
@@ -186,6 +187,44 @@ const GET_TEAM = `query GetAllClientTeams($input: GetAllPagesInputDTO!) {
         linkedIn
         twitter
       }
+    }
+  }
+}`;
+
+const GET_TEAM_SLUG = `query GetClientTeamDetailBySlug($slug: String!) {
+  getClientTeamDetailBySlug(slug: $slug) {
+    message
+    pagination {
+      total
+      hasNextPage
+    }
+    page {
+      _id
+      createdAt
+      updatedAt
+      name
+      slug
+      designation
+      practiceArea
+      profileImage
+      about
+      experiences
+      qualifications
+      languages
+      others
+      socialLinks {
+        facebook
+        email
+        linkedIn
+        twitter
+        contactNumber
+      }
+      seoTags {
+        title
+        description
+        tags
+      }
+      status
     }
   }
 }`;
@@ -372,6 +411,7 @@ export {
   GET_PRACTICE,
   GET_PRACTICE_SLUG,
   GET_TEAM,
+  GET_TEAM_SLUG,
   GET_TESTIMONIAL,
   GET_PUBLICATION,
   GET_PUBLICATION_HEADER,

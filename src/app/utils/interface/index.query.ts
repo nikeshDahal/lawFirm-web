@@ -120,9 +120,11 @@ interface ClientTeamsResponse {
 
 interface ClientTeam {
   _id: string;
+  slug: string;
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
   name: string;
+
   designation: string;
   practiceArea: string;
   profileImage: string | null;
@@ -131,6 +133,36 @@ interface ClientTeam {
     email: string;
     linkedIn: string;
     twitter: string;
+    contactNumber?: string;
+  };
+}
+
+interface ClientTeamDetail extends ClientTeam {
+  about?: string;
+  experiences?: string;
+  languages?: string;
+  qualifications?: string;
+  others?: string;
+  seoTags?: SeoTags;
+  status?: string;
+}
+
+interface SocialLinks {
+  facebook?: string;
+  linkedIn?: string;
+  twitter?: string;
+  email?: string;
+  contactNumber?: string;
+}
+
+interface ClientTeamDetailResponse {
+  message: string;
+  pagination: {
+    total: number;
+    hasNextPage: boolean;
+  };
+  page: ClientTeamDetail & {
+    socialLinks: SocialLinks;
   };
 }
 
@@ -283,6 +315,7 @@ export type {
   ClientPracticeArea,
   ClientTeamsResponse,
   ClientTeam,
+  ClientTeamDetail,
   ClientTestimonialsResponse,
   ClientTestimonial,
   ClientPublicationsResponse,

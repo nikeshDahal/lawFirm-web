@@ -96,7 +96,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
           {/* Logo */}
           <Link href={"/"}>
             <div className="flex items-center gap-2 group cursor-pointer">
-              <div className="bg-primary w-16 h-14 rounded flex items-center justify-center transform transition-transform duration-900 ease-in-out scale-100 group-hover:rotate-360 group-hover:scale-110">
+              <div className="bg-primary w-16 h-14 rounded flex items-center justify-center transform transition-transform duration-300 ease-in-out scale-100 group-hover:scale-105">
                 <img
                   src="/logo-only.png"
                   alt="Top Legal Advisers Logo"
@@ -104,10 +104,10 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                 />
               </div>
               <div>
-                <h1 className="text-xl font-serif font-bold tracking-tight text-[#1a1c1e] leading-none">
+                <div className="text-xl font-serif font-bold tracking-tight text-[#1a1c1e] leading-none">
                   Top <span className="text-gradient-gold">Legal </span>{" "}
                   Advisers
-                </h1>
+                </div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 mt-1">
                   Attorneys At Law
                 </p>
