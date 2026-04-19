@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "build:standalone": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
-    "start": "next start",
+    "start": "next dev",
+    "start:prod": "node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
@@ -33,7 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
-    "baseline-browser-mapping": "^2.9.19",
+    "baseline-browser-mapping": "^2.10.20",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "tailwindcss": "^4",
