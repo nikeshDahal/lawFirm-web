@@ -84,35 +84,35 @@ export default async function RootLayout({
       <head>
         <meta
           name="google-site-verification"
-          content="5MIspUfZy3Ydivu9BsmskSNqIkg7NEq-fNRTblMWLHc"
+          content="ZQnT069U-QYm2VVyMOp3SHN0yWsbQ_LnC_BWFyxesvQ"
         />
 
         <SchemaMarkup />
 
-        {/* Google Tag Manager */}
-        <Script id="gtm-script" strategy="afterInteractive">
+        {/* <!-- Google Tag Manager --> */}
+        <script>
           {`
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-KJWBDHNB');
-      `}
-        </Script>
-        {/* End Google Tag Manager */}
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WJHW47W8')
+  `}
+        </script>
+        {/* <!-- End Google Tag Manager --> */}
       </head>
 
       <body className={`${geist.className} antialiased bg-offwhite`}>
-        {/* Google Tag Manager (noscript) */}
+        {/*<!-- Google Tag Manager (noscript)`*/}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KJWBDHNB"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WJHW47W8"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
-          />
+          ></iframe>
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
+        {/*<!-- End Google Tag Manager (noscript) -->`*/}
 
         <Header contactData={contactData} pubData={pubData} />
 
