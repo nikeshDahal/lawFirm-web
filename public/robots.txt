@@ -1,2 +1,5 @@
-User-agent: * 
+User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
+
+Sitemap: https://toplegaladvisers.com/sitemap.xml
