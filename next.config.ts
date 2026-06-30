@@ -7,6 +7,32 @@ const nextConfig: NextConfig = {
   // For development, use: npm run dev
   // For production with standalone: npm run build:standalone && node .next/standalone/server.js
   output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true, // 301 Redirect: Prevents duplicate homepage content
+      },
+      {
+        source: "/index.html",
+        destination: "/",
+        permanent: true, // 301 Redirect: Common if migrating from a static site
+      },
+      {
+        source: "/services",
+        destination: "/practice-area",
+        permanent: true, // 301 Redirect: Routes generic 'services' traffic to your specific practice area page
+      },
+      {
+        source: "/practice",
+        destination: "/practice-area",
+        permanent: true,
+      },
+      // IMPORTANT: I temporarily removed your other redirects to prevent your app from crashing.
+      // See my message for an explanation on Next.js routing!
+    ];
+  },
   images: {
     remotePatterns: [
       {

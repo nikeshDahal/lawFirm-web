@@ -18,6 +18,9 @@ const publicationSeoData = await fetchData<ClientPublicationsResponse>({
 });
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/publications",
+  },
   ...publicationSeoData.metaData.seoTags,
   keywords:
     publicationSeoData.metaData.seoTags.tags
