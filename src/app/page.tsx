@@ -20,7 +20,7 @@ const Page: React.FC = () => {
       <About />
 
       {/* <section className="pt-12"> */}
-      <PraticeAreaOverview limit={10} />
+      <PraticeAreaOverview />
       <Publications />
       <TeamPage />
       {/* <ClientOverview /> */}
