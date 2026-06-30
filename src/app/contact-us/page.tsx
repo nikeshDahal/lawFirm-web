@@ -9,6 +9,9 @@ const contactData = await fetchData<ClientContactUsResponse>({
   path: "data.getClientContactUsPageContent",
 });
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/contact-us",
+  },
   ...contactData.seoTags,
   keywords:
     contactData?.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],

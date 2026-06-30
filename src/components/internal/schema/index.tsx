@@ -1,6 +1,6 @@
 // components/SchemaMarkup.tsx
-export default function SchemaMarkup() {
-  const schema = {
+export default function SchemaMarkup({ customSchema }: { customSchema?: any }) {
+  const defaultSchema = {
     "@context": "https://schema.org",
     "@type": "LegalService", // Perfect for Top Legal Advisers
     name: "Top Legal Advisers",
@@ -17,10 +17,12 @@ export default function SchemaMarkup() {
     },
   };
 
+  const finalSchema = customSchema || defaultSchema;
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(finalSchema) }}
     />
   );
 }

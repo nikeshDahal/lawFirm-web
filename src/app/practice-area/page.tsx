@@ -5,7 +5,7 @@ import { fetchData } from "../utils/service";
 import { GET_PRACTICE, GET_PRACTICE_SEO } from "../utils/service/index.query";
 
 type PracticePageProps = {
-  limit?: number; // optional, default value
+  searchParams?: Promise<{ limit?: string }>;
 };
 
 const practiceSeoData = await fetchData<ClientPracticeAreasResponse>({
@@ -21,6 +21,9 @@ const practiceSeoData = await fetchData<ClientPracticeAreasResponse>({
   },
 });
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/practice-area",
+  },
   ...practiceSeoData.metaData.seoTags,
   keywords:
     practiceSeoData.metaData.seoTags?.tags
@@ -28,7 +31,10 @@ export const metadata: Metadata = {
       .map((tag) => tag.trim()) || [],
 };
 
-export default async function PracticePage({ limit = 50 }: PracticePageProps) {
+export default async function PracticePage({ searchParams }: PracticePageProps) {
+  const params = await searchParams;
+  const limit = parseInt(params?.limit || "50", 10);
+
   const practiceData = await fetchData<ClientPracticeAreasResponse>({
     query: GET_PRACTICE,
     path: "data.findAllClientPracticeAreas",

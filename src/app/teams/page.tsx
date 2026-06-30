@@ -10,6 +10,9 @@ type TeamPageProps = {
 
 export const metadata: Metadata = {
   title: "Our Team",
+  alternates: {
+    canonical: "/teams",
+  },
 };
 
 export default async function TeamPage({ searchParams }: TeamPageProps) {

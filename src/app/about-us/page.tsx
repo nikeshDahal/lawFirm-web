@@ -9,6 +9,9 @@ const seoData = await fetchData<ClientAboutUsPageContent>({
   path: "data.getClientAboutUsPageContent",
 });
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/about-us",
+  },
   ...seoData.seoTags,
   keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
 };
