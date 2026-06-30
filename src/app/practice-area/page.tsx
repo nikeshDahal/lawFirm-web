@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default async function PracticePage({ searchParams }: PracticePageProps) {
   const params = await searchParams;
-  const limit = parseInt(params?.limit || "50", 10);
+  let limit = parseInt(params?.limit || "50", 10);
 
   const practiceData = await fetchData<ClientPracticeAreasResponse>({
     query: GET_PRACTICE,
