@@ -20,6 +20,7 @@ const VideoHeroBanner: React.FC<Props> = ({ data }) => {
           loop
           muted
           playsInline
+          {...{ fetchPriority: "high" } as any}
           className="w-full h-full object-cover opacity-80 brightness-110"
           src="/law-scale-hero-b.mp4"
           poster="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000"
