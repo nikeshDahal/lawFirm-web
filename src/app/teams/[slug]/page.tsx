@@ -112,7 +112,7 @@ const page = async ({ params }: Props) => {
                           ? pageData.profileImage
                           : "/user.jpg"
                       }
-                      alt={pageData?.name}
+                      alt={pageData?.imageAltText || pageData?.name || "Team Member"}
                       fallback="/user.jpg"
                     />
                   </div>

@@ -91,7 +91,7 @@ const Teams: React.FC<Props> = ({ teamData }) => {
                           ? (member.profileImage as string)
                           : "/user.jpg"
                       }
-                      alt={member.name}
+                      alt={member.imageAltText || member.name}
                       onError={(e) => {
                         e.currentTarget.src = "/user.jpg"; // your default image
                       }}

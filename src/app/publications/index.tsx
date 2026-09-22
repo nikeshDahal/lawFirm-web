@@ -170,7 +170,7 @@ const Publications = ({ initialData }: Props) => {
                           <div className="relative bg-gray-100 aspect-video overflow-hidden flex items-center justify-center">
                             <img
                               src={pub.pageImage || "/noimage.png"}
-                              alt={pub.title}
+                              alt={pub.imageAltText || pub.title}
                               className="max-w-full max-h-full object-contain transition-transform duration-1000 group-hover:scale-105"
                               onError={(e) => {
                                 e.currentTarget.src = "/noimage.png"; // your default image
@@ -271,7 +271,7 @@ const Publications = ({ initialData }: Props) => {
                       <div className="relative bg-gray-100 aspect-video overflow-hidden flex items-center justify-center">
                         <img
                           src={pub.pageImage || "/noimage.png"}
-                          alt={pub.title}
+                          alt={pub.imageAltText || pub.title}
                           className="max-w-full max-h-full object-contain transition-transform duration-1000 group-hover:scale-105"
                           onError={(e) => {
                             e.currentTarget.src = "/noimage.png"; // your default image
