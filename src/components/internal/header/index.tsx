@@ -141,7 +141,7 @@ const Header: React.FC<Props> = ({ contactData, pubData }) => {
                 {/* Submenu */}
                 {item.submenu && (
                   <div className="absolute top-full left-0 w-56 bg-white shadow-xl rounded-b-lg border-t-2 border-secondary opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <div className="py-2">
+                    <div className="py-2 max-h-[60vh] overflow-y-auto">
                       {(item.link === "/practice-area" &&
                       Array.isArray(pubData?.data) &&
                       pubData?.data.length > 0

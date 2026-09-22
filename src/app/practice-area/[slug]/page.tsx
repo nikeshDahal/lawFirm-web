@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import DOMPurify from "isomorphic-dompurify";
 import TableOfContents from "@/components/internal/tableOfContent";
 import ShareRail from "@/components/internal/shareRails";
+import SchemaMarkup from "@/components/internal/schema";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -33,6 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
   return {
+    alternates: {
+      canonical: `/practice-area/${slug}`,
+    },
     title: pageData?.seoTags?.title || pageData.title,
     description: pageData?.seoTags?.description || pageData.title,
     keywords:
@@ -40,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: pageData.title,
       description: pageData.metaData,
+      url: `/practice-area/${slug}`,
       images: [
         {
           url: pageData.pageImage || "/noimage.png",
@@ -65,6 +70,7 @@ const page = async ({ params }: Props) => {
 
   return (
     <>
+      <SchemaMarkup customSchema={pageData?.seoTags?.schemaMarkup} />
       {/* Main Practice Area Layout - Semantic <article> */}
       <main className="grow pt-8" id="main-content">
         <article
@@ -192,6 +198,18 @@ const page = async ({ params }: Props) => {
   font-weight: revert;
   line-height: revert;
   text-align: revert;
+}
+
+/* Link Styles */
+.publication-content a {
+  color: #2563eb; /* Blue */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.publication-content a:hover {
+  color: #1d4ed8; /* Darker Blue */
 }
 
 `,

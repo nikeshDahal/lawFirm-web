@@ -17,7 +17,19 @@ export default function SchemaMarkup({ customSchema }: { customSchema?: any }) {
     },
   };
 
-  const finalSchema = customSchema || defaultSchema;
+  let parsedCustomSchema = null;
+  if (customSchema) {
+    try {
+      parsedCustomSchema =
+        typeof customSchema === "string"
+          ? JSON.parse(customSchema)
+          : customSchema;
+    } catch (e) {
+      console.error("Failed to parse custom schema markup:", e);
+    }
+  }
+
+  const finalSchema = parsedCustomSchema || defaultSchema;
 
   return (
     <script

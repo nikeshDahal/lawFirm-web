@@ -8,28 +8,41 @@ type PracticePageProps = {
   searchParams?: Promise<{ limit?: string }>;
 };
 
-const practiceSeoData = await fetchData<ClientPracticeAreasResponse>({
-  query: GET_PRACTICE_SEO,
-  path: "data.findAllClientPracticeAreas",
-  variables: {
-    input: {
-      limit: 3,
-      order: "desc",
-      orderBy: "_id",
-      skip: 0,
+export async function generateMetadata(): Promise<Metadata> {
+  const practiceSeoData = await fetchData<ClientPracticeAreasResponse>({
+    query: GET_PRACTICE_SEO,
+    path: "data.findAllClientPracticeAreas",
+    variables: {
+      input: {
+        limit: 3,
+        order: "desc",
+        orderBy: "createdAt",
+        skip: 0,
+      },
     },
-  },
-});
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/practice-area",
-  },
-  ...practiceSeoData.metaData.seoTags,
-  keywords:
-    practiceSeoData.metaData.seoTags?.tags
-      ?.split(",")
-      .map((tag) => tag.trim()) || [],
-};
+  });
+
+  return {
+    alternates: {
+      canonical: "/practice-area",
+    },
+    ...practiceSeoData?.metaData?.seoTags,
+    keywords:
+      practiceSeoData?.metaData?.seoTags?.tags
+        ?.split(",")
+        .map((tag) => tag.trim()) || [],
+    openGraph: {
+      title: practiceSeoData?.metaData?.seoTags?.title,
+      description: practiceSeoData?.metaData?.seoTags?.description,
+      url: "/practice-area",
+      images: [
+        {
+          url: "/logo-only.png",
+        },
+      ],
+    },
+  };
+}
 
 export default async function PracticePage({ searchParams }: PracticePageProps) {
   const params = await searchParams;
@@ -42,7 +55,7 @@ export default async function PracticePage({ searchParams }: PracticePageProps) 
       input: {
         limit,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },

@@ -14,6 +14,16 @@ export const metadata: Metadata = {
   },
   ...seoData.seoTags,
   keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
+  openGraph: {
+    title: seoData.seoTags?.title,
+    description: seoData.seoTags?.description,
+    url: "/about-us",
+    images: [
+      {
+        url: "/logo-only.png",
+      },
+    ],
+  },
 };
 export default async function AboutPage() {
   const aboutData = await fetchData<ClientAboutUsPageContent>({
