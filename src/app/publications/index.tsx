@@ -52,7 +52,7 @@ const Publications = ({ initialData }: Props) => {
         input: {
           limit: 50,
           order: "desc",
-          orderBy: "_id",
+          orderBy: "createdAt",
           skip: 0,
         },
       },

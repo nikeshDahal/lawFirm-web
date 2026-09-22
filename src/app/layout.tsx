@@ -46,6 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: seoData?.seoTags?.title,
       description: seoData?.seoTags?.description,
+      url: "/",
       images: [
         {
           url: "/logo-only.png",
@@ -74,7 +75,7 @@ export default async function RootLayout({
       input: {
         limit: 50,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },
@@ -87,7 +88,7 @@ export default async function RootLayout({
       input: {
         limit: 50,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },

@@ -5,6 +5,7 @@ import NoData from "@/components/internal/nodata";
 import { Metadata } from "next";
 import Link from "next/link";
 import ProfileImage from "./component/ProfileImage";
+import SchemaMarkup from "@/components/internal/schema";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -37,10 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       pageData?.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],
     openGraph: {
       title: pageData.name,
-      description: pageData.designation,
+      description:
+        pageData.seoTags?.description || `Profile of ${pageData.name}`,
+      url: `/teams/${slug}`,
       images: [
         {
-          url: pageData.profileImage || "/user.jpg",
+          url: pageData.profileImage || "/noimage.png",
         },
       ],
     },
@@ -70,6 +73,7 @@ const page = async ({ params }: Props) => {
 
     return (
       <>
+        <SchemaMarkup customSchema={pageData?.seoTags?.schemaMarkup} />
         {/* Breadcrumb Navigation
         <nav className="max-w-7xl mx-auto px-6 pt-8 pb-4">
           <ul className="flex items-center gap-2 text-sm">

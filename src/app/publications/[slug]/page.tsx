@@ -8,6 +8,7 @@ import Image from "next/image";
 import DOMPurify from "isomorphic-dompurify";
 import TableOfContents from "@/components/internal/tableOfContent";
 import ShareRail from "@/components/internal/shareRails";
+import SchemaMarkup from "@/components/internal/schema";
 
 type Props = {
   params: { slug: Promise<string> };
@@ -42,6 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: pageData.title,
       description: pageData.metaData,
+      url: `/publications/${slug}`,
       images: [
         {
           url: pageData.pageImage || "/noimage.png",
@@ -67,6 +69,7 @@ const page = async ({ params }: Props) => {
 
   return (
     <>
+      <SchemaMarkup customSchema={pageData?.seoTags?.schemaMarkup} />
       {/* Main Publication Layout - Semantic <article> */}
       <main className="grow pt-8" id="main-content">
         <article

@@ -16,6 +16,16 @@ export async function generateMetadata(): Promise<Metadata> {
     ...contactData?.seoTags,
     keywords:
       contactData?.seoTags?.tags?.split(",").map((tag) => tag.trim()) || [],
+    openGraph: {
+      title: contactData?.seoTags?.title,
+      description: contactData?.seoTags?.description,
+      url: "/contact-us",
+      images: [
+        {
+          url: "/logo-only.png",
+        },
+      ],
+    },
   };
 }
 export default async function ContactPage() {

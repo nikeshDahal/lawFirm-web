@@ -9,6 +9,7 @@ interface SeoTags {
   title: string;
   description: string;
   tags: string;
+  schemaMarkup?: string;
 }
 
 interface ClientLandingPageContent {
@@ -64,11 +65,7 @@ interface ClientAboutUsPageContent {
   subTitle: string;
   yearsOfExperience: number;
   metaData: AboutUsMetaData;
-  seoTags: {
-    title: string;
-    description: string;
-    tags: string;
-  };
+  seoTags: SeoTags;
 }
 
 interface ClientPracticeAreasResponse {
@@ -80,11 +77,7 @@ interface ClientPracticeAreasResponse {
   metaData: {
     title: string;
     subTitle: string;
-    seoTags: {
-      title: string;
-      description: string;
-      tags: string;
-    };
+    seoTags: SeoTags;
   };
   data: ClientPracticeArea[];
   errors?: undefined;
@@ -102,11 +95,7 @@ interface ClientPracticeArea {
   author: string;
   pageImage: string;
   metaData: string;
-  seoTags: {
-    title: string;
-    description: string;
-    tags: string;
-  };
+  seoTags: SeoTags;
 }
 
 interface ClientTeamsResponse {
@@ -171,11 +160,7 @@ interface ClientTestimonialsResponse {
   metaData: {
     title: string;
     subTitle: string;
-    seoTags: {
-      title: string;
-      description: string;
-      tags: string;
-    };
+    seoTags: SeoTags;
   };
   data: ClientTestimonial[];
   pagination: {
@@ -205,11 +190,7 @@ interface ClientPublicationsResponse {
   metaData: {
     title: string;
     subTitle: string;
-    seoTags: {
-      title: string;
-      description: string;
-      tags: string;
-    };
+    seoTags: SeoTags;
   };
   data: ClientPublication[];
 }
@@ -240,11 +221,7 @@ interface ClientContactUsResponse {
   status: string; // e.g. "ACTIVE"
   pageType: string; // e.g. "CONTACT"
   author: string;
-  seoTags: {
-    title: string;
-    description: string;
-    tags: string;
-  };
+  seoTags: SeoTags;
   contactInfo: {
     primaryEmail: string;
     secondaryEmail: string;
@@ -298,11 +275,7 @@ interface ClientPracticeAreaDetail {
   author: string;
   pageImage: string;
   metaData: string;
-  seoTags: {
-    title: string;
-    description: string;
-    tags: string;
-  };
+  seoTags: SeoTags;
 }
 
 export type {

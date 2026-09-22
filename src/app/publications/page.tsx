@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
       input: {
         limit: 3,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },
@@ -27,6 +27,16 @@ export async function generateMetadata(): Promise<Metadata> {
       publicationSeoData?.metaData?.seoTags?.tags
         ?.split(",")
         .map((tag) => tag.trim()) || [],
+    openGraph: {
+      title: publicationSeoData?.metaData?.seoTags?.title,
+      description: publicationSeoData?.metaData?.seoTags?.description,
+      url: "/publications",
+      images: [
+        {
+          url: "/logo-only.png",
+        },
+      ],
+    },
   };
 }
 
@@ -38,7 +48,7 @@ export default async function PublicationPage() {
       input: {
         limit: 50,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },

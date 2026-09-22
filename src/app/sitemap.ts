@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     input: {
       limit: 1000,
       order: "desc",
-      orderBy: "_id",
+      orderBy: "createdAt",
       skip: 0,
     },
   };

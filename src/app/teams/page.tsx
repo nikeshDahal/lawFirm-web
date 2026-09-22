@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/teams",
   },
+  openGraph: {
+    title: "Our Team",
+    url: "/teams",
+    images: [
+      {
+        url: "/logo-only.png",
+      },
+    ],
+  },
 };
 
 export default async function TeamPage({ searchParams }: TeamPageProps) {
@@ -26,7 +35,7 @@ export default async function TeamPage({ searchParams }: TeamPageProps) {
       input: {
         limit,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },

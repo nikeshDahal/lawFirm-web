@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       input: {
         limit: 3,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },
@@ -31,6 +31,16 @@ export async function generateMetadata(): Promise<Metadata> {
       practiceSeoData?.metaData?.seoTags?.tags
         ?.split(",")
         .map((tag) => tag.trim()) || [],
+    openGraph: {
+      title: practiceSeoData?.metaData?.seoTags?.title,
+      description: practiceSeoData?.metaData?.seoTags?.description,
+      url: "/practice-area",
+      images: [
+        {
+          url: "/logo-only.png",
+        },
+      ],
+    },
   };
 }
 
@@ -45,7 +55,7 @@ export default async function PracticePage({ searchParams }: PracticePageProps) 
       input: {
         limit,
         order: "desc",
-        orderBy: "_id",
+        orderBy: "createdAt",
         skip: 0,
       },
     },
