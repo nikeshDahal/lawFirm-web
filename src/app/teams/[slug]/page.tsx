@@ -28,6 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
   return {
+    alternates: {
+      canonical: `/teams/${slug}`,
+    },
     title: pageData?.seoTags?.title || pageData.name,
     description: pageData?.seoTags?.description || pageData.designation,
     keywords:

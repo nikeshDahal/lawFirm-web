@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
   return {
+    alternates: {
+      canonical: `/practice-area/${slug}`,
+    },
     title: pageData?.seoTags?.title || pageData.title,
     description: pageData?.seoTags?.description || pageData.title,
     keywords:
@@ -192,6 +195,18 @@ const page = async ({ params }: Props) => {
   font-weight: revert;
   line-height: revert;
   text-align: revert;
+}
+
+/* Link Styles */
+.publication-content a {
+  color: #2563eb; /* Blue */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.publication-content a:hover {
+  color: #1d4ed8; /* Darker Blue */
 }
 
 `,

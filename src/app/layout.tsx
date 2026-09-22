@@ -19,39 +19,41 @@ import FloatingContact from "@/components/internal/stickyWidget";
 import SchemaMarkup from "@/components/internal/schema";
 import Script from "next/script";
 
-const seoData = await fetchData<ClientLandingPageContent>({
-  path: `data.getClientLandingPageContent` as string,
-  query: GET_BANNER,
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const seoData = await fetchData<ClientLandingPageContent>({
+    path: `data.getClientLandingPageContent` as string,
+    query: GET_BANNER,
+  });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://toplegaladvisers.com",
-  ),
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+  return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_BASE_URL || "https://toplegaladvisers.com",
+    ),
+    alternates: {
+      canonical: "/",
+    },
+    robots: {
       index: true,
       follow: true,
-    },
-  },
-  ...seoData.seoTags,
-  keywords: seoData.seoTags?.tags?.split(",").map((tag) => tag.trim()),
-  category: "Legal Services",
-  openGraph: {
-    title: seoData.seoTags.title,
-    description: seoData.seoTags.description,
-    images: [
-      {
-        url: "/logo-only.png",
+      googleBot: {
+        index: true,
+        follow: true,
       },
-    ],
-  },
-};
+    },
+    ...seoData?.seoTags,
+    keywords: seoData?.seoTags?.tags?.split(",").map((tag) => tag.trim()),
+    category: "Legal Services",
+    openGraph: {
+      title: seoData?.seoTags?.title,
+      description: seoData?.seoTags?.description,
+      images: [
+        {
+          url: "/logo-only.png",
+        },
+      ],
+    },
+  };
+}
 
 const geist = localFont({
   src: "./Geist-VariableFont_wght.ttf",

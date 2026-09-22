@@ -26,7 +26,11 @@ import { Spinner } from "@/components/internal/spinner";
 import { Content } from "@/components/internal/markup";
 import NoData from "@/components/internal/nodata";
 import GradientIcon from "@/components/ui/gradientIcon";
-const Publications = () => {
+type Props = {
+  initialData?: ClientPublicationsResponse | null;
+};
+
+const Publications = ({ initialData }: Props) => {
   useLayoutEffect(() => {
     window.scrollTo({
       top: 0,
@@ -35,10 +39,11 @@ const Publications = () => {
     });
   }, []);
 
-  const [data, setData] = React.useState<ClientPublicationsResponse | null>();
+  const [data, setData] = React.useState<ClientPublicationsResponse | null>(initialData || null);
   const [pending, setPending] = React.useState<boolean>(true);
 
   const getData = async () => {
+    if (initialData) return;
     setPending(false);
     const publicationData = await fetchData<ClientPublicationsResponse>({
       query: GET_PUBLICATION,
@@ -58,7 +63,7 @@ const Publications = () => {
   };
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [initialData]);
 
   const pathname = usePathname();
   const isPreview = !["/publications"].includes(pathname);
