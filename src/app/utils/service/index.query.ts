@@ -103,6 +103,7 @@ const GET_PRACTICE = `query FindAllClientPracticeAreas($input: GetAllPagesInputD
       pageType
       author
       pageImage
+      imageAltText
       metaData
       seoTags {
         title
@@ -146,6 +147,7 @@ const GET_PRACTICE_SLUG = `query GetClientPracticeAreaDetailBySlug($slug: String
     pageType
     author
     pageImage
+    imageAltText
     metaData
   }
 }`;
@@ -181,6 +183,7 @@ const GET_TEAM = `query GetAllClientTeams($input: GetAllPagesInputDTO!) {
       designation
       practiceArea
       profileImage
+      imageAltText
       socialLinks {
         facebook
         email
@@ -207,6 +210,7 @@ const GET_TEAM_SLUG = `query GetClientTeamDetailBySlug($slug: String!) {
       designation
       practiceArea
       profileImage
+      imageAltText
       about
       experiences
       qualifications
@@ -250,6 +254,7 @@ const GET_TESTIMONIAL = `query GetAllClientTestimonials($input: GetAllPagesInput
       clientName
       clientDesignation
       clientImage
+      imageAltText
       status
     }
     pagination {
@@ -286,6 +291,7 @@ const GET_PUBLICATION = `query GetAllClientPublications($input: GetAllPagesInput
       pageType
       author
       pageImage
+      imageAltText
       metaData
     }
   }
@@ -338,6 +344,7 @@ const GET_PUBLICATION_SLUG = `query GetClientPublicationBySlug($slug: String!) {
     pageType
     author
     pageImage
+    imageAltText
     metaData
   }
 }`;

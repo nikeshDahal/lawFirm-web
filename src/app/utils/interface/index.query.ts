@@ -94,6 +94,7 @@ interface ClientPracticeArea {
   pageType: string; // could be "PRACTICE_AREAS" if stricter typing
   author: string;
   pageImage: string;
+  imageAltText?: string;
   metaData: string;
   seoTags: SeoTags;
 }
@@ -124,6 +125,7 @@ interface ClientTeam {
     twitter: string;
     contactNumber?: string;
   };
+  imageAltText?: string;
 }
 
 interface ClientTeamDetail extends ClientTeam {
@@ -178,6 +180,7 @@ interface ClientTestimonial {
   clientName: string;
   clientDesignation: string;
   clientImage: string;
+  imageAltText?: string;
   status: string; // could be "active" | "inactive" if stricter typing
 }
 
@@ -206,6 +209,7 @@ interface ClientPublication {
   pageType: string; // e.g. "BLOG" | "PUBLICATIONS"
   author: string;
   pageImage: string;
+  imageAltText?: string;
   metaData: string;
   category?: string;
 }
@@ -274,6 +278,7 @@ interface ClientPracticeAreaDetail {
   pageType: string; // e.g. "PRACTICE_AREAS"
   author: string;
   pageImage: string;
+  imageAltText?: string;
   metaData: string;
   seoTags: SeoTags;
 }

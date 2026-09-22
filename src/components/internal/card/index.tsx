@@ -10,6 +10,7 @@ type Props = {
   content?: string | null;
   link?: string | null;
   pageImage?: string;
+  imageAltText?: string;
   metaData?: string;
 };
 
@@ -18,6 +19,7 @@ const OverviewCard = ({
   icon = "Sacle",
   title = "Legal Strategy",
   pageImage = "",
+  imageAltText = "",
   content = null,
   metaData = "",
 }: Props) => {
@@ -29,7 +31,7 @@ const OverviewCard = ({
       <div className="w-15 h-14 bg-gray-50 rounded flex items-center justify-center mb-6 group-hover:bg-white transition-colors group-hover:animate-bounce overflow-hidden">
         <Image
           src={pageImage || "/noimage.png"}
-          alt={title || "Legal Service"}
+          alt={imageAltText || title || "Legal Service"}
           width={48}
           height={48}
           className="w-full h-full object-cover object-center"

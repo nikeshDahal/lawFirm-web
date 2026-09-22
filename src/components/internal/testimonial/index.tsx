@@ -135,7 +135,7 @@ export default function TestimonialSection() {
                                   ? item.clientImage
                                   : "/noimage.png"
                               }
-                              alt={item.clientName}
+                              alt={item.imageAltText || item.clientName}
                               className="h-full w-full object-cover"
                               onError={(e) => {
                                 e.currentTarget.src = "/noimage.png"; // your default image
