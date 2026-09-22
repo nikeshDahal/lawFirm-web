@@ -10,7 +10,7 @@ const fetchData = async <T = unknown, V = Record<string, any>>({
   path = null,
   query,
   variables,
-  cache = "default",
+  cache = "no-store",
 }: FetchDataArgs<V>): Promise<T> => {
   const res = await fetch(
     (process.env.NEXT_API as string) || (process.env.NEXT_PUBLIC_API as string),
