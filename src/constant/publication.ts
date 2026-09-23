@@ -21,7 +21,7 @@ const PUBLICATIONS: Publication[] = [
     subtitle:
       "A Strategic Framework for Global Corporate Compliance and Risk Mitigation",
     category: "Corporate Law",
-    author: "Eleanor Vance",
+    author: "Qurisha Shahi",
     authorTitle: "Senior Partner",
     date: "2024-12-12",
     displayDate: "December 12, 2024",
@@ -148,7 +148,7 @@ const PUBLICATIONS: Publication[] = [
     subtitle:
       "A Strategic Framework for Global Corporate Compliance and Risk Mitigation",
     category: "Corporate Law",
-    author: "Eleanor Vance",
+    author: "Qurisha Shahi",
     authorTitle: "Senior Partner",
     date: "2024-12-12",
     displayDate: "December 12, 2024",

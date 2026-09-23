@@ -17,7 +17,7 @@ const ExpertCTA: React.FC = () => {
             Expert Consult
           </h4>
           <p className="text-gray-400 text-[11px] mb-6">
-            Schedule a direct strategy session with Eleanor Vance.
+            Schedule a direct strategy session with Qurisha Shahi.
           </p>
           <Link href={"/contact-us"}>
             <button className="w-full cursor-pointer py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-gradient-gold transition-all">
