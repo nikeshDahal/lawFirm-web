@@ -15,7 +15,7 @@ const ExpertCTA: React.FC = () => {
           </div>
           <h4 className="text-white font-bold text-sm mb-2">Expert Consult</h4>
           <p className="text-white text-[11px] mb-6">
-            Schedule a direct strategy session with Eleanor Vance.
+            Schedule a direct strategy session with Qurisha Shahi.
           </p>
           <Link href={"/contact-us"}>
             <button className="w-full cursor-pointer py-3 bg-gradient-gold text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-white hover:text-primary transition-all">

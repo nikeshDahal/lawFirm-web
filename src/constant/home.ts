@@ -54,7 +54,7 @@ const firmOverview: PracticeProps[] = [
     metaDescription:
       "Justice & Co. provides expert corporate legal services including M&A, shareholder agreements, and regulatory compliance to ensure sustainable business growth.",
     category: "Primary Practice",
-    leadPartner: "Eleanor Vance",
+    leadPartner: "Qurisha Shahi",
     icon: "Briefcase",
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600",

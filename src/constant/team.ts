@@ -7,7 +7,7 @@ const TEAM_MEMBERS = [
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
   },
   {
-    name: "Eleanor Vance",
+    name: "Qurisha Shahi",
     role: "Partner",
     specialty: "Intellectual Property",
     image:
@@ -35,7 +35,7 @@ const TEAM_MEMBERS = [
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
   },
   {
-    name: "Eleanor Vance",
+    name: "Qurisha Shahi",
     role: "Partner",
     specialty: "Intellectual Property",
     image:
