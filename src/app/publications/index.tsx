@@ -2,7 +2,7 @@
 import { MainHeading } from "@/components/internal/texture";
 import { PUBLICATIONS } from "@/constant/publication";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Calendar, FileText, User } from "lucide-react";
+import { ArrowRight, Calendar, FileText, User, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -41,6 +41,8 @@ const Publications = ({ initialData }: Props) => {
 
   const [data, setData] = React.useState<ClientPublicationsResponse | null>(initialData || null);
   const [pending, setPending] = React.useState<boolean>(true);
+  const [isLoadingMore, setIsLoadingMore] = React.useState<boolean>(false);
+  const limit = 9;
 
   const getData = async () => {
     if (initialData) return;
@@ -50,7 +52,7 @@ const Publications = ({ initialData }: Props) => {
       path: "data.getAllClientPublications",
       variables: {
         input: {
-          limit: 50,
+          limit: limit,
           order: "desc",
           orderBy: "createdAt",
           skip: 0,
@@ -64,6 +66,42 @@ const Publications = ({ initialData }: Props) => {
   React.useEffect(() => {
     getData();
   }, [initialData]);
+
+  const loadMore = async () => {
+    if (!data || !data.data) return;
+    setIsLoadingMore(true);
+    const currentLength = data.data.length;
+    
+    try {
+      const moreData = await fetchData<ClientPublicationsResponse>({
+        query: GET_PUBLICATION,
+        path: "data.getAllClientPublications",
+        variables: {
+          input: {
+            limit: limit,
+            order: "desc",
+            orderBy: "createdAt",
+            skip: currentLength,
+          },
+        },
+      });
+
+      if (moreData && moreData.data) {
+        setData((prev) => {
+          if (!prev) return moreData;
+          return {
+            ...prev,
+            pagination: moreData.pagination,
+            data: [...prev.data, ...moreData.data],
+          };
+        });
+      }
+    } catch (error) {
+      console.error("Failed to load more publications", error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
 
   const pathname = usePathname();
   const isPreview = !["/publications"].includes(pathname);
@@ -322,6 +360,27 @@ const Publications = ({ initialData }: Props) => {
               ))}
             </div>
           ) : null}
+          
+          {/* Load More Button */}
+          {!isPreview && data?.pagination?.hasNextPage && (
+            <div className="flex justify-center mt-12 mb-8">
+              <button
+                onClick={loadMore}
+                disabled={isLoadingMore}
+                className="group flex items-center gap-2 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isLoadingMore ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" /> Loading...
+                  </>
+                ) : (
+                  <>
+                    <ArrowRight size={16} className="text-secondary group-hover:text-white group-hover:translate-x-1 transition-transform" /> Load More
+                  </>
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </>

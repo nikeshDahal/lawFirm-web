@@ -17,11 +17,50 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { ClientPracticeAreasResponse } from "../utils/interface/index.query";
+import { fetchData } from "../utils/service";
+import { GET_PRACTICE } from "../utils/service/index.query";
+import { Loader2, ArrowRight } from "lucide-react";
 
 type Props = {
   practiceData: ClientPracticeAreasResponse;
 };
 const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
+  const [data, setData] = React.useState<ClientPracticeAreasResponse>(practiceData);
+  const [isLoadingMore, setIsLoadingMore] = React.useState<boolean>(false);
+  const limit = 9;
+
+  const loadMore = async () => {
+    if (!data || !data.data) return;
+    setIsLoadingMore(true);
+    const currentLength = data.data.length;
+    
+    try {
+      const moreData = await fetchData<ClientPracticeAreasResponse>({
+        query: GET_PRACTICE,
+        path: "data.findAllClientPracticeAreas",
+        variables: {
+          input: {
+            limit: limit,
+            order: "desc",
+            orderBy: "createdAt",
+            skip: currentLength,
+          },
+        },
+      });
+
+      if (moreData && moreData.data) {
+        setData((prev) => ({
+          ...prev,
+          pagination: moreData.pagination,
+          data: [...prev.data, ...moreData.data],
+        }));
+      }
+    } catch (error) {
+      console.error("Failed to load more practice areas", error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
   const pathname = usePathname();
   const isPreview = !["/practice-area"].includes(pathname);
 
@@ -57,9 +96,9 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
           ])}
         >
           <MainHeading
-            title={practiceData.metaData.title || "Practice Area"}
+            title={data.metaData?.title || "Practice Area"}
             description={
-              practiceData.metaData.subTitle ||
+              data.metaData?.subTitle ||
               "Commitment, Integrity & Success"
             }
             customClass={!isPreview ? "mb-12 text-left" : ""}
@@ -78,13 +117,13 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
         )}
 
         {/* Cards / Carousel */}
-        {Array.isArray(practiceData.data) && practiceData.data.length > 0 && (
+        {Array.isArray(data.data) && data.data.length > 0 && (
           <>
             {isPreview ? (
               <div>
                 <Carousel opts={{ align: "start" }} setApi={setApi}>
                   <CarouselContent>
-                    {practiceData.data.map((item, i: number) => (
+                    {data.data.map((item, i: number) => (
                       <CarouselItem
                         key={i}
                         className="md:basis-1/2 lg:basis-1/3 py-2"
@@ -101,7 +140,7 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
                 </Carousel>
 
                 {/* Dots Indicator */}
-                {practiceData.data.length > 3 && (
+                {data.data.length > 3 && (
                   <div className="flex justify-center gap-2 py-4">
                     {Array.from({ length: count }).map((_, i) => (
                       <button
@@ -130,13 +169,34 @@ const PraticeAreaOverview: React.FC<Props> = ({ practiceData }) => {
               </div>
             ) : (
               <div className="grid md:grid-cols-3 gap-12 text-left mb-12">
-                {practiceData.data.map((item, i: number) => (
+                {data.data.map((item, i: number) => (
                   <OverviewCard
                     key={i}
                     {...item}
                     link={`/practice-area/${item.slug}`}
                   />
                 ))}
+              </div>
+            )}
+            
+            {/* Load More Button */}
+            {!isPreview && data.pagination?.hasNextPage && (
+              <div className="flex justify-center mt-12 mb-8">
+                <button
+                  onClick={loadMore}
+                  disabled={isLoadingMore}
+                  className="group flex items-center gap-2 px-8 py-4 border-2 border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300 font-black text-xs uppercase tracking-widest text-primary bg-transparent shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isLoadingMore ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Loading...
+                    </>
+                  ) : (
+                    <>
+                      <ArrowRight size={16} className="text-secondary group-hover:text-white group-hover:translate-x-1 transition-transform" /> Load More
+                    </>
+                  )}
+                </button>
               </div>
             )}
           </>
