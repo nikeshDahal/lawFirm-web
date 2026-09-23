@@ -46,7 +46,7 @@ export default async function PublicationPage() {
     path: "data.getAllClientPublications",
     variables: {
       input: {
-        limit: 50,
+        limit: 9,
         order: "desc",
         orderBy: "createdAt",
         skip: 0,
