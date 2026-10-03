@@ -1,6 +1,6 @@
 "use client";
 import { NAV_ITEMS } from "@/constant/menu";
-import { ArrowRight, Scale } from "lucide-react";
+import { ArrowRight, Scale, Code, Mail, Phone, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -110,10 +110,59 @@ const Footer: React.FC<Props> = ({ contactData, pubData }) => {
 
         {/* Bottom Copyright */}
         <div className="pt-8 border-t-1 border-gold flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wide uppercase">
-          <p>
-            © {new Date().getFullYear()} Top Legal Advisers. All Rights
-            Reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
+            <p>
+              © {new Date().getFullYear()} Top Legal Advisers. All Rights
+              Reserved.
+            </p>
+            <div className="flex items-center gap-1.5 normal-case relative group">
+              <GradientIcon icon={Code} size={14} />
+              <div className="flex items-center">
+                <span className="mr-1">Developed by</span>
+                <div className="relative inline-block cursor-pointer">
+                  <a
+                    href="mailto:nikeshdahal297@gmail.com"
+                    className="hover:text-white transition-colors font-medium capitalize"
+                    rel="author"
+                    title="Developed by Nikesh Dahal"
+                    aria-label="Contact Developer Nikesh Dahal"
+                  >
+                    Er Nikesh Dahal
+                  </a>
+
+                  {/* Hover Card Wrapper */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 pb-2 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none group-hover:pointer-events-auto">
+                    {/* Card Content */}
+                    <div className="bg-white text-gray-800 rounded-lg shadow-xl overflow-hidden transform group-hover:-translate-y-1 translate-y-2 transition-transform duration-300 border border-gray-100">
+                      <div className="bg-primary/5 h-10 w-full relative border-b border-gray-100"></div>
+                      <div className="px-3 pb-3 relative flex flex-col items-center">
+                        <div className="w-10 h-10 bg-white rounded-full p-0.5 -mt-5 shadow-sm mb-1.5 flex items-center justify-center border border-gray-100 overflow-hidden">
+                          <img src="/user.jpg" alt="Nikesh Dahal" className="w-full h-full rounded-full object-cover" />
+                        </div>
+                        <h4 className="font-bold text-xs text-primary capitalize">Er. Nikesh Dahal</h4>
+                        <p className="text-[9px] text-gray-500 mb-2 text-center font-normal">Software Engineer</p>
+
+                        <div className="flex flex-col gap-0.5 w-full font-normal">
+                          <a href="mailto:nikeshdahal297@gmail.com" className="flex items-center gap-2 text-[10px] text-gray-600 hover:text-white hover:bg-primary transition-colors p-1 rounded-md">
+                            <Mail size={12} className="text-gold flex-shrink-0" />
+                            <span className="truncate">Email Me</span>
+                          </a>
+                          <a href="tel:9814037042" className="flex items-center gap-2 text-[10px] text-gray-600 hover:text-white hover:bg-primary transition-colors p-1 rounded-md">
+                            <Phone size={12} className="text-gold flex-shrink-0" />
+                            <span>Contact Me</span>
+                          </a>
+                          <a href="https://www.linkedin.com/in/nikesh-dahal-47b425178/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] text-gray-600 hover:text-white hover:bg-primary transition-colors p-1 rounded-md">
+                            <Linkedin size={12} className="text-gold flex-shrink-0" />
+                            <span>LinkedIn</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="flex gap-8">
             <Link
               href="/privacy-policy"
