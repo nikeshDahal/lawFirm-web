@@ -42,6 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     ...seoData?.seoTags,
     keywords: seoData?.seoTags?.tags?.split(",").map((tag) => tag.trim()),
+    authors: [{ name: "Nikesh Dahal" }],
     category: "Legal Services",
     openGraph: {
       title: seoData?.seoTags?.title,
